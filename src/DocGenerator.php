@@ -138,20 +138,20 @@ class DocGenerator
      */
     private function outputSingleDocumentation(DocGeneratorOutputModel $docGeneratorOutputModel): DocGenerator
     {
-        $foundDocumentation = array_filter(
+        $docGeneratorDocumentationBuilder = array_filter(
             $this->documentations,
             function (DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder) use ($docGeneratorOutputModel) {
                 return $docGeneratorDocumentationBuilder->getDocumentationId() === $docGeneratorOutputModel->getDocumentationId();
             }
         );
 
-        $foundDocumentation = reset($foundDocumentation);
+        $docGeneratorDocumentationBuilder = reset($docGeneratorDocumentationBuilder);
 
-        if ($foundDocumentation === false) {
+        if ($docGeneratorDocumentationBuilder === false) {
             return $this;
         }
 
-        $this->documentationOutputs[] = DocGeneratorOutputBuilder::factory($docGeneratorOutputModel, $foundDocumentation)->build();
+        $this->documentationOutputs[] = DocGeneratorOutputBuilder::factory($docGeneratorOutputModel, $docGeneratorDocumentationBuilder)->build();
 
         return $this;
     }
