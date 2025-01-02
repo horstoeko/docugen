@@ -20,4 +20,15 @@ namespace horstoeko\docugen\block;
  */
 class DocGeneratorBlockComment extends DocGeneratorBlockAbstract
 {
+    /**
+     * @inheritDoc
+     */
+    public function build(): DocGeneratorBlockAbstract
+    {
+        foreach ($this->getDocGeneratorBlockModel()->getLines() as $blockLine) {
+            $this->getDocGeneratorLineParser()->parseLine($blockLine);
+        }
+
+        return $this;
+    }
 }

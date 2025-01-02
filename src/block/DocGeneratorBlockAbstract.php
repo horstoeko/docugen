@@ -122,14 +122,7 @@ abstract class DocGeneratorBlockAbstract
      *
      * @return DocGeneratorBlockAbstract
      */
-    public function build(): DocGeneratorBlockAbstract
-    {
-        foreach ($this->getDocGeneratorBlockModel()->getLines() as $blockLine) {
-            $this->getDocGeneratorLineParser()->parseLine($blockLine);
-        }
-
-        return $this;
-    }
+    abstract public function build(): DocGeneratorBlockAbstract;
 
     /**
      * Get all the lines from the block
