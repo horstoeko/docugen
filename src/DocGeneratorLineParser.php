@@ -97,11 +97,11 @@ class DocGeneratorLineParser
         }
 
         $includeCodeSnippetFromLine = isset($matches[2]) ? (int)ltrim($matches[2], ':') : 1;
-        $includeCodeSnippetToLine = isset($matches[3]) ? (int)ltrim($matches[3], ':') : count($includeCodeSnippetModel->getLinesToRender());
+        $includeCodeSnippetToLine = isset($matches[3]) ? (int)ltrim($matches[3], ':') : count($includeCodeSnippetModel->getLines());
 
         $this->docGeneratorOutputBuffer->addLinesToOutputBuffer(
             array_slice(
-                $includeCodeSnippetModel->getLinesToRender(),
+                $includeCodeSnippetModel->getLines(),
                 $includeCodeSnippetFromLine - 1,
                 $includeCodeSnippetToLine - $includeCodeSnippetFromLine + 1
             )
@@ -130,11 +130,11 @@ class DocGeneratorLineParser
         }
 
         $includeTextFromLine = isset($matches[2]) ? (int)ltrim($matches[2], ':') : 1;
-        $includeTextToLine = isset($matches[3]) ? (int)ltrim($matches[3], ':') : count($includeTextModel->getLinesToRender());
+        $includeTextToLine = isset($matches[3]) ? (int)ltrim($matches[3], ':') : count($includeTextModel->getLines());
 
         $this->docGeneratorOutputBuffer->addLinesToOutputBuffer(
             array_slice(
-                $includeTextModel->getLinesToRender(),
+                $includeTextModel->getLines(),
                 $includeTextFromLine - 1,
                 $includeTextToLine - $includeTextFromLine + 1
             )

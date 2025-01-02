@@ -10,6 +10,8 @@
 namespace horstoeko\docugen\model;
 
 use stdClass;
+use horstoeko\docugen\model\traits\DocGeneratorModelHasLinesAttribute;
+use horstoeko\docugen\model\traits\DocGeneratorCommonModelAttributesTrait;
 
 /**
  * Class representing the model for a code snippet
@@ -22,33 +24,8 @@ use stdClass;
  */
 class DocGeneratorCodeSnippetModel extends DocGeneratorAbstractModel
 {
-    /**
-     * The codesnippet id
-     *
-     * @var string
-     */
-    protected $id = "";
-
-    /**
-     * The codesnippet title
-     *
-     * @var string
-     */
-    protected $title = "";
-
-    /**
-     * The codesnippet description
-     *
-     * @var string
-     */
-    protected $description = "";
-
-    /**
-     * The code lines
-     *
-     * @var array
-     */
-    protected $lines = [];
+    use DocGeneratorCommonModelAttributesTrait,
+        DocGeneratorModelHasLinesAttribute;
 
     /**
      * @inheritDoc
@@ -59,45 +36,5 @@ class DocGeneratorCodeSnippetModel extends DocGeneratorAbstractModel
         $this->title = $modelData->title;
         $this->description = $modelData->description;
         $this->lines = $modelData->lines;
-    }
-
-    /**
-     * Returns the Id
-     *
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
-     * Returns the title
-     *
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    /**
-     * Returns the description
-     *
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    /**
-     * Returns the lines
-     *
-     * @return array<string>
-     */
-    public function getLinesToRender(): array
-    {
-        return $this->lines;
     }
 }

@@ -10,6 +10,8 @@
 namespace horstoeko\docugen\model;
 
 use stdClass;
+use horstoeko\docugen\model\traits\DocGeneratorModelHasLinesAttribute;
+use horstoeko\docugen\model\traits\DocGeneratorCommonModelAttributesTrait;
 
 /**
  * Class representing the model for a documentation
@@ -22,26 +24,8 @@ use stdClass;
  */
 class DocGeneratorBlockModel extends DocGeneratorAbstractModel
 {
-    /**
-     * The block id
-     *
-     * @var string
-     */
-    protected $id = "";
-
-    /**
-     * The block title
-     *
-     * @var string
-     */
-    protected $title = "";
-
-    /**
-     * The block description
-     *
-     * @var string
-     */
-    protected $description = "";
+    use DocGeneratorCommonModelAttributesTrait,
+        DocGeneratorModelHasLinesAttribute;
 
     /**
      * The block type
@@ -58,13 +42,6 @@ class DocGeneratorBlockModel extends DocGeneratorAbstractModel
     protected $language = "php";
 
     /**
-     * The code lines
-     *
-     * @var array
-     */
-    protected $lines = [];
-
-    /**
      * @inheritDoc
      */
     protected function fillAttributes(stdClass $modelData): void
@@ -75,36 +52,6 @@ class DocGeneratorBlockModel extends DocGeneratorAbstractModel
         $this->type = $modelData->type;
         $this->language = $modelData->language ?? "php";
         $this->lines = $modelData->lines;
-    }
-
-    /**
-     * Returns the Id
-     *
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
-     * Returns the title
-     *
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    /**
-     * Returns the description
-     *
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return $this->description;
     }
 
     /**
@@ -125,15 +72,5 @@ class DocGeneratorBlockModel extends DocGeneratorAbstractModel
     public function getLanguage(): string
     {
         return $this->language;
-    }
-
-    /**
-     * Returns the lines
-     *
-     * @return array<string>
-     */
-    public function getLinesToRender(): array
-    {
-        return $this->lines;
     }
 }

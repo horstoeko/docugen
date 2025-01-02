@@ -9,6 +9,7 @@
 
 namespace horstoeko\docugen\model;
 
+use horstoeko\docugen\model\traits\DocGeneratorModelHasIdAttribute;
 use stdClass;
 
 /**
@@ -22,12 +23,7 @@ use stdClass;
  */
 class DocGeneratorOutputModel extends DocGeneratorAbstractModel
 {
-    /**
-     * The documentation id
-     *
-     * @var string
-     */
-    protected $id = "";
+    use DocGeneratorModelHasIdAttribute;
 
     /**
      * The documentation output type
@@ -51,16 +47,6 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
         $this->id = $modelData->id;
         $this->outputType = $modelData->outputtype;
         $this->documentationId = $modelData->documentationid;
-    }
-
-    /**
-     * Returns the Id
-     *
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
     }
 
     /**

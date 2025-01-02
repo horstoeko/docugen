@@ -10,6 +10,7 @@
 namespace horstoeko\docugen\model;
 
 use stdClass;
+use horstoeko\docugen\model\traits\DocGeneratorCommonModelAttributesTrait;
 
 /**
  * Class representing the model for a documentation
@@ -22,26 +23,7 @@ use stdClass;
  */
 class DocGeneratorDocumentationModel extends DocGeneratorAbstractModel
 {
-    /**
-     * The codesnippet id
-     *
-     * @var string
-     */
-    protected $id = "";
-
-    /**
-     * The codesnippet title
-     *
-     * @var string
-     */
-    protected $title = "";
-
-    /**
-     * The codesnippet description
-     *
-     * @var string
-     */
-    protected $description = "";
+    use DocGeneratorCommonModelAttributesTrait;
 
     /**
      * The code lines
@@ -59,36 +41,6 @@ class DocGeneratorDocumentationModel extends DocGeneratorAbstractModel
         $this->title = $modelData->title;
         $this->description = $modelData->description;
         $this->blocks = $modelData->blocks;
-    }
-
-    /**
-     * Returns the Id
-     *
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
-     * Returns the title
-     *
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    /**
-     * Returns the description
-     *
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return $this->description;
     }
 
     /**

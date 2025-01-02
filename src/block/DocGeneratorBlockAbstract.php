@@ -84,7 +84,7 @@ abstract class DocGeneratorBlockAbstract
      */
     public function build(): DocGeneratorBlockAbstract
     {
-        foreach ($this->docGeneratorBlockModel->getLinesToRender() as $blockLine) {
+        foreach ($this->docGeneratorBlockModel->getLines() as $blockLine) {
             $this->docGeneratorLineParser->parseLine($blockLine);
         }
 

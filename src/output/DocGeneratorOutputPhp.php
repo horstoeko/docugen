@@ -13,7 +13,7 @@ use horstoeko\docugen\block\DocGeneratorBlockCode;
 use horstoeko\docugen\block\DocGeneratorBlockComment;
 
 /**
- * Class representing the markdown outputter
+ * Class representing the PHP outputter
  *
  * @category DocuGen
  * @package  DocuGen
