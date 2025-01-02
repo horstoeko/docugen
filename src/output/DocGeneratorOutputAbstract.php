@@ -89,6 +89,8 @@ abstract class DocGeneratorOutputAbstract
      */
     public function build(): DocGeneratorOutputAbstract
     {
+        $this->beforeAllBlocks();
+
         foreach ($this->documentationBuilder->getBlocks() as $block) {
             switch (true) {
                 case $block->getBlockInstance() instanceof DocGeneratorBlockComment:
@@ -99,6 +101,8 @@ abstract class DocGeneratorOutputAbstract
                     break;
             }
         }
+
+        $this->afterAllBlocks();
 
         return $this;
     }
@@ -140,4 +144,24 @@ abstract class DocGeneratorOutputAbstract
      * @return void
      */
     abstract protected function renderCode(DocGeneratorBlockCode $docGeneratorBlockCode): void;
+
+    /**
+     * Do something before rendering all blocks
+     *
+     * @return DocGeneratorOutputAbstract
+     */
+    protected function beforeAllBlocks(): DocGeneratorOutputAbstract
+    {
+        return $this;
+    }
+
+    /**
+     * Do something after rendering all blocks
+     *
+     * @return DocGeneratorOutputAbstract
+     */
+    protected function afterAllBlocks(): DocGeneratorOutputAbstract
+    {
+        return $this;
+    }
 }

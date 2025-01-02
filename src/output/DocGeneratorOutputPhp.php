@@ -45,4 +45,14 @@ class DocGeneratorOutputPhp extends DocGeneratorOutputAbstract
     {
         $this->docGeneratorOutputBuffer->addLinesToOutputBuffer($docGeneratorBlockCode->getRenderedLines());
     }
+
+    /**
+     * @inheritDoc
+     */
+    protected function beforeAllBlocks(): DocGeneratorOutputAbstract
+    {
+        $this->docGeneratorOutputBuffer->addLineToOutputBuffer("<?php\n");
+
+        return $this;
+    }
 }
