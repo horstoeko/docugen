@@ -59,7 +59,7 @@
     "outputs": [
         {
             "id": "OUTPUT1",
-            "outputtype": "php",
+            "outputtype": "markdown",
             "documentationid": "DOC1",
             "filepath": "/examples",
             "filename": "exampleoutput.php"

@@ -29,21 +29,21 @@ class DocGeneratorBlockBuilder
      *
      * @var DocGeneratorBlockModel
      */
-    protected $docGeneratorBlockModel;
+    private $docGeneratorBlockModel;
 
     /**
      * The global config
      *
      * @var DocGeneratorConfig
      */
-    protected $docGeneratorConfig;
+    private $docGeneratorConfig;
 
     /**
      * Block instance
      *
      * @var DocGeneratorBlockAbstract
      */
-    protected $blockInstance;
+    private $docGeneratorBlockAbstract;
 
     /**
      * Create a new instance of DocGeneratorBlockBuilder
@@ -70,37 +70,23 @@ class DocGeneratorBlockBuilder
     }
 
     /**
-     * Generate a single block
-     *
-     * @return DocGeneratorBlockBuilder
-     */
-    public function build(): DocGeneratorBlockBuilder
-    {
-        $blockClassName = sprintf('horstoeko\docugen\block\DocGeneratorBlock%s', ucFirst($this->docGeneratorBlockModel->getType()));
-
-        $this->blockInstance = $blockClassName::factory($this->docGeneratorBlockModel, $this->docGeneratorConfig)->build();
-
-        return $this;
-    }
-
-    /**
-     * Get model of the block
+     * Returns the associated block model
      *
      * @return DocGeneratorBlockModel
      */
-    public function getBlockModel(): DocGeneratorBlockModel
+    public function getDocGeneratorBlockModel(): DocGeneratorBlockModel
     {
         return $this->docGeneratorBlockModel;
     }
 
     /**
-     * Get ID of the block
+     * Returns the global configuration
      *
-     * @return string
+     * @return DocGeneratorConfig
      */
-    public function getBlockId(): string
+    public function getDocGeneratorConfig(): DocGeneratorConfig
     {
-        return $this->getBlockModel()->getId();
+        return $this->docGeneratorConfig;
     }
 
     /**
@@ -110,7 +96,7 @@ class DocGeneratorBlockBuilder
      */
     public function getBlockInstance(): DocGeneratorBlockAbstract
     {
-        return $this->blockInstance;
+        return $this->docGeneratorBlockAbstract;
     }
 
     /**
@@ -121,5 +107,23 @@ class DocGeneratorBlockBuilder
     public function getRenderedLines(): array
     {
         return $this->getBlockInstance()->getRenderedLines();
+    }
+
+    /**
+     * Generate a single block
+     *
+     * @return DocGeneratorBlockBuilder
+     */
+    public function build(): DocGeneratorBlockBuilder
+    {
+        $blockClassName = sprintf('horstoeko\docugen\block\DocGeneratorBlock%s', ucFirst($this->getDocGeneratorBlockModel()->getType()));
+
+        $this->docGeneratorBlockAbstract =
+            $blockClassName::factory(
+                $this->getDocGeneratorBlockModel(),
+                $this->getDocGeneratorConfig()
+            )->build();
+
+        return $this;
     }
 }

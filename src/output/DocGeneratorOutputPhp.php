@@ -28,7 +28,7 @@ class DocGeneratorOutputPhp extends DocGeneratorOutputAbstract
      */
     protected function renderComment(DocGeneratorBlockComment $docGeneratorBlockComment): void
     {
-        $this->docGeneratorOutputBuffer->addLinesToOutputBuffer(
+        $this->getDocGeneratorOutputBuffer()->addLinesToOutputBuffer(
             array_map(
                 function (string $line) {
                     return sprintf("// %s", $line);
@@ -43,7 +43,7 @@ class DocGeneratorOutputPhp extends DocGeneratorOutputAbstract
      */
     protected function renderCode(DocGeneratorBlockCode $docGeneratorBlockCode): void
     {
-        $this->docGeneratorOutputBuffer->addLinesToOutputBuffer($docGeneratorBlockCode->getRenderedLines());
+        $this->getDocGeneratorOutputBuffer()->addLinesToOutputBuffer($docGeneratorBlockCode->getRenderedLines());
     }
 
     /**
@@ -51,7 +51,7 @@ class DocGeneratorOutputPhp extends DocGeneratorOutputAbstract
      */
     protected function beforeAllBlocks(): DocGeneratorOutputAbstract
     {
-        $this->docGeneratorOutputBuffer->addLineToOutputBuffer("<?php\n");
+        $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer("<?php\n");
 
         return $this;
     }

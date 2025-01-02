@@ -30,14 +30,14 @@ abstract class DocGeneratorBlockAbstract
      *
      * @var DocGeneratorBlockModel
      */
-    protected $docGeneratorBlockModel;
+    private $docGeneratorBlockModel;
 
     /**
      * The global config
      *
      * @var DocGeneratorConfig
      */
-    protected $docGeneratorConfig;
+    private $docGeneratorConfig;
 
     /**
      * Line parser
@@ -51,7 +51,7 @@ abstract class DocGeneratorBlockAbstract
      *
      * @var DocGeneratorOutputBuffer
      */
-    protected $docGeneratorOutputBuffer;
+    private $docGeneratorOutputBuffer;
 
     /**
      * Return new instance of DocGeneratorBlockAbstract
@@ -78,27 +78,57 @@ abstract class DocGeneratorBlockAbstract
     }
 
     /**
+     * Returns the associated block model
+     *
+     * @return DocGeneratorBlockModel
+     */
+    public function getDocGeneratorBlockModel(): DocGeneratorBlockModel
+    {
+        return $this->docGeneratorBlockModel;
+    }
+
+    /**
+     * Returns the global configuration
+     *
+     * @return DocGeneratorConfig
+     */
+    public function getDocGeneratorConfig(): DocGeneratorConfig
+    {
+        return $this->docGeneratorConfig;
+    }
+
+    /**
+     * Returns the internal line parser
+     *
+     * @return DocGeneratorLineParser
+     */
+    public function getDocGeneratorLineParser(): DocGeneratorLineParser
+    {
+        return $this->docGeneratorLineParser;
+    }
+
+    /**
+     * Returns the internal output buffer
+     *
+     * @return DocGeneratorOutputBuffer
+     */
+    public function getDocGeneratorOutputBuffer(): DocGeneratorOutputBuffer
+    {
+        return $this->docGeneratorOutputBuffer;
+    }
+
+    /**
      * Generate a single block
      *
      * @return DocGeneratorBlockAbstract
      */
     public function build(): DocGeneratorBlockAbstract
     {
-        foreach ($this->docGeneratorBlockModel->getLines() as $blockLine) {
-            $this->docGeneratorLineParser->parseLine($blockLine);
+        foreach ($this->getDocGeneratorBlockModel()->getLines() as $blockLine) {
+            $this->getDocGeneratorLineParser()->parseLine($blockLine);
         }
 
         return $this;
-    }
-
-    /**
-     * Returns the model of the block
-     *
-     * @return DocGeneratorBlockModel
-     */
-    public function getBlockModel(): DocGeneratorBlockModel
-    {
-        return $this->docGeneratorBlockModel;
     }
 
     /**
@@ -108,6 +138,6 @@ abstract class DocGeneratorBlockAbstract
      */
     public function getRenderedLines(): array
     {
-        return $this->docGeneratorOutputBuffer->getLines();
+        return $this->getDocGeneratorOutputBuffer()->getLines();
     }
 }

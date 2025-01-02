@@ -29,21 +29,21 @@ class DocGeneratorDocumentationBuilder
      *
      * @var DocGeneratorDocumentationModel
      */
-    protected $docGeneratorDocumentationModel;
+    private $docGeneratorDocumentationModel;
 
     /**
      * The creator config
      *
      * @var DocGeneratorConfig
      */
-    protected $docGeneratorConfig;
+    private $docGeneratorConfig;
 
     /**
      * Blocks collected
      *
      * @var array<DocGeneratorBlockBuilder>
      */
-    private $blocks = [];
+    private $cocGeneratorBlockBuilders = [];
 
     /**
      * Create a new instance
@@ -68,40 +68,23 @@ class DocGeneratorDocumentationBuilder
     }
 
     /**
-     * Generate the documentation
-     *
-     * @return DocGeneratorDocumentationBuilder
-     */
-    public function build(): DocGeneratorDocumentationBuilder
-    {
-        foreach ($this->docGeneratorDocumentationModel->getBlocks() as $documentationBlockId) {
-            $this->blocks[] = DocGeneratorBlockBuilder::factory(
-                $this->docGeneratorConfig->getBlocks()->findByIdOrFail($documentationBlockId),
-                $this->docGeneratorConfig
-            )->build();
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get the model of the documentation
+     * Returns the associated documentation model
      *
      * @return DocGeneratorDocumentationModel
      */
-    public function getDocumentationModel(): DocGeneratorDocumentationModel
+    public function getDocGeneratorDocumentationModel(): DocGeneratorDocumentationModel
     {
         return $this->docGeneratorDocumentationModel;
     }
 
     /**
-     * Get the ID of the documentation
+     * Returns the global configuration
      *
-     * @return string
+     * @return DocGeneratorConfig
      */
-    public function getDocumentationId(): string
+    public function getDocGeneratorConfig(): DocGeneratorConfig
     {
-        return $this->getDocumentationModel()->getId();
+        return $this->docGeneratorConfig;
     }
 
     /**
@@ -109,8 +92,25 @@ class DocGeneratorDocumentationBuilder
      *
      * @return array<DocGeneratorBlockBuilder>
      */
-    public function getBlocks(): array
+    public function getDocGeneratorBlockBuilders(): array
     {
-        return $this->blocks;
+        return $this->cocGeneratorBlockBuilders;
+    }
+
+    /**
+     * Generate the documentation
+     *
+     * @return DocGeneratorDocumentationBuilder
+     */
+    public function build(): DocGeneratorDocumentationBuilder
+    {
+        foreach ($this->docGeneratorDocumentationModel->getBlocks() as $documentationBlockId) {
+            $this->cocGeneratorBlockBuilders[] = DocGeneratorBlockBuilder::factory(
+                $this->getDocGeneratorConfig()->getBlocks()->findByIdOrFail($documentationBlockId),
+                $this->getDocGeneratorConfig()
+            )->build();
+        }
+
+        return $this;
     }
 }

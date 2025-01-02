@@ -141,7 +141,7 @@ class DocGenerator
         $docGeneratorDocumentationBuilder = array_filter(
             $this->documentations,
             function (DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder) use ($docGeneratorOutputModel) {
-                return $docGeneratorDocumentationBuilder->getDocumentationId() === $docGeneratorOutputModel->getDocumentationId();
+                return $docGeneratorDocumentationBuilder->getDocGeneratorDocumentationModel()->getId() === $docGeneratorOutputModel->getDocumentationId();
             }
         );
 

@@ -28,7 +28,7 @@ class DocGeneratorOutputMarkdown extends DocGeneratorOutputAbstract
      */
     protected function renderComment(DocGeneratorBlockComment $docGeneratorBlockComment): void
     {
-        $this->docGeneratorOutputBuffer->addLinesToOutputBuffer($docGeneratorBlockComment->getRenderedLines());
+        $this->getDocGeneratorOutputBuffer()->addLinesToOutputBuffer($docGeneratorBlockComment->getRenderedLines());
     }
 
     /**
@@ -36,8 +36,21 @@ class DocGeneratorOutputMarkdown extends DocGeneratorOutputAbstract
      */
     protected function renderCode(DocGeneratorBlockCode $docGeneratorBlockCode): void
     {
-        $this->docGeneratorOutputBuffer->addLineToOutputBuffer(sprintf('```%s', $docGeneratorBlockCode->getBlockModel()->getLanguage()));
-        $this->docGeneratorOutputBuffer->addLinesToOutputBuffer($docGeneratorBlockCode->getRenderedLines());
-        $this->docGeneratorOutputBuffer->addLineToOutputBuffer('```');
+        $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer(sprintf('```%s', $docGeneratorBlockCode->getDocGeneratorBlockModel()->getLanguage()));
+        $this->getDocGeneratorOutputBuffer()->addLinesToOutputBuffer($docGeneratorBlockCode->getRenderedLines());
+        $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer('```');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function beforeAllBlocks(): DocGeneratorOutputAbstract
+    {
+        $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer(sprintf('# %s', $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorDocumentationModel()->getTitle()));
+        $this->getDocGeneratorOutputBuffer()->addEmptyLineToOutputBuffer();
+        $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer($this->getDocGeneratorDocumentationBuilder()->getDocGeneratorDocumentationModel()->getDescription());
+        $this->getDocGeneratorOutputBuffer()->addEmptyLineToOutputBuffer();
+
+        return $this;
     }
 }

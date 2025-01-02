@@ -29,28 +29,21 @@ class DocGeneratorOutputBuilder
      *
      * @var DocGeneratorOutputModel
      */
-    protected $docGeneratorOutputModel;
+    private $docGeneratorOutputModel;
 
     /**
      * List of generated documentations
      *
      * @var DocGeneratorDocumentationBuilder
      */
-    protected $documentationBuilder;
+    private $docGeneratorDocumentationBuilder;
 
     /**
      * The creator config
      *
      * @var DocGeneratorConfig
      */
-    protected $docGeneratorConfig;
-
-    /**
-     * Output instance
-     *
-     * @var DocGeneratorOutputAbstract
-     */
-    protected $outputInstance;
+    private $docGeneratorConfig;
 
     /**
      * Create a new instance
@@ -76,8 +69,38 @@ class DocGeneratorOutputBuilder
     final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder, DocGeneratorConfig $docGeneratorConfig)
     {
         $this->docGeneratorOutputModel = $docGeneratorOutputModel;
-        $this->documentationBuilder = $docGeneratorDocumentationBuilder;
+        $this->docGeneratorDocumentationBuilder = $docGeneratorDocumentationBuilder;
         $this->docGeneratorConfig = $docGeneratorConfig;
+    }
+
+    /**
+     * Returns the associated output model
+     *
+     * @return DocGeneratorOutputModel
+     */
+    public function getDocGeneratorOutputModel(): DocGeneratorOutputModel
+    {
+        return $this->docGeneratorOutputModel;
+    }
+
+    /**
+     * Returns the associated document builder
+     *
+     * @return DocGeneratorDocumentationBuilder
+     */
+    public function getDocGeneratorDocumentationBuilder(): DocGeneratorDocumentationBuilder
+    {
+        return $this->docGeneratorDocumentationBuilder;
+    }
+
+    /**
+     * Returns the global configuration
+     *
+     * @return DocGeneratorConfig
+     */
+    public function getDocGeneratorConfig(): DocGeneratorConfig
+    {
+        return $this->docGeneratorConfig;
     }
 
     /**
@@ -87,34 +110,18 @@ class DocGeneratorOutputBuilder
      */
     public function build(): DocGeneratorOutputBuilder
     {
-        $outputClassName = sprintf('horstoeko\docugen\output\DocGeneratorOutput%s', ucFirst($this->docGeneratorOutputModel->getOutputType()));
+        $outputClassName =
+            sprintf(
+                'horstoeko\docugen\output\DocGeneratorOutput%s',
+                ucFirst($this->getDocGeneratorOutputModel()->getOutputType())
+            );
 
-        $this->outputInstance = $outputClassName::factory(
-            $this->docGeneratorOutputModel,
-            $this->documentationBuilder,
-            $this->docGeneratorConfig
+        $outputClassName::factory(
+            $this->getDocGeneratorOutputModel(),
+            $this->getDocGeneratorDocumentationBuilder(),
+            $this->getDocGeneratorConfig()
         )->build()->writeFile();
 
         return $this;
-    }
-
-    /**
-     * Get model of the output
-     *
-     * @return DocGeneratorOutputModel
-     */
-    public function getOutputModel(): DocGeneratorOutputModel
-    {
-        return $this->docGeneratorOutputModel;
-    }
-
-    /**
-     * Get ID of the output
-     *
-     * @return string
-     */
-    public function getOutputId(): string
-    {
-        return $this->getOutputModel()->getId();
     }
 }

@@ -9,12 +9,12 @@
 
 namespace horstoeko\docugen\output;
 
+use horstoeko\docugen\block\DocGeneratorBlockCode;
+use horstoeko\docugen\block\DocGeneratorBlockComment;
 use horstoeko\docugen\DocGeneratorConfig;
 use horstoeko\docugen\DocGeneratorOutputBuffer;
-use horstoeko\docugen\block\DocGeneratorBlockCode;
-use horstoeko\docugen\model\DocGeneratorOutputModel;
-use horstoeko\docugen\block\DocGeneratorBlockComment;
 use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
+use horstoeko\docugen\model\DocGeneratorOutputModel;
 use horstoeko\stringmanagement\PathUtils;
 
 /**
@@ -33,28 +33,28 @@ abstract class DocGeneratorOutputAbstract
      *
      * @var DocGeneratorOutputModel
      */
-    protected $docGeneratorOutputModel;
+    private $docGeneratorOutputModel;
 
     /**
      * List of generated documentations
      *
      * @var DocGeneratorDocumentationBuilder
      */
-    protected $documentationBuilder;
+    private $docGeneratorDocumentationBuilder;
 
     /**
      * The global config
      *
      * @var DocGeneratorConfig
      */
-    protected $docGeneratorConfig;
+    private $docGeneratorConfig;
 
     /**
      * Output buffer
      *
      * @var DocGeneratorOutputBuffer
      */
-    protected $docGeneratorOutputBuffer;
+    private $docGeneratorOutputBuffer;
 
     /**
      * Create a new instance
@@ -77,9 +77,49 @@ abstract class DocGeneratorOutputAbstract
     final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder, DocGeneratorConfig $docGeneratorConfig)
     {
         $this->docGeneratorOutputModel = $docGeneratorOutputModel;
-        $this->documentationBuilder = $docGeneratorDocumentationBuilder;
+        $this->docGeneratorDocumentationBuilder = $docGeneratorDocumentationBuilder;
         $this->docGeneratorConfig = $docGeneratorConfig;
         $this->docGeneratorOutputBuffer = DocGeneratorOutputBuffer::factory();
+    }
+
+    /**
+     * Returns the associated output model
+     *
+     * @return DocGeneratorOutputModel
+     */
+    public function getDocGeneratorOutputModel(): DocGeneratorOutputModel
+    {
+        return $this->docGeneratorOutputModel;
+    }
+
+    /**
+     * Returns the associated document builder
+     *
+     * @return DocGeneratorDocumentationBuilder
+     */
+    public function getDocGeneratorDocumentationBuilder(): DocGeneratorDocumentationBuilder
+    {
+        return $this->docGeneratorDocumentationBuilder;
+    }
+
+    /**
+     * Returns the global configuration
+     *
+     * @return DocGeneratorConfig
+     */
+    public function getDocGeneratorConfig(): DocGeneratorConfig
+    {
+        return $this->docGeneratorConfig;
+    }
+
+    /**
+     * Returns the internal output buffer
+     *
+     * @return DocGeneratorOutputBuffer
+     */
+    public function getDocGeneratorOutputBuffer(): DocGeneratorOutputBuffer
+    {
+        return $this->docGeneratorOutputBuffer;
     }
 
     /**
@@ -91,7 +131,7 @@ abstract class DocGeneratorOutputAbstract
     {
         $this->beforeAllBlocks();
 
-        foreach ($this->documentationBuilder->getBlocks() as $block) {
+        foreach ($this->getDocGeneratorDocumentationBuilder()->getDocGeneratorBlockBuilders() as $block) {
             switch (true) {
                 case $block->getBlockInstance() instanceof DocGeneratorBlockComment:
                     $this->renderComment($block->getBlockInstance());
@@ -117,15 +157,15 @@ abstract class DocGeneratorOutputAbstract
         $filenameToOutput =
             PathUtils::combinePathWithFile(
                 PathUtils::combinePathWithPath(
-                    $this->docGeneratorConfig->getRootDirectory(),
-                    $this->docGeneratorOutputModel->getFilePath()
+                    $this->getDocGeneratorConfig()->getRootDirectory(),
+                    $this->getDocGeneratorOutputModel()->getFilePath()
                 ),
-                $this->docGeneratorOutputModel->getFileName()
+                $this->getDocGeneratorOutputModel()->getFileName()
             );
 
         file_put_contents(
             $filenameToOutput,
-            implode(PHP_EOL, $this->docGeneratorOutputBuffer->getLines())
+            implode(PHP_EOL, $this->getDocGeneratorOutputBuffer()->getLines())
         );
 
         return $this;

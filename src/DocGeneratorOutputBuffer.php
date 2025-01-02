@@ -51,24 +51,38 @@ class DocGeneratorOutputBuffer
      * Add a single line to the output buffer
      *
      * @param  string $line
-     * @return void
+     * @return DocGeneratorOutputBuffer
      */
-    public function addLineToOutputBuffer(string $line): void
+    public function addLineToOutputBuffer(string $line): DocGeneratorOutputBuffer
     {
         $this->lines[] = $line;
+
+        return $this;
     }
 
     /**
      * Add multiple lines to the output buffer
      *
      * @param  array<string> $lines
-     * @return void
+     * @return DocGeneratorOutputBuffer
      */
-    public function addLinesToOutputBuffer(array $lines): void
+    public function addLinesToOutputBuffer(array $lines): DocGeneratorOutputBuffer
     {
         foreach ($lines as $line) {
             $this->addLineToOutputBuffer($line);
         }
+
+        return $this;
+    }
+
+    /**
+     * Add an empty line to the output buffer
+     *
+     * @return DocGeneratorOutputBuffer
+     */
+    public function addEmptyLineToOutputBuffer(): DocGeneratorOutputBuffer
+    {
+        return $this->addLineToOutputBuffer('');
     }
 
     /**
