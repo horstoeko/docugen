@@ -1,0 +1,172 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": [
+        "title",
+        "description",
+        "codesnippets",
+        "texts",
+        "documentations"
+    ],
+    "properties": {
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "codesnippets": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "title",
+                    "description",
+                    "lines"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "lines": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "texts": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "title",
+                    "description",
+                    "lines"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "lines": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "blocks": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "title",
+                    "description",
+                    "type",
+                    "lines"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "oneOf": [
+                            {
+                                "const": "comment"
+                            },
+                            {
+                                "const": "code"
+                            }
+                        ]
+                    },
+                    "language": {
+                        "type": "string"
+                    },
+                    "lines": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "documentations": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "title",
+                    "description",
+                    "blocks"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "blocks": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "outputs": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "outputtype",
+                    "documentationid"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "outputtype": {
+                        "type": "string"
+                    },
+                    "documentationid": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

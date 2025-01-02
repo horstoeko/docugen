@@ -1,0 +1,66 @@
+{
+    "title": "Sample Project",
+    "description": "This is a sample project",
+    "codesnippets": [
+        {
+            "id": "CS1",
+            "title": "CodeSnippet 1",
+            "description": "The first CodeSnippet",
+            "language": "php",
+            "lines": [
+                "$instance = new DummyClass();",
+                "$instance->print();"
+            ]
+        }
+    ],
+    "texts": [
+        {
+            "id": "TXT1",
+            "title": "Text 1",
+            "description": "The first text",
+            "lines": [
+                "Das ist ein Test",
+                "Der Test ist sehr schön"
+            ]
+        }
+    ],
+    "blocks": [
+        {
+            "id": "BLK1",
+            "title": "Block 1",
+            "description": "The first block",
+            "type": "comment",
+            "lines": [
+                "@TXT:TXT1:1:2"
+            ]
+        },
+        {
+            "id": "BLK2",
+            "title": "Block 2",
+            "description": "The second block",
+            "type": "code",
+            "language": "php",
+            "lines": [
+                "@CS:CS1"
+            ]
+        }
+    ],
+    "documentations": [
+        {
+            "id": "DOC1",
+            "title": "Documentation of DummyClass",
+            "description": "Documentation of DummyClass",
+            "blocks": [
+                "BLK1",
+                "BLK2"
+            ]
+        }
+    ],
+    "outputs": [
+        {
+            "id": "OUTPUT1",
+            "outputtype": "php",
+            "documentationid": "DOC1"
+        }
+    ]
+}
