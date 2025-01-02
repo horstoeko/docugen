@@ -97,4 +97,24 @@ class DocGeneratorOutputBuilder
 
         return $this;
     }
+
+    /**
+     * Get model of the output
+     *
+     * @return DocGeneratorOutputModel
+     */
+    public function getOutputModel(): DocGeneratorOutputModel
+    {
+        return $this->docGeneratorOutputModel;
+    }
+
+    /**
+     * Get ID of the output
+     *
+     * @return string
+     */
+    public function getOutputId(): string
+    {
+        return $this->getOutputModel()->getId();
+    }
 }
