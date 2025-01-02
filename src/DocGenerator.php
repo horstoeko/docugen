@@ -37,14 +37,15 @@ class DocGenerator
      *
      * @var array<DocGeneratorDocumentationBuilder>
      */
-    private $documentations = [];
+    private $docGeneratorDocumentationBuilders = [];
 
     /**
      * List of generated outputs
      *
-     * @var array<DocGeneratorOutputBuilder>
+     * @var            array<DocGeneratorOutputBuilder>
+     * @phpstan-ignore property.onlyWritten
      */
-    private $documentationOutputs = [];
+    private $docGeneratorOutputBuilders = [];
 
     /**
      * Instanciate the documentation generator
@@ -69,6 +70,16 @@ class DocGenerator
     }
 
     /**
+     * Returns the global configuration
+     *
+     * @return DocGeneratorConfig
+     */
+    public function getDocGeneratorConfig(): DocGeneratorConfig
+    {
+        return $this->docGeneratorConfig;
+    }
+
+    /**
      * Build and output all documentations
      *
      * @return DocGenerator
@@ -88,9 +99,9 @@ class DocGenerator
      */
     private function generateAllDocumentations(): DocGenerator
     {
-        $this->documentations = [];
+        $this->docGeneratorDocumentationBuilders = [];
 
-        $this->docGeneratorConfig->getDocumentations()->each(
+        $this->getDocGeneratorConfig()->getDocumentations()->each(
             function (DocGeneratorDocumentationModel $docGeneratorDocumentationModel): void {
                 $this->generateSingleDocumentation($docGeneratorDocumentationModel);
             }
@@ -107,7 +118,11 @@ class DocGenerator
      */
     private function generateSingleDocumentation(DocGeneratorDocumentationModel $docGeneratorDocumentationModel): DocGenerator
     {
-        $this->documentations[] = DocGeneratorDocumentationBuilder::factory($docGeneratorDocumentationModel, $this->docGeneratorConfig)->build();
+        $this->docGeneratorDocumentationBuilders[] =
+            DocGeneratorDocumentationBuilder::factory(
+                $docGeneratorDocumentationModel,
+                $this->getDocGeneratorConfig()
+            )->build();
 
         return $this;
     }
@@ -119,9 +134,9 @@ class DocGenerator
      */
     private function outputAllDocumentations(): DocGenerator
     {
-        $this->documentationOutputs = [];
+        $this->docGeneratorOutputBuilders = [];
 
-        $this->docGeneratorConfig->getOutputs()->each(
+        $this->getDocGeneratorConfig()->getOutputs()->each(
             function (DocGeneratorOutputModel $docGeneratorOutputModel): void {
                 $this->outputSingleDocumentation($docGeneratorOutputModel);
             }
@@ -139,9 +154,9 @@ class DocGenerator
     private function outputSingleDocumentation(DocGeneratorOutputModel $docGeneratorOutputModel): DocGenerator
     {
         $docGeneratorDocumentationBuilder = array_filter(
-            $this->documentations,
+            $this->docGeneratorDocumentationBuilders,
             function (DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder) use ($docGeneratorOutputModel) {
-                return $docGeneratorDocumentationBuilder->getDocGeneratorDocumentationModel()->getId() === $docGeneratorOutputModel->getDocumentationId();
+                return $docGeneratorDocumentationBuilder->getDocGeneratorDocumentationModel()->isId($docGeneratorOutputModel->getDocumentationId());
             }
         );
 
@@ -151,28 +166,13 @@ class DocGenerator
             return $this;
         }
 
-        $this->documentationOutputs[] = DocGeneratorOutputBuilder::factory($docGeneratorOutputModel, $docGeneratorDocumentationBuilder, $this->docGeneratorConfig)->build();
+        $this->docGeneratorOutputBuilders[] =
+            DocGeneratorOutputBuilder::factory(
+                $docGeneratorOutputModel,
+                $docGeneratorDocumentationBuilder,
+                $this->getDocGeneratorConfig()
+            )->build();
 
         return $this;
-    }
-
-    /**
-     * Get all documentations
-     *
-     * @return array<DocGeneratorDocumentationBuilder>
-     */
-    public function getAllRenderedDocumentations(): array
-    {
-        return $this->documentations;
-    }
-
-    /**
-     * Get all documentation outputs
-     *
-     * @return array<DocGeneratorOutputBuilder>
-     */
-    public function getDocumentationOutputs(): array
-    {
-        return $this->documentationOutputs;
     }
 }

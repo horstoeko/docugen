@@ -8,6 +8,6 @@ class BasicTest extends TestCase
 {
     public function testSoundCheck(): void
     {
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        $this->assertTrue(true);
     }
 }

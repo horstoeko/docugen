@@ -45,9 +45,9 @@ class DocGeneratorOutputMarkdown extends DocGeneratorOutputAbstract
     /**
      * @inheritDoc
      */
-    protected function renderBlankBlock(DocGeneratorBlockBlank $docGeneratorBlockBank): void
+    protected function renderBlankBlock(DocGeneratorBlockBlank $docGeneratorBlockBlank): void
     {
-        $this->getDocGeneratorOutputBuffer()->addLinesToOutputBuffer($docGeneratorBlockBank->getRenderedLines());
+        $this->getDocGeneratorOutputBuffer()->addLinesToOutputBuffer($docGeneratorBlockBlank->getRenderedLines());
     }
 
     /**

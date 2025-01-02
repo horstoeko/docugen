@@ -36,4 +36,15 @@ trait DocGeneratorModelHasIdAttribute
     {
         return $this->id;
     }
+
+    /**
+     * Check if the given $id matches the current model ID attribute
+     *
+     * @param  string $id
+     * @return boolean
+     */
+    public function isId(string $id): bool
+    {
+        return strcasecmp($this->getId(), $id) === 0;
+    }
 }
