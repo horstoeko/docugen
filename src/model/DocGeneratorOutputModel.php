@@ -40,6 +40,20 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
     protected $documentationId = "";
 
     /**
+     * The subdirectory where to store the file
+     *
+     * @var string
+     */
+    protected $filePath = "";
+
+    /**
+     * The filename to use to store
+     *
+     * @var string
+     */
+    protected $fileName = "";
+
+    /**
      * @inheritDoc
      */
     protected function fillAttributes(stdClass $modelData): void
@@ -47,6 +61,8 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
         $this->id = $modelData->id;
         $this->outputType = $modelData->outputtype;
         $this->documentationId = $modelData->documentationid;
+        $this->filePath = $modelData->filepath;
+        $this->fileName = $modelData->filename;
     }
 
     /**
@@ -67,5 +83,25 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
     public function getDocumentationId(): string
     {
         return $this->documentationId;
+    }
+
+    /**
+     * Returns the subdirectory where to store the file
+     *
+     * @return string
+     */
+    public function getFilePath(): string
+    {
+        return $this->filePath;
+    }
+
+    /**
+     * Returns the filename to use to store
+     *
+     * @return string
+     */
+    public function getFileName(): string
+    {
+        return $this->fileName;
     }
 }

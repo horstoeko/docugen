@@ -20,4 +20,4 @@ foreach ($generator->getDocumentations() as $documentation) {
 }
 */
 
-print_r($generator->getDocumentationOutputs()[0]->getRenderedLines());
+//print_r($generator->getDocumentationOutputs()[0]->getRenderedLines());

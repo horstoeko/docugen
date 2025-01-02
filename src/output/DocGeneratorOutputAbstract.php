@@ -9,11 +9,13 @@
 
 namespace horstoeko\docugen\output;
 
+use horstoeko\docugen\DocGeneratorConfig;
 use horstoeko\docugen\DocGeneratorOutputBuffer;
 use horstoeko\docugen\block\DocGeneratorBlockCode;
 use horstoeko\docugen\model\DocGeneratorOutputModel;
 use horstoeko\docugen\block\DocGeneratorBlockComment;
 use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
+use horstoeko\stringmanagement\PathUtils;
 
 /**
  * Class representing the abstract outputter
@@ -41,6 +43,13 @@ abstract class DocGeneratorOutputAbstract
     protected $documentationBuilder;
 
     /**
+     * The global config
+     *
+     * @var DocGeneratorConfig
+     */
+    protected $docGeneratorConfig;
+
+    /**
      * Output buffer
      *
      * @var DocGeneratorOutputBuffer
@@ -54,9 +63,9 @@ abstract class DocGeneratorOutputAbstract
      * @param  DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
      * @return DocGeneratorOutputAbstract
      */
-    public static function factory(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder): DocGeneratorOutputAbstract
+    public static function factory(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder, DocGeneratorConfig $docGeneratorConfig): DocGeneratorOutputAbstract
     {
-        return new static($docGeneratorOutputModel, $docGeneratorDocumentationBuilder);
+        return new static($docGeneratorOutputModel, $docGeneratorDocumentationBuilder, $docGeneratorConfig);
     }
 
     /**
@@ -65,10 +74,11 @@ abstract class DocGeneratorOutputAbstract
      * @param DocGeneratorOutputModel          $docGeneratorOutputModel
      * @param DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
      */
-    final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder)
+    final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder, DocGeneratorConfig $docGeneratorConfig)
     {
         $this->docGeneratorOutputModel = $docGeneratorOutputModel;
         $this->documentationBuilder = $docGeneratorDocumentationBuilder;
+        $this->docGeneratorConfig = $docGeneratorConfig;
         $this->docGeneratorOutputBuffer = DocGeneratorOutputBuffer::factory();
     }
 
@@ -94,6 +104,30 @@ abstract class DocGeneratorOutputAbstract
     }
 
     /**
+     * Write the output to a file
+     *
+     * @return DocGeneratorOutputAbstract
+     */
+    public function writeFile(): DocGeneratorOutputAbstract
+    {
+        $filenameToOutput =
+            PathUtils::combinePathWithFile(
+                PathUtils::combinePathWithPath(
+                    $this->docGeneratorConfig->getRootDirectory(),
+                    $this->docGeneratorOutputModel->getFilePath()
+                ),
+                $this->docGeneratorOutputModel->getFileName()
+            );
+
+        file_put_contents(
+            $filenameToOutput,
+            implode(PHP_EOL, $this->docGeneratorOutputBuffer->getLines())
+        );
+
+        return $this;
+    }
+
+    /**
      * Render a comment block
      *
      * @return void
@@ -106,14 +140,4 @@ abstract class DocGeneratorOutputAbstract
      * @return void
      */
     abstract protected function renderCode(DocGeneratorBlockCode $docGeneratorBlockCode): void;
-
-    /**
-     * Get the lines to output
-     *
-     * @return array<string>
-     */
-    public function getRenderedLines(): array
-    {
-        return $this->docGeneratorOutputBuffer->getLines();
-    }
 }

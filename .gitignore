@@ -81,3 +81,5 @@ _backup*
 /build/phpdoc/
 /*.phar
 /composer.lock
+
+/examples/exampleoutput.php

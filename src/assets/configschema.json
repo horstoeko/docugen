@@ -153,7 +153,9 @@
                 "required": [
                     "id",
                     "outputtype",
-                    "documentationid"
+                    "documentationid",
+                    "filepath",
+                    "filename"
                 ],
                 "properties": {
                     "id": {
@@ -163,6 +165,12 @@
                         "type": "string"
                     },
                     "documentationid": {
+                        "type": "string"
+                    },
+                    "filepath": {
+                        "type": "string"
+                    },
+                    "filename": {
                         "type": "string"
                     }
                 }

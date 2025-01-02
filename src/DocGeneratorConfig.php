@@ -12,6 +12,7 @@ namespace horstoeko\docugen;
 use Exception as GlobalException;
 use InvalidArgumentException;
 use stdClass;
+use Composer\InstalledVersions;
 use horstoeko\docugen\exception\DocGeneratorFileNotFoundException;
 use horstoeko\docugen\exception\DocGeneratorFileNotReadableException;
 use horstoeko\docugen\exception\DocGeneratorInvalidJsonContentException;
@@ -69,6 +70,13 @@ class DocGeneratorConfig
      * @var DocGeneratorOutputModelCollection
      */
     private $docGeneratorOutputModelCollection;
+
+    /**
+     * The root directory (where the files probably should be stored)
+     *
+     * @var string
+     */
+    private $rootDirectory = "";
 
     /**
      * Load a config from a file containing a JSON
@@ -131,6 +139,7 @@ class DocGeneratorConfig
      */
     final protected function __construct(string $jsonContent)
     {
+        $this->initializeRootDirectory();
         $this->setJsonContent($jsonContent);
     }
 
@@ -182,6 +191,31 @@ class DocGeneratorConfig
     public function getOutputs(): DocGeneratorOutputModelCollection
     {
         return $this->docGeneratorOutputModelCollection;
+    }
+
+    /**
+     * Returns the root directory (where all the generated files are stored)
+     *
+     * @return string
+     */
+    public function getRootDirectory(): string
+    {
+        return $this->rootDirectory;
+    }
+
+    /**
+     * Set the new root directory (where all the generated files are stored)
+     *
+     * @param  string $newRootDirectory
+     * @return DocGeneratorConfig
+     */
+    public function setRootDirectory(string $newRootDirectory): DocGeneratorConfig
+    {
+        if (is_dir($newRootDirectory)) {
+            $this->rootDirectory = $newRootDirectory;
+        }
+
+        return $this;
     }
 
     /**
@@ -263,5 +297,15 @@ class DocGeneratorConfig
         )->in(
             $jsonObject
         );
+    }
+
+    /**
+     * Initialize the root directory
+     *
+     * @return void
+     */
+    protected function initializeRootDirectory(): void
+    {
+        $this->rootDirectory = realpath(InstalledVersions::getRootPackage()['install_path']);
     }
 }

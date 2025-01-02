@@ -151,7 +151,7 @@ class DocGenerator
             return $this;
         }
 
-        $this->documentationOutputs[] = DocGeneratorOutputBuilder::factory($docGeneratorOutputModel, $docGeneratorDocumentationBuilder)->build();
+        $this->documentationOutputs[] = DocGeneratorOutputBuilder::factory($docGeneratorOutputModel, $docGeneratorDocumentationBuilder, $this->docGeneratorConfig)->build();
 
         return $this;
     }

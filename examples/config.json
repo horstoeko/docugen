@@ -60,7 +60,9 @@
         {
             "id": "OUTPUT1",
             "outputtype": "php",
-            "documentationid": "DOC1"
+            "documentationid": "DOC1",
+            "filepath": "/examples",
+            "filename": "exampleoutput.php"
         }
     ]
 }
