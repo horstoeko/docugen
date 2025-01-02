@@ -222,10 +222,6 @@ class DocGeneratorConfig
      */
     protected function setJsonObject(stdClass $jsonObject): DocGeneratorConfig
     {
-        if (!is_object($jsonObject)) {
-            throw new InvalidArgumentException("Parameter should be an object");
-        }
-
         $this->validateJsonObject($jsonObject);
 
         $this->docGeneratorCodeSnippetModelCollection = DocGeneratorCodeSnippetModelCollection::factory($jsonObject->codesnippets);

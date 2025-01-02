@@ -76,9 +76,6 @@ class DocGeneratorOutputBuilder
      */
     public function build(): DocGeneratorOutputBuilder
     {
-        /**
-         * @var DocGeneratorOutputAbstract $outputClassName
-         */
         $outputClassName = sprintf('horstoeko\docugen\output\DocGeneratorOutput%s', ucFirst($this->docGeneratorOutputModel->getOutputType()));
 
         $this->outputInstance = $outputClassName::factory($this->docGeneratorOutputModel, $this->documentationBuilder)->build();

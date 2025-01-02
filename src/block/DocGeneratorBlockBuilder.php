@@ -76,9 +76,6 @@ class DocGeneratorBlockBuilder
      */
     public function build(): DocGeneratorBlockBuilder
     {
-        /**
-         * @var DocGeneratorBlockAbstract $blockClassName
-         */
         $blockClassName = sprintf('horstoeko\docugen\block\DocGeneratorBlock%s', ucFirst($this->docGeneratorBlockModel->getType()));
 
         $this->blockInstance = $blockClassName::factory($this->docGeneratorBlockModel, $this->docGeneratorConfig)->build();

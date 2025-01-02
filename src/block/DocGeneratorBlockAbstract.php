@@ -42,7 +42,7 @@ abstract class DocGeneratorBlockAbstract
     /**
      * Line parser
      *
-     * @var DocGeneratorLineParser;
+     * @var DocGeneratorLineParser
      */
     private $docGeneratorLineParser;
 
