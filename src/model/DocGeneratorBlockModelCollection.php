@@ -9,6 +9,8 @@
 
 namespace horstoeko\docugen\model;
 
+use RuntimeException;
+
 /**
  * Class representing the a collection of documentations
  *
@@ -47,11 +49,15 @@ class DocGeneratorBlockModelCollection extends DocGeneratorAbstractModelCollecti
     /**
      * Find a block by it's id. When not found an Exception is raised
      *
-     * @param  string $id
-     * @return DocGeneratorBlockModel|null
+     * @param string $id
+     * @return DocGeneratorBlockModel
+     * @throws RuntimeException
      */
-    public function findByIdOrFail(string $id): ?DocGeneratorBlockModel
+    public function findByIdOrFail(string $id): DocGeneratorBlockModel
     {
+        /**
+         * @var DocGeneratorBlockModel
+         */
         $blockModel = $this->findByAttributeOrFail("id", $id);
 
         return $blockModel;
