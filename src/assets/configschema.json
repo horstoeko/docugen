@@ -165,7 +165,15 @@
                         "type": "string"
                     },
                     "outputtype": {
-                        "type": "string"
+                        "type": "string",
+                        "oneOf": [
+                            {
+                                "const": "php"
+                            },
+                            {
+                                "const": "markdown"
+                            }
+                        ]
                     },
                     "documentationid": {
                         "type": "string"

@@ -64,7 +64,7 @@ _backup*
 /nbproject/
 
 !/setup/.htaccess
-.vscode 
+.vscode
 .idea
 
 /vendor/
@@ -83,3 +83,4 @@ _backup*
 /composer.lock
 
 /examples/exampleoutput.php
+/examples/exampleoutput.md
