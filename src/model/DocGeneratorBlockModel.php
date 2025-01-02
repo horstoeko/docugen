@@ -24,9 +24,8 @@ use horstoeko\docugen\model\traits\DocGeneratorCommonModelAttributesTrait;
  */
 class DocGeneratorBlockModel extends DocGeneratorAbstractModel
 {
-    use DocGeneratorCommonModelAttributesTrait,
-        DocGeneratorModelHasLinesAttribute;
-
+    use DocGeneratorCommonModelAttributesTrait;
+    use DocGeneratorModelHasLinesAttribute;
     /**
      * The block type
      *

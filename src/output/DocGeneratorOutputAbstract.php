@@ -51,24 +51,24 @@ abstract class DocGeneratorOutputAbstract
      * Create a new instance
      *
      * @param  DocGeneratorOutputModel          $docGeneratorOutputModel
-     * @param  DocGeneratorDocumentationBuilder $documentationBuilder
+     * @param  DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
      * @return DocGeneratorOutputAbstract
      */
-    public static function factory(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $documentationBuilder): DocGeneratorOutputAbstract
+    public static function factory(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder): DocGeneratorOutputAbstract
     {
-        return new static($docGeneratorOutputModel, $documentationBuilder);
+        return new static($docGeneratorOutputModel, $docGeneratorDocumentationBuilder);
     }
 
     /**
      * Constructor (hidden)
      *
      * @param DocGeneratorOutputModel          $docGeneratorOutputModel
-     * @param DocGeneratorDocumentationBuilder $documentationBuilder
+     * @param DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
      */
-    final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $documentationBuilder)
+    final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder)
     {
         $this->docGeneratorOutputModel = $docGeneratorOutputModel;
-        $this->documentationBuilder = $documentationBuilder;
+        $this->documentationBuilder = $docGeneratorDocumentationBuilder;
         $this->docGeneratorOutputBuffer = DocGeneratorOutputBuffer::factory();
     }
 

@@ -24,9 +24,8 @@ use horstoeko\docugen\model\traits\DocGeneratorCommonModelAttributesTrait;
  */
 class DocGeneratorTextModel extends DocGeneratorAbstractModel
 {
-    use DocGeneratorCommonModelAttributesTrait,
-        DocGeneratorModelHasLinesAttribute;
-
+    use DocGeneratorCommonModelAttributesTrait;
+    use DocGeneratorModelHasLinesAttribute;
     /**
      * @inheritDoc
      */

@@ -48,25 +48,25 @@ class DocGeneratorOutputBuilder
      * Create a new instance
      *
      * @param  DocGeneratorOutputModel          $docGeneratorOutputModel
-     * @param  DocGeneratorDocumentationBuilder $documentationBuilder
+     * @param  DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
      * @return DocGeneratorOutputBuilder
      */
-    public static function factory(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $documentationBuilder): DocGeneratorOutputBuilder
+    public static function factory(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder): DocGeneratorOutputBuilder
     {
-        return new static($docGeneratorOutputModel, $documentationBuilder);
+        return new static($docGeneratorOutputModel, $docGeneratorDocumentationBuilder);
     }
 
     /**
      * Constructor (hidden)
      *
      * @param  DocGeneratorOutputModel          $docGeneratorOutputModel
-     * @param  DocGeneratorDocumentationBuilder $documentationBuilder
+     * @param  DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
      * @return void
      */
-    final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $documentationBuilder)
+    final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder)
     {
         $this->docGeneratorOutputModel = $docGeneratorOutputModel;
-        $this->documentationBuilder = $documentationBuilder;
+        $this->documentationBuilder = $docGeneratorDocumentationBuilder;
     }
 
     /**

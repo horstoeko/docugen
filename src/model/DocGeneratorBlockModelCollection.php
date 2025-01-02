@@ -49,7 +49,7 @@ class DocGeneratorBlockModelCollection extends DocGeneratorAbstractModelCollecti
     /**
      * Find a block by it's id. When not found an Exception is raised
      *
-     * @param string $id
+     * @param  string $id
      * @return DocGeneratorBlockModel
      * @throws RuntimeException
      */
