@@ -10,6 +10,7 @@
 namespace horstoeko\docugen\output;
 
 use horstoeko\docugen\block\DocGeneratorBlockCode;
+use horstoeko\docugen\block\DocGeneratorBlockBlank;
 use horstoeko\docugen\block\DocGeneratorBlockComment;
 
 /**
@@ -26,7 +27,7 @@ class DocGeneratorOutputPhp extends DocGeneratorOutputAbstract
     /**
      * @inheritDoc
      */
-    protected function renderComment(DocGeneratorBlockComment $docGeneratorBlockComment): void
+    protected function renderCommentBlock(DocGeneratorBlockComment $docGeneratorBlockComment): void
     {
         $this->getDocGeneratorOutputBuffer()->addLinesToOutputBuffer(
             array_map(
@@ -41,9 +42,17 @@ class DocGeneratorOutputPhp extends DocGeneratorOutputAbstract
     /**
      * @inheritDoc
      */
-    protected function renderCode(DocGeneratorBlockCode $docGeneratorBlockCode): void
+    protected function renderCodeBlock(DocGeneratorBlockCode $docGeneratorBlockCode): void
     {
         $this->getDocGeneratorOutputBuffer()->addLinesToOutputBuffer($docGeneratorBlockCode->getRenderedLines());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function renderBlankBlock(DocGeneratorBlockBlank $docGeneratorBlockBank): void
+    {
+        $this->getDocGeneratorOutputBuffer()->addLinesToOutputBuffer($docGeneratorBlockBank->getRenderedLines());
     }
 
     /**

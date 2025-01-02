@@ -25,6 +25,8 @@ class DocGeneratorBlockBlank extends DocGeneratorBlockAbstract
      */
     public function build(): DocGeneratorBlockAbstract
     {
+        $this->getDocGeneratorOutputBuffer()->addEmptyLineToOutputBuffer();
+
         return $this;
     }
 }

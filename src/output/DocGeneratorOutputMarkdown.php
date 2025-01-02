@@ -9,6 +9,7 @@
 
 namespace horstoeko\docugen\output;
 
+use horstoeko\docugen\block\DocGeneratorBlockBlank;
 use horstoeko\docugen\block\DocGeneratorBlockCode;
 use horstoeko\docugen\block\DocGeneratorBlockComment;
 
@@ -26,7 +27,7 @@ class DocGeneratorOutputMarkdown extends DocGeneratorOutputAbstract
     /**
      * @inheritDoc
      */
-    protected function renderComment(DocGeneratorBlockComment $docGeneratorBlockComment): void
+    protected function renderCommentBlock(DocGeneratorBlockComment $docGeneratorBlockComment): void
     {
         $this->getDocGeneratorOutputBuffer()->addLinesToOutputBuffer($docGeneratorBlockComment->getRenderedLines());
     }
@@ -34,11 +35,19 @@ class DocGeneratorOutputMarkdown extends DocGeneratorOutputAbstract
     /**
      * @inheritDoc
      */
-    protected function renderCode(DocGeneratorBlockCode $docGeneratorBlockCode): void
+    protected function renderCodeBlock(DocGeneratorBlockCode $docGeneratorBlockCode): void
     {
         $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer(sprintf('```%s', $docGeneratorBlockCode->getDocGeneratorBlockModel()->getLanguage()));
         $this->getDocGeneratorOutputBuffer()->addLinesToOutputBuffer($docGeneratorBlockCode->getRenderedLines());
         $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer('```');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function renderBlankBlock(DocGeneratorBlockBlank $docGeneratorBlockBank): void
+    {
+        $this->getDocGeneratorOutputBuffer()->addLinesToOutputBuffer($docGeneratorBlockBank->getRenderedLines());
     }
 
     /**

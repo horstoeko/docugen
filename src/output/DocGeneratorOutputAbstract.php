@@ -9,6 +9,7 @@
 
 namespace horstoeko\docugen\output;
 
+use horstoeko\docugen\block\DocGeneratorBlockBlank;
 use horstoeko\docugen\block\DocGeneratorBlockCode;
 use horstoeko\docugen\block\DocGeneratorBlockComment;
 use horstoeko\docugen\DocGeneratorConfig;
@@ -134,10 +135,13 @@ abstract class DocGeneratorOutputAbstract
         foreach ($this->getDocGeneratorDocumentationBuilder()->getDocGeneratorBlockBuilders() as $block) {
             switch (true) {
                 case $block->getBlockInstance() instanceof DocGeneratorBlockComment:
-                    $this->renderComment($block->getBlockInstance());
+                    $this->renderCommentBlock($block->getBlockInstance());
                     break;
                 case $block->getBlockInstance() instanceof DocGeneratorBlockCode:
-                    $this->renderCode($block->getBlockInstance());
+                    $this->renderCodeBlock($block->getBlockInstance());
+                    break;
+                case $block->getBlockInstance() instanceof DocGeneratorBlockBlank:
+                    $this->renderBlankBlock($block->getBlockInstance());
                     break;
             }
         }
@@ -176,14 +180,21 @@ abstract class DocGeneratorOutputAbstract
      *
      * @return void
      */
-    abstract protected function renderComment(DocGeneratorBlockComment $docGeneratorBlockComment): void;
+    abstract protected function renderCommentBlock(DocGeneratorBlockComment $docGeneratorBlockComment): void;
 
     /**
      * Render a code block
      *
      * @return void
      */
-    abstract protected function renderCode(DocGeneratorBlockCode $docGeneratorBlockCode): void;
+    abstract protected function renderCodeBlock(DocGeneratorBlockCode $docGeneratorBlockCode): void;
+
+    /**
+     * Render a blank block
+     *
+     * @return void
+     */
+    abstract protected function renderBlankBlock(DocGeneratorBlockBlank $docGeneratorBlockBlank): void;
 
     /**
      * Do something before rendering all blocks

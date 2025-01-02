@@ -43,7 +43,7 @@ class DocGeneratorDocumentationBuilder
      *
      * @var array<DocGeneratorBlockBuilder>
      */
-    private $cocGeneratorBlockBuilders = [];
+    private $docGeneratorBlockBuilders = [];
 
     /**
      * Create a new instance
@@ -94,7 +94,7 @@ class DocGeneratorDocumentationBuilder
      */
     public function getDocGeneratorBlockBuilders(): array
     {
-        return $this->cocGeneratorBlockBuilders;
+        return $this->docGeneratorBlockBuilders;
     }
 
     /**
@@ -105,7 +105,7 @@ class DocGeneratorDocumentationBuilder
     public function build(): DocGeneratorDocumentationBuilder
     {
         foreach ($this->docGeneratorDocumentationModel->getBlocks() as $documentationBlockId) {
-            $this->cocGeneratorBlockBuilders[] = DocGeneratorBlockBuilder::factory(
+            $this->docGeneratorBlockBuilders[] = DocGeneratorBlockBuilder::factory(
                 $this->getDocGeneratorConfig()->getBlocks()->findByIdOrFail($documentationBlockId),
                 $this->getDocGeneratorConfig()
             )->build();
