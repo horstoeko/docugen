@@ -158,6 +158,12 @@
                     "id": {
                         "type": "string"
                     },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
                     "outputtype": {
                         "type": "string",
                         "oneOf": [
@@ -181,11 +187,33 @@
                     "filepathisabsolute": {
                         "type": "boolean"
                     },
-                    "adddocumentationtitle": {
-                        "type": "boolean"
+                    "titlemode": {
+                        "type": "integer",
+                        "oneOf": [
+                            {
+                                "const": 0
+                            },
+                            {
+                                "const": 1
+                            },
+                            {
+                                "const": 2
+                            }
+                        ]
                     },
-                    "adddocumentationdescription": {
-                        "type": "boolean"
+                    "descriptionmode": {
+                        "type": "integer",
+                        "oneOf": [
+                            {
+                                "const": 0
+                            },
+                            {
+                                "const": 1
+                            },
+                            {
+                                "const": 2
+                            }
+                        ]
                     }
                 }
             }

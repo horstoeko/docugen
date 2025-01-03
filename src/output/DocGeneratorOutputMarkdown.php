@@ -55,13 +55,34 @@ class DocGeneratorOutputMarkdown extends DocGeneratorOutputAbstract
      */
     protected function beforeAllBlocks(): DocGeneratorOutputAbstract
     {
-        if ($this->getDocGeneratorOutputModel()->getDddDocumentationTitle() === true) {
-            $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer(sprintf('# %s', $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorDocumentationModel()->getTitle()));
+        $title = "";
+        $description = "";
+
+        $x = $this->getDocGeneratorOutputModel()->getTitleMode();
+        $y = $this->getDocGeneratorOutputModel()->getDescriptionMode();
+
+        if ($this->getDocGeneratorOutputModel()->getTitleMode() === 1) {
+            $title = $this->getDocGeneratorOutputModel()->getTitle();
+        } elseif ($this->getDocGeneratorOutputModel()->getTitleMode() === 2) {
+            $title = $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorDocumentationModel()->getTitle();
+        }
+
+        if ($this->getDocGeneratorOutputModel()->getDescriptionMode() === 1) {
+            $description = $this->getDocGeneratorOutputModel()->getDescription();
+        } elseif ($this->getDocGeneratorOutputModel()->getDescriptionMode() === 2) {
+            $description = $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorDocumentationModel()->getDescription();
+        }
+
+        $title = trim($title);
+        $description = trim($description);
+
+        if ($title) {
+            $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer(sprintf('# %s', $title));
             $this->getDocGeneratorOutputBuffer()->addEmptyLineToOutputBuffer();
         }
 
-        if ($this->getDocGeneratorOutputModel()->getDddDocumentationDescription() === true) {
-            $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer($this->getDocGeneratorDocumentationBuilder()->getDocGeneratorDocumentationModel()->getDescription());
+        if ($description) {
+            $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer($description);
             $this->getDocGeneratorOutputBuffer()->addEmptyLineToOutputBuffer();
         }
 

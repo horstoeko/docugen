@@ -9,8 +9,8 @@
 
 namespace horstoeko\docugen\model;
 
-use horstoeko\docugen\model\traits\DocGeneratorModelHasIdAttribute;
 use stdClass;
+use horstoeko\docugen\model\traits\DocGeneratorCommonModelAttributesTrait;
 
 /**
  * Class representing the model for a output definition
@@ -23,7 +23,7 @@ use stdClass;
  */
 class DocGeneratorOutputModel extends DocGeneratorAbstractModel
 {
-    use DocGeneratorModelHasIdAttribute;
+    use DocGeneratorCommonModelAttributesTrait;
 
     /**
      * The documentation output type
@@ -61,18 +61,18 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
     protected $filePathIsAbsolute = false;
 
     /**
-     * Indicator if the documentation title should be added to the output
+     * Indicator in which way the title should be inclued
      *
-     * @var boolean
+     * @var integer
      */
-    protected $addDocumentationTitle = true;
+    protected $titleMode = 0;
 
     /**
-     * Indicator if the documentation description should be added to the output
+     * Indicator in which way the description should be inclued
      *
-     * @var boolean
+     * @var integer
      */
-    protected $addDocumentationDescription = true;
+    protected $descriptionMode = 0;
 
     /**
      * @inheritDoc
@@ -80,13 +80,15 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
     protected function fillAttributes(stdClass $modelData): void
     {
         $this->id = $modelData->id ?? "";
+        $this->title = $modelData->title ?? "";
+        $this->description = $modelData->description ?? "";
         $this->outputType = $modelData->outputtype ?? "markdown";
         $this->documentationId = $modelData->documentationid ?? "";
         $this->filePath = $modelData->filepath ?? "";
         $this->fileName = $modelData->filename ?? "";
         $this->filePathIsAbsolute = $modelData->filepathisabsolute ?? false;
-        $this->addDocumentationTitle = $modelData->adddocumentationtitle ?? true;
-        $this->addDocumentationDescription = $modelData->adddocumentationdescription ?? true;
+        $this->titleMode = $modelData->titlemode ?? 0;
+        $this->descriptionMode = $modelData->descriptionmode ?? 0;
     }
 
     /**
@@ -140,22 +142,22 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
     }
 
     /**
-     * Returns the indicator if the documentation title should be added to the output
+     * Returns the indicator in which way the title should be inclued
      *
-     * @return boolean
+     * @return integer
      */
-    public function getDddDocumentationTitle(): bool
+    public function getTitleMode(): int
     {
-        return $this->addDocumentationTitle;
+        return $this->titleMode;
     }
 
     /**
-     * Returns the indicator if the documentation description should be added to the output
+     * Returns the indicator in which way the description should be inclued
      *
-     * @return boolean
+     * @return integer
      */
-    public function getDddDocumentationDescription(): bool
+    public function getDescriptionMode(): int
     {
-        return $this->addDocumentationDescription;
+        return $this->descriptionMode;
     }
 }
