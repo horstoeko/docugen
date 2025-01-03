@@ -55,10 +55,15 @@ class DocGeneratorOutputMarkdown extends DocGeneratorOutputAbstract
      */
     protected function beforeAllBlocks(): DocGeneratorOutputAbstract
     {
-        $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer(sprintf('# %s', $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorDocumentationModel()->getTitle()));
-        $this->getDocGeneratorOutputBuffer()->addEmptyLineToOutputBuffer();
-        $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer($this->getDocGeneratorDocumentationBuilder()->getDocGeneratorDocumentationModel()->getDescription());
-        $this->getDocGeneratorOutputBuffer()->addEmptyLineToOutputBuffer();
+        if ($this->getDocGeneratorOutputModel()->getDddDocumentationTitle() === true) {
+            $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer(sprintf('# %s', $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorDocumentationModel()->getTitle()));
+            $this->getDocGeneratorOutputBuffer()->addEmptyLineToOutputBuffer();
+        }
+
+        if ($this->getDocGeneratorOutputModel()->getDddDocumentationDescription() === true) {
+            $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer($this->getDocGeneratorDocumentationBuilder()->getDocGeneratorDocumentationModel()->getDescription());
+            $this->getDocGeneratorOutputBuffer()->addEmptyLineToOutputBuffer();
+        }
 
         return $this;
     }

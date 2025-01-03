@@ -61,6 +61,20 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
     protected $filePathIsAbsolute = false;
 
     /**
+     * Indicator if the documentation title should be added to the output
+     *
+     * @var boolean
+     */
+    protected $addDocumentationTitle = true;
+
+    /**
+     * Indicator if the documentation description should be added to the output
+     *
+     * @var boolean
+     */
+    protected $addDocumentationDescription = true;
+
+    /**
      * @inheritDoc
      */
     protected function fillAttributes(stdClass $modelData): void
@@ -71,6 +85,8 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
         $this->filePath = $modelData->filepath ?? "";
         $this->fileName = $modelData->filename ?? "";
         $this->filePathIsAbsolute = $modelData->filepathisabsolute ?? false;
+        $this->addDocumentationTitle = $modelData->adddocumentationtitle ?? true;
+        $this->addDocumentationDescription = $modelData->adddocumentationdescription ?? true;
     }
 
     /**
@@ -121,5 +137,25 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
     public function getFilePathIsAbsolute(): bool
     {
         return $this->filePathIsAbsolute;
+    }
+
+    /**
+     * Returns the indicator if the documentation title should be added to the output
+     *
+     * @return boolean
+     */
+    public function getDddDocumentationTitle(): bool
+    {
+        return $this->addDocumentationTitle;
+    }
+
+    /**
+     * Returns the indicator if the documentation description should be added to the output
+     *
+     * @return boolean
+     */
+    public function getDddDocumentationDescription(): bool
+    {
+        return $this->addDocumentationDescription;
     }
 }

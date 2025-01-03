@@ -180,6 +180,12 @@
                     },
                     "filepathisabsolute": {
                         "type": "boolean"
+                    },
+                    "adddocumentationtitle": {
+                        "type": "boolean"
+                    },
+                    "adddocumentationdescription": {
+                        "type": "boolean"
                     }
                 }
             }
