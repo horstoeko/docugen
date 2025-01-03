@@ -82,4 +82,5 @@ _backup*
 /*.phar
 /composer.lock
 
-/examples/exampleoutput*.*
+/examples/example*.*
+/examples/Example*.*
