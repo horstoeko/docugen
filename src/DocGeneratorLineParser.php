@@ -105,6 +105,8 @@ class DocGeneratorLineParser
             $includeCodeSnippetToLine - $includeCodeSnippetFromLine + 1
         );
 
+        $this->replaceTextParts($lines);
+
         $this->docGeneratorOutputBuffer->addLinesToOutputBuffer($lines);
 
         return true;
@@ -138,6 +140,21 @@ class DocGeneratorLineParser
             $includeTextToLine - $includeTextFromLine + 1
         );
 
+        $this->replaceTextParts($lines);
+
+        $this->docGeneratorOutputBuffer->addLinesToOutputBuffer($lines);
+
+        return true;
+    }
+
+    /**
+     * Replace text parts
+     *
+     * @param array &$lines
+     * @return void
+     */
+    protected function replaceTextParts(array &$lines): void
+    {
         do {
             $hasReplacedSomething = false;
             foreach ($lines as $lineKey => $lineValue) {
@@ -145,12 +162,14 @@ class DocGeneratorLineParser
                 $lines[$lineKey] = $lineValue;
             }
         } while ($hasReplacedSomething);
-
-        $this->docGeneratorOutputBuffer->addLinesToOutputBuffer($lines);
-
-        return true;
     }
 
+    /**
+     * Replace text parts
+     *
+     * @param mixed &$line
+     * @return bool
+     */
     protected function hasReplacedTextPart(&$line): bool
     {
         if (!preg_match('/@TXTPART:(\w+)(:\d+)?/', $line, $matches)) {
