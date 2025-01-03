@@ -150,7 +150,7 @@ class DocGeneratorLineParser
     /**
      * Replace text parts
      *
-     * @param array &$lines
+     * @param  array &$lines
      * @return void
      */
     protected function replaceTextParts(array &$lines): void
@@ -167,7 +167,7 @@ class DocGeneratorLineParser
     /**
      * Replace text parts
      *
-     * @param mixed &$line
+     * @param  mixed &$line
      * @return bool
      */
     protected function hasReplacedTextPart(&$line): bool
