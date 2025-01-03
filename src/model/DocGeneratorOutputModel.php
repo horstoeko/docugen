@@ -30,7 +30,7 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
      *
      * @var string
      */
-    protected $outputType = "";
+    protected $outputType = "markdown";
 
     /**
      * The list of documentations to output
@@ -58,11 +58,11 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
      */
     protected function fillAttributes(stdClass $modelData): void
     {
-        $this->id = $modelData->id;
-        $this->outputType = $modelData->outputtype;
-        $this->documentationId = $modelData->documentationid;
-        $this->filePath = $modelData->filepath;
-        $this->fileName = $modelData->filename;
+        $this->id = $modelData->id ?? "";
+        $this->outputType = $modelData->outputtype ?? "markdown";
+        $this->documentationId = $modelData->documentationid ?? "";
+        $this->filePath = $modelData->filepath ?? "";
+        $this->fileName = $modelData->filename ?? "";
     }
 
     /**

@@ -45,12 +45,12 @@ class DocGeneratorBlockModel extends DocGeneratorAbstractModel
      */
     protected function fillAttributes(stdClass $modelData): void
     {
-        $this->id = $modelData->id;
-        $this->title = $modelData->title;
-        $this->description = $modelData->description;
-        $this->type = $modelData->type;
+        $this->id = $modelData->id ?? "";
+        $this->title = $modelData->title ?? "";
+        $this->description = $modelData->description ?? "";
+        $this->type = $modelData->type ?? "";
         $this->language = $modelData->language ?? "php";
-        $this->lines = $modelData->lines;
+        $this->lines = $modelData->lines ?? [];
     }
 
     /**

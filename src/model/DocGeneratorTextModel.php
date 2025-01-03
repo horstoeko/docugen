@@ -26,14 +26,15 @@ class DocGeneratorTextModel extends DocGeneratorAbstractModel
 {
     use DocGeneratorCommonModelAttributesTrait;
     use DocGeneratorModelHasLinesAttribute;
+
     /**
      * @inheritDoc
      */
     protected function fillAttributes(stdClass $modelData): void
     {
-        $this->id = $modelData->id;
-        $this->title = $modelData->title;
-        $this->description = $modelData->description;
-        $this->lines = $modelData->lines;
+        $this->id = $modelData->id ?? "";
+        $this->title = $modelData->title ?? "";
+        $this->description = $modelData->description ?? "";
+        $this->lines = $modelData->lines ?? [];
     }
 }
