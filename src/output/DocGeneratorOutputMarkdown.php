@@ -58,9 +58,6 @@ class DocGeneratorOutputMarkdown extends DocGeneratorOutputAbstract
         $title = "";
         $description = "";
 
-        $x = $this->getDocGeneratorOutputModel()->getTitleMode();
-        $y = $this->getDocGeneratorOutputModel()->getDescriptionMode();
-
         if ($this->getDocGeneratorOutputModel()->getTitleMode() === 1) {
             $title = $this->getDocGeneratorOutputModel()->getTitle();
         } elseif ($this->getDocGeneratorOutputModel()->getTitleMode() === 2) {
