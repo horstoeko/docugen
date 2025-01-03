@@ -46,6 +46,13 @@ class DocGeneratorOutputBuilder
     private $docGeneratorConfig;
 
     /**
+     * Output instance
+     *
+     * @var DocGeneratorOutputAbstract
+     */
+    private $docGeneratorOutputAbstract;
+
+    /**
      * Create a new instance
      *
      * @param  DocGeneratorOutputModel          $docGeneratorOutputModel
@@ -104,7 +111,17 @@ class DocGeneratorOutputBuilder
     }
 
     /**
-     * Build output
+     * Get the block instance (object)
+     *
+     * @return DocGeneratorOutputAbstract
+     */
+    public function getOutputInstance(): DocGeneratorOutputAbstract
+    {
+        return $this->docGeneratorOutputAbstract;
+    }
+
+    /**
+     * Generate a single output
      *
      * @return DocGeneratorOutputBuilder
      */
@@ -116,11 +133,12 @@ class DocGeneratorOutputBuilder
                 ucFirst($this->getDocGeneratorOutputModel()->getOutputType())
             );
 
-        $outputClassName::factory(
-            $this->getDocGeneratorOutputModel(),
-            $this->getDocGeneratorDocumentationBuilder(),
-            $this->getDocGeneratorConfig()
-        )->build()->writeFile();
+        $this->docGeneratorOutputAbstract =
+            $outputClassName::factory(
+                $this->getDocGeneratorOutputModel(),
+                $this->getDocGeneratorDocumentationBuilder(),
+                $this->getDocGeneratorConfig()
+            )->build()->writeFile();
 
         return $this;
     }

@@ -42,8 +42,7 @@ class DocGenerator
     /**
      * List of generated outputs
      *
-     * @var            array<DocGeneratorOutputBuilder>
-     * @phpstan-ignore property.onlyWritten
+     * @var array<DocGeneratorOutputBuilder>
      */
     private $docGeneratorOutputBuilders = [];
 
@@ -87,7 +86,8 @@ class DocGenerator
     public function build(): DocGenerator
     {
         $this->generateAllDocumentations();
-        $this->outputAllDocumentations();
+        $this->generateAllDocumentationOutputs();
+        $this->writeAllDocumentationOutputs();
 
         return $this;
     }
@@ -132,13 +132,13 @@ class DocGenerator
      *
      * @return DocGenerator
      */
-    private function outputAllDocumentations(): DocGenerator
+    private function generateAllDocumentationOutputs(): DocGenerator
     {
         $this->docGeneratorOutputBuilders = [];
 
         $this->getDocGeneratorConfig()->getOutputs()->each(
             function (DocGeneratorOutputModel $docGeneratorOutputModel): void {
-                $this->outputSingleDocumentation($docGeneratorOutputModel);
+                $this->generateSingleDocumentationOutput($docGeneratorOutputModel);
             }
         );
 
@@ -151,7 +151,7 @@ class DocGenerator
      * @param  DocGeneratorOutputModel $docGeneratorOutputModel
      * @return DocGenerator
      */
-    private function outputSingleDocumentation(DocGeneratorOutputModel $docGeneratorOutputModel): DocGenerator
+    private function generateSingleDocumentationOutput(DocGeneratorOutputModel $docGeneratorOutputModel): DocGenerator
     {
         $docGeneratorDocumentationBuilder = array_filter(
             $this->docGeneratorDocumentationBuilders,
@@ -172,6 +172,33 @@ class DocGenerator
                 $docGeneratorDocumentationBuilder,
                 $this->getDocGeneratorConfig()
             )->build();
+
+        return $this;
+    }
+
+    /**
+     * Write each defined output
+     *
+     * @return DocGenerator
+     */
+    private function writeAllDocumentationOutputs(): DocGenerator
+    {
+        foreach ($this->docGeneratorOutputBuilders as $docGeneratorOutputBuilder) {
+            $this->writeSingleDocumentationOutput($docGeneratorOutputBuilder);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Write a single defined output
+     *
+     * @param DocGeneratorOutputBuilder $docGeneratorOutputBuilder
+     * @return DocGenerator
+     */
+    private function writeSingleDocumentationOutput(DocGeneratorOutputBuilder $docGeneratorOutputBuilder): DocGenerator
+    {
+        $docGeneratorOutputBuilder->getOutputInstance()->writeFile();
 
         return $this;
     }

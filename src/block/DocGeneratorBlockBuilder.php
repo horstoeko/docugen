@@ -116,7 +116,11 @@ class DocGeneratorBlockBuilder
      */
     public function build(): DocGeneratorBlockBuilder
     {
-        $blockClassName = sprintf('horstoeko\docugen\block\DocGeneratorBlock%s', ucFirst($this->getDocGeneratorBlockModel()->getType()));
+        $blockClassName =
+            sprintf(
+                'horstoeko\docugen\block\DocGeneratorBlock%s',
+                ucFirst($this->getDocGeneratorBlockModel()->getType())
+            );
 
         $this->docGeneratorBlockAbstract =
             $blockClassName::factory(
