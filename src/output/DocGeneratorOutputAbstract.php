@@ -158,14 +158,9 @@ abstract class DocGeneratorOutputAbstract
      */
     public function writeFile(): DocGeneratorOutputAbstract
     {
-        $filenameToOutput =
-            PathUtils::combinePathWithFile(
-                PathUtils::combinePathWithPath(
-                    $this->getDocGeneratorConfig()->getRootDirectory(),
-                    $this->getDocGeneratorOutputModel()->getFilePath()
-                ),
-                $this->getDocGeneratorOutputModel()->getFileName()
-            );
+        $filepath = $this->getDocGeneratorOutputModel()->getFilePathIsAbsolute() ? $this->getDocGeneratorOutputModel()->getFilePath() : PathUtils::combinePathWithPath($this->getDocGeneratorConfig()->getRootDirectory(), $this->getDocGeneratorOutputModel()->getFilePath());
+
+        $filenameToOutput = PathUtils::combinePathWithFile($filepath, $this->getDocGeneratorOutputModel()->getFileName());
 
         file_put_contents(
             $filenameToOutput,

@@ -54,6 +54,13 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
     protected $fileName = "";
 
     /**
+     * Indicator that file path is an absolute path
+     *
+     * @var boolean
+     */
+    protected $filePathIsAbsolute = false;
+
+    /**
      * @inheritDoc
      */
     protected function fillAttributes(stdClass $modelData): void
@@ -63,6 +70,7 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
         $this->documentationId = $modelData->documentationid ?? "";
         $this->filePath = $modelData->filepath ?? "";
         $this->fileName = $modelData->filename ?? "";
+        $this->filePathIsAbsolute = $modelData->filepathisabsolute ?? false;
     }
 
     /**
@@ -103,5 +111,15 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
     public function getFileName(): string
     {
         return $this->fileName;
+    }
+
+    /**
+     * Returns the indicator that file path is an absolute path
+     *
+     * @return boolean
+     */
+    public function getFilePathIsAbsolute(): bool
+    {
+        return $this->filePathIsAbsolute;
     }
 }

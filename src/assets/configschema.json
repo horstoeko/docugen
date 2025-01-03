@@ -177,6 +177,9 @@
                     },
                     "filename": {
                         "type": "string"
+                    },
+                    "filepathisabsolute": {
+                        "type": "boolean"
                     }
                 }
             }
