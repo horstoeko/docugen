@@ -6,7 +6,8 @@
         "description",
         "codesnippets",
         "texts",
-        "documentations"
+        "documentations",
+        "outputs"
     ],
     "properties": {
         "title": {
@@ -21,8 +22,6 @@
                 "type": "object",
                 "required": [
                     "id",
-                    "title",
-                    "description",
                     "lines"
                 ],
                 "properties": {
@@ -50,8 +49,6 @@
                 "type": "object",
                 "required": [
                     "id",
-                    "title",
-                    "description",
                     "lines"
                 ],
                 "properties": {
@@ -79,8 +76,6 @@
                 "type": "object",
                 "required": [
                     "id",
-                    "title",
-                    "description",
                     "type",
                     "lines"
                 ],
