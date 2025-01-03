@@ -73,12 +73,12 @@ class DocGeneratorOutputMarkdown extends DocGeneratorOutputAbstract
         $title = trim($title);
         $description = trim($description);
 
-        if ($title) {
+        if ($title !== '' && $title !== '0') {
             $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer(sprintf('# %s', $title));
             $this->getDocGeneratorOutputBuffer()->addEmptyLineToOutputBuffer();
         }
 
-        if ($description) {
+        if ($description !== '' && $description !== '0') {
             $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer($description);
             $this->getDocGeneratorOutputBuffer()->addEmptyLineToOutputBuffer();
         }
