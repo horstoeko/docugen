@@ -82,5 +82,4 @@ _backup*
 /*.phar
 /composer.lock
 
-/examples/exampleoutput.php
-/examples/exampleoutput.md
+/examples/exampleoutput*.*
