@@ -31,7 +31,7 @@ class DocGeneratorBlockModel extends DocGeneratorAbstractModel
      *
      * @var string
      */
-    protected $type = "";
+    protected $type = "comment";
 
     /**
      * The language
@@ -48,7 +48,7 @@ class DocGeneratorBlockModel extends DocGeneratorAbstractModel
         $this->id = $modelData->id ?? "";
         $this->title = $modelData->title ?? "";
         $this->description = $modelData->description ?? "";
-        $this->type = $modelData->type ?? "";
+        $this->type = $modelData->type ?? "comment";
         $this->language = $modelData->language ?? "php";
         $this->lines = $modelData->lines ?? [];
     }

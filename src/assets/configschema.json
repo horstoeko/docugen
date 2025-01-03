@@ -76,7 +76,6 @@
                 "type": "object",
                 "required": [
                     "id",
-                    "type",
                     "lines"
                 ],
                 "properties": {
