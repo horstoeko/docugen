@@ -10,11 +10,13 @@
 namespace horstoeko\docugen\output;
 
 use horstoeko\docugen\block\DocGeneratorBlockBlank;
+use horstoeko\docugen\block\DocGeneratorBlockBuilder;
 use horstoeko\docugen\block\DocGeneratorBlockCode;
 use horstoeko\docugen\block\DocGeneratorBlockComment;
 use horstoeko\docugen\DocGeneratorConfig;
 use horstoeko\docugen\DocGeneratorOutputBuffer;
 use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
+use horstoeko\docugen\model\DocGeneratorDocumentationModel;
 use horstoeko\docugen\model\DocGeneratorOutputModel;
 use horstoeko\stringmanagement\PathUtils;
 
@@ -104,6 +106,26 @@ abstract class DocGeneratorOutputAbstract
     }
 
     /**
+     * Returns the documentation model
+     *
+     * @return DocGeneratorDocumentationModel
+     */
+    public function getDocGeneratorDocumentationModel(): DocGeneratorDocumentationModel
+    {
+        return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorDocumentationModel();
+    }
+
+    /**
+     * Returns the list of documentation blocks
+     *
+     * @return array<DocGeneratorBlockBuilder>
+     */
+    public function getDocGeneratorBlockBuilders(): array
+    {
+        return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorBlockBuilders();
+    }
+
+    /**
      * Returns the global configuration
      *
      * @return DocGeneratorConfig
@@ -132,7 +154,7 @@ abstract class DocGeneratorOutputAbstract
     {
         $this->beforeAllBlocks();
 
-        foreach ($this->getDocGeneratorDocumentationBuilder()->getDocGeneratorBlockBuilders() as $block) {
+        foreach ($this->getDocGeneratorBlockBuilders() as $block) {
             switch (true) {
                 case $block->getBlockInstance() instanceof DocGeneratorBlockComment:
                     $this->renderCommentBlock($block->getBlockInstance());

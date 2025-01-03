@@ -61,13 +61,13 @@ class DocGeneratorOutputMarkdown extends DocGeneratorOutputAbstract
         if ($this->getDocGeneratorOutputModel()->getTitleMode() === 1) {
             $title = $this->getDocGeneratorOutputModel()->getTitle();
         } elseif ($this->getDocGeneratorOutputModel()->getTitleMode() === 2) {
-            $title = $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorDocumentationModel()->getTitle();
+            $title = $this->getDocGeneratorDocumentationModel()->getTitle();
         }
 
         if ($this->getDocGeneratorOutputModel()->getDescriptionMode() === 1) {
             $description = $this->getDocGeneratorOutputModel()->getDescription();
         } elseif ($this->getDocGeneratorOutputModel()->getDescriptionMode() === 2) {
-            $description = $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorDocumentationModel()->getDescription();
+            $description = $this->getDocGeneratorDocumentationModel()->getDescription();
         }
 
         $title = trim($title);
