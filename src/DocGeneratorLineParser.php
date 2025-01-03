@@ -99,13 +99,13 @@ class DocGeneratorLineParser
         $includeCodeSnippetFromLine = isset($matches[2]) ? (int)ltrim($matches[2], ':') : 1;
         $includeCodeSnippetToLine = isset($matches[3]) ? (int)ltrim($matches[3], ':') : count($includeCodeSnippetModel->getLines());
 
-        $this->docGeneratorOutputBuffer->addLinesToOutputBuffer(
-            array_slice(
-                $includeCodeSnippetModel->getLines(),
-                $includeCodeSnippetFromLine - 1,
-                $includeCodeSnippetToLine - $includeCodeSnippetFromLine + 1
-            )
+        $lines = array_slice(
+            $includeCodeSnippetModel->getLines(),
+            $includeCodeSnippetFromLine - 1,
+            $includeCodeSnippetToLine - $includeCodeSnippetFromLine + 1
         );
+
+        $this->docGeneratorOutputBuffer->addLinesToOutputBuffer($lines);
 
         return true;
     }
@@ -132,12 +132,48 @@ class DocGeneratorLineParser
         $includeTextFromLine = isset($matches[2]) ? (int)ltrim($matches[2], ':') : 1;
         $includeTextToLine = isset($matches[3]) ? (int)ltrim($matches[3], ':') : count($includeTextModel->getLines());
 
-        $this->docGeneratorOutputBuffer->addLinesToOutputBuffer(
-            array_slice(
-                $includeTextModel->getLines(),
-                $includeTextFromLine - 1,
-                $includeTextToLine - $includeTextFromLine + 1
-            )
+        $lines = array_slice(
+            $includeTextModel->getLines(),
+            $includeTextFromLine - 1,
+            $includeTextToLine - $includeTextFromLine + 1
+        );
+
+        do {
+            $hasReplacedSomething = false;
+            foreach ($lines as $lineKey => $lineValue) {
+                $hasReplacedSomething = $hasReplacedSomething || $this->hasReplacedTextPart($lineValue);
+                $lines[$lineKey] = $lineValue;
+            }
+        } while ($hasReplacedSomething);
+
+        $this->docGeneratorOutputBuffer->addLinesToOutputBuffer($lines);
+
+        return true;
+    }
+
+    protected function hasReplacedTextPart(&$line): bool
+    {
+        if (!preg_match('/@TXTPART:(\w+)(:\d+)?/', $line, $matches)) {
+            return false;
+        }
+
+        $line = preg_replace_callback(
+            '/@TXTPART:(\w+)(:\d+)?/',
+            function ($matches) {
+                $indexWithinLines = isset($matches[2]) ? (int)ltrim($matches[2], ':') : 0;
+                $partTextModel = $this->docGeneratorConfig->getTexts()->findById($matches[1]);
+
+                if (is_null($partTextModel)) {
+                    return $matches[0];
+                }
+
+                if (empty($partTextModel->getLines())) {
+                    return $matches[0];
+                }
+
+                return trim($partTextModel->getLines()[$indexWithinLines]);
+            },
+            $line
         );
 
         return true;
