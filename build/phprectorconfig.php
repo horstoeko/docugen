@@ -5,21 +5,24 @@ declare(strict_types=1);
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\SetList;
 use Rector\Php52\Rector\Property\VarToPublicPropertyRector;
+use Rector\CodingStyle\Rector\Assign\SplitDoubleAssignRector;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\CodingStyle\Rector\FuncCall\ConsistentImplodeRector;
+use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
-use Rector\Naming\Rector\Class_\RenamePropertyToMatchTypeRector;
 use Rector\Transform\Rector\FuncCall\FuncCallToConstFetchRector;
 use Rector\Strict\Rector\If_\BooleanInIfConditionRuleFixerRector;
-use Rector\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
+use Rector\CodingStyle\Rector\Property\SplitGroupedPropertiesRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\FuncCall\CallUserFuncToMethodCallRector;
 use Rector\Strict\Rector\BooleanNot\BooleanInBooleanNotRuleFixerRector;
-use Rector\Naming\Rector\ClassMethod\RenameVariableToMatchNewTypeRector;
+use Rector\CodingStyle\Rector\FuncCall\CallUserFuncArrayToVariadicRector;
 use Rector\Instanceof_\Rector\Ternary\FlipNegatedTernaryInstanceofRector;
 use Rector\Strict\Rector\Ternary\BooleanInTernaryOperatorRuleFixerRector;
+use Rector\CodingStyle\Rector\Catch_\CatchExceptionNameMatchingTypeRector;
+use Rector\CodingStyle\Rector\FuncCall\CountArrayToEmptyArrayComparisonRector;
 use Rector\Naming\Rector\Assign\RenameVariableToMatchMethodCallReturnTypeRector;
 use Rector\Naming\Rector\Foreach_\RenameForeachValueVariableToMatchExprVariableRector;
 use Rector\Naming\Rector\Foreach_\RenameForeachValueVariableToMatchMethodCallReturnTypeRector;
@@ -52,15 +55,21 @@ return RectorConfig::configure()
         BooleanInBooleanNotRuleFixerRector::class,
         BooleanInIfConditionRuleFixerRector::class,
         BooleanInTernaryOperatorRuleFixerRector::class,
+        CallUserFuncArrayToVariadicRector::class,
+        CallUserFuncToMethodCallRector::class,
+        CatchExceptionNameMatchingTypeRector::class,
+        ConsistentImplodeRector::class,
+        CountArrayToEmptyArrayComparisonRector::class,
         DisallowedEmptyRuleFixerRector::class,
+        FlipNegatedTernaryInstanceofRector::class,
         FuncCallToConstFetchRector::class,
         RemoveExtraParametersRector::class,
         RenameForeachValueVariableToMatchExprVariableRector::class,
         RenameForeachValueVariableToMatchMethodCallReturnTypeRector::class,
         RenameVariableToMatchMethodCallReturnTypeRector::class,
         VarToPublicPropertyRector::class,
-        FlipNegatedTernaryInstanceofRector::class,
-        ConsistentImplodeRector::class,
-        CallUserFuncToMethodCallRector::class,
+        SplitGroupedPropertiesRector::class,
+        SplitDoubleAssignRector::class,
+        NewlineAfterStatementRector::class,
     ])
     ->withTypeCoverageLevel(0);
