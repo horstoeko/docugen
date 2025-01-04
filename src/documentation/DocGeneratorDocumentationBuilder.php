@@ -104,9 +104,17 @@ class DocGeneratorDocumentationBuilder
      */
     public function build(): DocGeneratorDocumentationBuilder
     {
-        foreach ($this->docGeneratorDocumentationModel->getBlocks() as $documentationBlockId) {
+        $docGeneratorBlockModels =
+            array_map(
+                function ($docGeneratorBlockModelId) {
+                    return $this->getDocGeneratorConfig()->getBlocks()->findByIdOrFail($docGeneratorBlockModelId);
+                },
+                $this->docGeneratorDocumentationModel->getBlocks()
+            );
+
+        foreach ($docGeneratorBlockModels as $docGeneratorBlockModel) {
             $this->docGeneratorBlockBuilders[] = DocGeneratorBlockBuilder::factory(
-                $this->getDocGeneratorConfig()->getBlocks()->findByIdOrFail($documentationBlockId),
+                $docGeneratorBlockModel,
                 $this
             )->build();
         }
