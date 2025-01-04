@@ -10,6 +10,7 @@
 namespace horstoeko\docugen\model;
 
 use stdClass;
+use horstoeko\docugen\model\traits\DocGeneratorModelHasOptionAttribute;
 use horstoeko\docugen\model\traits\DocGeneratorCommonModelAttributesTrait;
 
 /**
@@ -24,6 +25,7 @@ use horstoeko\docugen\model\traits\DocGeneratorCommonModelAttributesTrait;
 class DocGeneratorDocumentationModel extends DocGeneratorAbstractModel
 {
     use DocGeneratorCommonModelAttributesTrait;
+    use DocGeneratorModelHasOptionAttribute;
 
     /**
      * The code lines
@@ -41,6 +43,7 @@ class DocGeneratorDocumentationModel extends DocGeneratorAbstractModel
         $this->title = $modelData->title ?? "";
         $this->description = $modelData->description ?? "";
         $this->blocks = $modelData->blocks ?? [];
+        $this->options = array_column($modelData->options ?? [], "value", "id");
     }
 
     /**

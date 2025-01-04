@@ -10,6 +10,7 @@
 namespace horstoeko\docugen\model;
 
 use stdClass;
+use horstoeko\docugen\model\traits\DocGeneratorModelHasOptionAttribute;
 use horstoeko\docugen\model\traits\DocGeneratorCommonModelAttributesTrait;
 
 /**
@@ -24,6 +25,7 @@ use horstoeko\docugen\model\traits\DocGeneratorCommonModelAttributesTrait;
 class DocGeneratorOutputModel extends DocGeneratorAbstractModel
 {
     use DocGeneratorCommonModelAttributesTrait;
+    use DocGeneratorModelHasOptionAttribute;
 
     /**
      * The documentation output type
@@ -89,6 +91,7 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
         $this->filePathIsAbsolute = $modelData->filepathisabsolute ?? false;
         $this->titleMode = $modelData->titlemode ?? 0;
         $this->descriptionMode = $modelData->descriptionmode ?? 0;
+        $this->options = array_column($modelData->options ?? [], "value", "id");
     }
 
     /**

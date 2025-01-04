@@ -12,6 +12,7 @@ namespace horstoeko\docugen\model;
 use stdClass;
 use horstoeko\docugen\model\traits\DocGeneratorModelHasLinesAttribute;
 use horstoeko\docugen\model\traits\DocGeneratorCommonModelAttributesTrait;
+use horstoeko\docugen\model\traits\DocGeneratorModelHasOptionAttribute;
 
 /**
  * Class representing the model for a documentation
@@ -26,6 +27,8 @@ class DocGeneratorBlockModel extends DocGeneratorAbstractModel
 {
     use DocGeneratorCommonModelAttributesTrait;
     use DocGeneratorModelHasLinesAttribute;
+    use DocGeneratorModelHasOptionAttribute;
+
     /**
      * The block type
      *
@@ -51,6 +54,7 @@ class DocGeneratorBlockModel extends DocGeneratorAbstractModel
         $this->type = $modelData->type ?? "comment";
         $this->language = $modelData->language ?? "php";
         $this->lines = $modelData->lines ?? [];
+        $this->options = array_column($modelData->options ?? [], "value", "id");
     }
 
     /**
