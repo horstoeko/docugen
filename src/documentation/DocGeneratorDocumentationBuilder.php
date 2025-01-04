@@ -11,6 +11,7 @@ namespace horstoeko\docugen\documentation;
 
 use horstoeko\docugen\DocGeneratorConfig;
 use horstoeko\docugen\block\DocGeneratorBlockBuilder;
+use horstoeko\docugen\expression\DocGeneratorExpressionLanguage;
 use horstoeko\docugen\model\DocGeneratorDocumentationModel;
 
 /**
@@ -110,6 +111,22 @@ class DocGeneratorDocumentationBuilder
                     return $this->getDocGeneratorConfig()->getBlocks()->findByIdOrFail($docGeneratorBlockModelId);
                 },
                 $this->docGeneratorDocumentationModel->getBlocks()
+            );
+
+        $docGeneratorBlockModels =
+            array_filter(
+                $docGeneratorBlockModels,
+                function ($docGeneratorBlockModel) {
+                    if ($docGeneratorBlockModel->hasVisibleExpression()) {
+                        $docGeneratorExpressionLanguage = new DocGeneratorExpressionLanguage();
+                        $docGeneratorExpressionLanguage->addVariable("documentationmodel", $this->getDocGeneratorDocumentationModel());
+                        $docGeneratorExpressionLanguage->addVariable("blockmodel", $docGeneratorBlockModel);
+                        $docGeneratorExpressionLanguage->addVariable("config", $this->getDocGeneratorConfig());
+                        return $docGeneratorExpressionLanguage->evaluatesToBooleanTrue($docGeneratorBlockModel->getVisibleExpression());
+                    }
+
+                    return true;
+                }
             );
 
         foreach ($docGeneratorBlockModels as $docGeneratorBlockModel) {
