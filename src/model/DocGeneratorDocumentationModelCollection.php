@@ -27,4 +27,36 @@ class DocGeneratorDocumentationModelCollection extends DocGeneratorAbstractModel
     {
         return DocGeneratorDocumentationModel::class;
     }
+
+    /**
+     * Find a block by it's id
+     *
+     * @param  string $id
+     * @return DocGeneratorDocumentationModel|null
+     */
+    public function findById(string $id): ?DocGeneratorDocumentationModel
+    {
+        /**
+         * @var DocGeneratorDocumentationModel|null $documentationModel
+         */
+        $documentationModel = $this->findByAttribute("id", $id);
+
+        return $documentationModel;
+    }
+
+    /**
+     * Find a block by it's id. When not found an Exception is raised
+     *
+     * @param  string $id
+     * @return DocGeneratorDocumentationModel
+     */
+    public function findByIdOrFail(string $id): DocGeneratorDocumentationModel
+    {
+        /**
+         * @var DocGeneratorDocumentationModel $documentationModel
+         */
+        $documentationModel = $this->findByAttributeOrFail("id", $id);
+
+        return $documentationModel;
+    }
 }

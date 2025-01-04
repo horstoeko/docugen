@@ -10,9 +10,11 @@
 namespace horstoeko\docugen\documentation;
 
 use horstoeko\docugen\DocGeneratorConfig;
+use horstoeko\docugen\model\DocGeneratorOutputModel;
 use horstoeko\docugen\block\DocGeneratorBlockBuilder;
-use horstoeko\docugen\expression\DocGeneratorExpressionLanguage;
+use horstoeko\docugen\output\DocGeneratorOutputBuilder;
 use horstoeko\docugen\model\DocGeneratorDocumentationModel;
+use horstoeko\docugen\expression\DocGeneratorExpressionLanguage;
 
 /**
  * Class representing the generator for a single documentation
@@ -33,6 +35,13 @@ class DocGeneratorDocumentationBuilder
     private $docGeneratorDocumentationModel;
 
     /**
+     * The associated output model
+     *
+     * @var DocGeneratorOutputModel
+     */
+    private $docGeneratorOutputModel;
+
+    /**
      * The creator config
      *
      * @var DocGeneratorConfig
@@ -51,9 +60,9 @@ class DocGeneratorDocumentationBuilder
      *
      * @return DocGeneratorDocumentationBuilder
      */
-    public static function factory(DocGeneratorDocumentationModel $docGeneratorDocumentationModel, DocGeneratorConfig $docGeneratorConfig): DocGeneratorDocumentationBuilder
+    public static function factory(DocGeneratorDocumentationModel $docGeneratorDocumentationModel, DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorConfig $docGeneratorConfig): DocGeneratorDocumentationBuilder
     {
-        return new static($docGeneratorDocumentationModel, $docGeneratorConfig);
+        return new static($docGeneratorDocumentationModel, $docGeneratorOutputModel, $docGeneratorConfig);
     }
 
     /**
@@ -62,9 +71,10 @@ class DocGeneratorDocumentationBuilder
      * @param  DocGeneratorDocumentationModel $docGeneratorDocumentationModel
      * @return static
      */
-    final protected function __construct(DocGeneratorDocumentationModel $docGeneratorDocumentationModel, DocGeneratorConfig $docGeneratorConfig)
+    final protected function __construct(DocGeneratorDocumentationModel $docGeneratorDocumentationModel, DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorConfig $docGeneratorConfig)
     {
         $this->docGeneratorDocumentationModel = $docGeneratorDocumentationModel;
+        $this->docGeneratorOutputModel = $docGeneratorOutputModel;
         $this->docGeneratorConfig = $docGeneratorConfig;
     }
 
@@ -76,6 +86,16 @@ class DocGeneratorDocumentationBuilder
     public function getDocGeneratorDocumentationModel(): DocGeneratorDocumentationModel
     {
         return $this->docGeneratorDocumentationModel;
+    }
+
+    /**
+     * Returns the associated output model
+     *
+     * @return DocGeneratorOutputModel
+     */
+    public function getDocGeneratorOutputModel(): DocGeneratorOutputModel
+    {
+        return $this->docGeneratorOutputModel;
     }
 
     /**
@@ -121,9 +141,10 @@ class DocGeneratorDocumentationBuilder
                         return true;
                     }
 
-                    $docGeneratorExpressionLanguage = new DocGeneratorExpressionLanguage();
+                    $docGeneratorExpressionLanguage = DocGeneratorExpressionLanguage::factory();
                     $docGeneratorExpressionLanguage->addVariable("documentationmodel", $this->getDocGeneratorDocumentationModel());
                     $docGeneratorExpressionLanguage->addVariable("blockmodel", $docGeneratorBlockModel);
+                    $docGeneratorExpressionLanguage->addVariable("outputmodel", $this->getDocGeneratorOutputModel());
                     $docGeneratorExpressionLanguage->addVariable("config", $this->getDocGeneratorConfig());
 
                     return $docGeneratorExpressionLanguage->evaluatesToBooleanTrue($docGeneratorBlockModel->getVisibleExpression());
@@ -136,6 +157,11 @@ class DocGeneratorDocumentationBuilder
                 $this
             )->build();
         }
+
+        DocGeneratorOutputBuilder::factory(
+            $this->getDocGeneratorOutputModel(),
+            $this
+        )->build()->writeFile();
 
         return $this;
     }

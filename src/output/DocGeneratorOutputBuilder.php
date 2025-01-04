@@ -132,4 +132,16 @@ class DocGeneratorOutputBuilder
 
         return $this;
     }
+
+    /**
+     * Generate the output as a file
+     *
+     * @return DocGeneratorOutputBuilder
+     */
+    public function writeFile(): DocGeneratorOutputBuilder
+    {
+        $this->getOutputInstance()->writeFile();
+
+        return $this;
+    }
 }

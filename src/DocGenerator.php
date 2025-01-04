@@ -10,8 +10,6 @@
 namespace horstoeko\docugen;
 
 use horstoeko\docugen\model\DocGeneratorOutputModel;
-use horstoeko\docugen\output\DocGeneratorOutputBuilder;
-use horstoeko\docugen\model\DocGeneratorDocumentationModel;
 use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
 
 /**
@@ -31,20 +29,6 @@ class DocGenerator
      * @var DocGeneratorConfig
      */
     private $docGeneratorConfig;
-
-    /**
-     * List of generated documentations
-     *
-     * @var array<DocGeneratorDocumentationBuilder>
-     */
-    private $docGeneratorDocumentationBuilders = [];
-
-    /**
-     * List of generated outputs
-     *
-     * @var array<DocGeneratorOutputBuilder>
-     */
-    private $docGeneratorOutputBuilders = [];
 
     /**
      * Instanciate the documentation generator
@@ -79,66 +63,27 @@ class DocGenerator
     }
 
     /**
-     * Build and output all documentations
+     * Build documentations
      *
      * @return DocGenerator
      */
     public function build(): DocGenerator
     {
         $this->generateAllDocumentations();
-        $this->generateAllDocumentationOutputs();
-        $this->writeAllDocumentationOutputs();
 
         return $this;
     }
 
     /**
-     * Generate each defined documentation
+     * Build all documentations
      *
      * @return DocGenerator
      */
-    private function generateAllDocumentations(): DocGenerator
+    public function generateAllDocumentations(): DocGenerator
     {
-        $this->docGeneratorDocumentationBuilders = [];
-
-        $this->getDocGeneratorConfig()->getDocumentations()->each(
-            function (DocGeneratorDocumentationModel $docGeneratorDocumentationModel): void {
-                $this->generateSingleDocumentation($docGeneratorDocumentationModel);
-            }
-        );
-
-        return $this;
-    }
-
-    /**
-     * Generate a single documentation
-     *
-     * @param  DocGeneratorDocumentationModel $docGeneratorDocumentationModel
-     * @return DocGenerator
-     */
-    private function generateSingleDocumentation(DocGeneratorDocumentationModel $docGeneratorDocumentationModel): DocGenerator
-    {
-        $this->docGeneratorDocumentationBuilders[] =
-            DocGeneratorDocumentationBuilder::factory(
-                $docGeneratorDocumentationModel,
-                $this->getDocGeneratorConfig()
-            )->build();
-
-        return $this;
-    }
-
-    /**
-     * Generate each defined output
-     *
-     * @return DocGenerator
-     */
-    private function generateAllDocumentationOutputs(): DocGenerator
-    {
-        $this->docGeneratorOutputBuilders = [];
-
         $this->getDocGeneratorConfig()->getOutputs()->each(
             function (DocGeneratorOutputModel $docGeneratorOutputModel): void {
-                $this->generateSingleDocumentationOutput($docGeneratorOutputModel);
+                $this->generateSingleDocumentations($docGeneratorOutputModel);
             }
         );
 
@@ -146,58 +91,20 @@ class DocGenerator
     }
 
     /**
-     * Generate a single output
+     * Build a single documentation
      *
      * @param  DocGeneratorOutputModel $docGeneratorOutputModel
      * @return DocGenerator
      */
-    private function generateSingleDocumentationOutput(DocGeneratorOutputModel $docGeneratorOutputModel): DocGenerator
+    protected function generateSingleDocumentations(DocGeneratorOutputModel $docGeneratorOutputModel): DocGenerator
     {
-        $docGeneratorDocumentationBuilder = array_filter(
-            $this->docGeneratorDocumentationBuilders,
-            function (DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder) use ($docGeneratorOutputModel) {
-                return $docGeneratorDocumentationBuilder->getDocGeneratorDocumentationModel()->isId($docGeneratorOutputModel->getDocumentationId());
-            }
-        );
-
-        $docGeneratorDocumentationBuilder = reset($docGeneratorDocumentationBuilder);
-
-        if ($docGeneratorDocumentationBuilder === false) {
-            return $this;
-        }
-
-        $this->docGeneratorOutputBuilders[] =
-            DocGeneratorOutputBuilder::factory(
-                $docGeneratorOutputModel,
-                $docGeneratorDocumentationBuilder
-            )->build();
-
-        return $this;
-    }
-
-    /**
-     * Write each defined output
-     *
-     * @return DocGenerator
-     */
-    private function writeAllDocumentationOutputs(): DocGenerator
-    {
-        foreach ($this->docGeneratorOutputBuilders as $docGeneratorOutputBuilder) {
-            $this->writeSingleDocumentationOutput($docGeneratorOutputBuilder);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Write a single defined output
-     *
-     * @param  DocGeneratorOutputBuilder $docGeneratorOutputBuilder
-     * @return DocGenerator
-     */
-    private function writeSingleDocumentationOutput(DocGeneratorOutputBuilder $docGeneratorOutputBuilder): DocGenerator
-    {
-        $docGeneratorOutputBuilder->getOutputInstance()->writeFile();
+        DocGeneratorDocumentationBuilder::factory(
+            $this->getDocGeneratorConfig()->getDocumentations()->findByIdOrFail(
+                $docGeneratorOutputModel->getDocumentationId()
+            ),
+            $docGeneratorOutputModel,
+            $this->getDocGeneratorConfig()
+        )->build();
 
         return $this;
     }

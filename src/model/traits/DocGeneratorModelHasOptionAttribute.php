@@ -91,7 +91,7 @@ trait DocGeneratorModelHasOptionAttribute
      * @param  float  $default
      * @return float
      */
-    public function getFloatOptions(string $option, float $default = 0.0): int
+    public function getFloatOptions(string $option, float $default = 0.0): float
     {
         return (float)$this->getOption($option, $default);
     }
