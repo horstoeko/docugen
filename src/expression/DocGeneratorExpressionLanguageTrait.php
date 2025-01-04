@@ -49,8 +49,8 @@ trait DocGeneratorExpressionLanguageTrait
     }
 
     /**
-    * Returns true if the expression evaluates to false
-      *
+     * Returns true if the expression evaluates to false
+     *
      * @param  string $expression
      * @param  array  $variables
      * @return bool

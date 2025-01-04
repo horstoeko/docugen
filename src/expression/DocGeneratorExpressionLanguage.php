@@ -77,9 +77,11 @@ class DocGeneratorExpressionLanguage
      */
     public function addVariables(array $variables): DocGeneratorExpressionLanguage
     {
-        array_walk($variables, function ($variableValue, $variableName): void {
-            $this->addVariable($variableName, $variableValue);
-        });
+        array_walk(
+            $variables, function ($variableValue, $variableName): void {
+                $this->addVariable($variableName, $variableValue);
+            }
+        );
 
         return $this;
     }

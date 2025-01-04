@@ -192,7 +192,7 @@ class DocGenerator
     /**
      * Write a single defined output
      *
-     * @param DocGeneratorOutputBuilder $docGeneratorOutputBuilder
+     * @param  DocGeneratorOutputBuilder $docGeneratorOutputBuilder
      * @return DocGenerator
      */
     private function writeSingleDocumentationOutput(DocGeneratorOutputBuilder $docGeneratorOutputBuilder): DocGenerator
