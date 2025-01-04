@@ -125,12 +125,20 @@ class DocGeneratorDocumentationBuilder
      */
     public function build(): DocGeneratorDocumentationBuilder
     {
+        $docGeneratorBlocks =
+            array_filter(
+                $this->docGeneratorDocumentationModel->getBlocks(),
+                function ($docGeneratorBlockId) {
+                    return substr($docGeneratorBlockId, 0, 1) != '#';
+                }
+            );
+
         $docGeneratorBlockModels =
             array_map(
-                function ($docGeneratorBlockModelId) {
-                    return $this->getDocGeneratorConfig()->getBlocks()->findByIdOrFail($docGeneratorBlockModelId);
+                function ($docGeneratorBlockId) {
+                    return $this->getDocGeneratorConfig()->getBlocks()->findByIdOrFail($docGeneratorBlockId);
                 },
-                $this->docGeneratorDocumentationModel->getBlocks()
+                $docGeneratorBlocks
             );
 
         $docGeneratorBlockModels =
