@@ -82,8 +82,8 @@ abstract class DocGeneratorOutputAbstract
     final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorOutputBuilder $docGeneratorOutputBuilder, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder)
     {
         $this->docGeneratorOutputModel = $docGeneratorOutputModel;
-        $this->docGeneratorDocumentationBuilder = $docGeneratorDocumentationBuilder;
         $this->docGeneratorOutputBuilder = $docGeneratorOutputBuilder;
+        $this->docGeneratorDocumentationBuilder = $docGeneratorDocumentationBuilder;
         $this->docGeneratorOutputBuffer = DocGeneratorOutputBuffer::factory();
     }
 
