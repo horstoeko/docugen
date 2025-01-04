@@ -166,13 +166,13 @@ abstract class DocGeneratorOutputAbstract
     {
         $this->beforeAllBlocks();
 
-        foreach ($this->getDocGeneratorBlockBuilders() as $block) {
-            if ($block->getBlockInstance() instanceof DocGeneratorBlockComment) {
-                $this->renderCommentBlock($block->getBlockInstance());
-            } elseif ($block->getBlockInstance() instanceof DocGeneratorBlockCode) {
-                $this->renderCodeBlock($block->getBlockInstance());
-            } elseif ($block->getBlockInstance() instanceof DocGeneratorBlockBlank) {
-                $this->renderBlankBlock($block->getBlockInstance());
+        foreach ($this->getDocGeneratorBlockBuilders() as $docGeneratorBlockBuilder) {
+            if ($docGeneratorBlockBuilder->getBlockInstance() instanceof DocGeneratorBlockComment) {
+                $this->renderCommentBlock($docGeneratorBlockBuilder->getBlockInstance());
+            } elseif ($docGeneratorBlockBuilder->getBlockInstance() instanceof DocGeneratorBlockCode) {
+                $this->renderCodeBlock($docGeneratorBlockBuilder->getBlockInstance());
+            } elseif ($docGeneratorBlockBuilder->getBlockInstance() instanceof DocGeneratorBlockBlank) {
+                $this->renderBlankBlock($docGeneratorBlockBuilder->getBlockInstance());
             }
         }
 

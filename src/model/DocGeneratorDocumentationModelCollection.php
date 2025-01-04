@@ -52,11 +52,6 @@ class DocGeneratorDocumentationModelCollection extends DocGeneratorAbstractModel
      */
     public function findByIdOrFail(string $id): DocGeneratorDocumentationModel
     {
-        /**
-         * @var DocGeneratorDocumentationModel $documentationModel
-         */
-        $documentationModel = $this->findByAttributeOrFail("id", $id);
-
-        return $documentationModel;
+        return $this->findByAttributeOrFail("id", $id);
     }
 }

@@ -88,7 +88,7 @@ class DocGeneratorLineParser
      */
     protected function mustIncludeCodeSnippet($line): bool
     {
-        if (!preg_match('/^@CS:(\w+)(:\d+)?(:\d+)?$/', $line, $matches)) {
+        if (in_array(preg_match('/^@CS:(\w+)(:\d+)?(:\d+)?$/', $line, $matches), [0, false], true)) {
             return false;
         }
 
@@ -123,7 +123,7 @@ class DocGeneratorLineParser
      */
     protected function mustIncludeText($line): bool
     {
-        if (!preg_match('/^@TXT:(\w+)(:\d+)?(:\d+)?$/', $line, $matches)) {
+        if (in_array(preg_match('/^@TXT:(\w+)(:\d+)?(:\d+)?$/', $line, $matches), [0, false], true)) {
             return false;
         }
 
@@ -175,7 +175,7 @@ class DocGeneratorLineParser
      */
     protected function hasReplacedTextPart(&$line): bool
     {
-        if (!preg_match('/@TXTPART:(\w+)(:\d+)?/', $line, $matches)) {
+        if (in_array(preg_match('/@TXTPART:(\w+)(:\d+)?/', $line, $matches), [0, false], true)) {
             return false;
         }
 

@@ -118,9 +118,9 @@ abstract class TestCase extends PhpUnitTestCase
     public function getPrivatePropertyFromClassname(string $className, string $propertyName): ReflectionProperty
     {
         $reflectionClass = new ReflectionClass($className);
-        $property = $reflectionClass->getProperty($propertyName);
-        $property->setAccessible(true);
-        return $property;
+        $reflectionProperty = $reflectionClass->getProperty($propertyName);
+        $reflectionProperty->setAccessible(true);
+        return $reflectionProperty;
     }
 
     /**
@@ -133,9 +133,9 @@ abstract class TestCase extends PhpUnitTestCase
     public function getPrivatePropertyFromObject(object $object, string $propertyName): ReflectionProperty
     {
         $reflectionClass = new ReflectionClass($object);
-        $property = $reflectionClass->getProperty($propertyName);
-        $property->setAccessible(true);
-        return $property;
+        $reflectionProperty = $reflectionClass->getProperty($propertyName);
+        $reflectionProperty->setAccessible(true);
+        return $reflectionProperty;
     }
 
     /**
@@ -148,9 +148,9 @@ abstract class TestCase extends PhpUnitTestCase
     public function getPrivateMethodFromClassname(string $className, string $methodName): ReflectionMethod
     {
         $reflectionClass = new ReflectionClass($className);
-        $method = $reflectionClass->getMethod($methodName);
-        $method->setAccessible(true);
-        return $method;
+        $reflectionMethod = $reflectionClass->getMethod($methodName);
+        $reflectionMethod->setAccessible(true);
+        return $reflectionMethod;
     }
 
     /**
@@ -163,8 +163,8 @@ abstract class TestCase extends PhpUnitTestCase
     public function getPrivateMethodFromObject(object $object, string $methodName): ReflectionMethod
     {
         $reflectionClass = new ReflectionClass($object);
-        $method = $reflectionClass->getMethod($methodName);
-        $method->setAccessible(true);
-        return $method;
+        $reflectionMethod = $reflectionClass->getMethod($methodName);
+        $reflectionMethod->setAccessible(true);
+        return $reflectionMethod;
     }
 }
