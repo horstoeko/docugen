@@ -57,6 +57,7 @@ abstract class DocGeneratorBlockAbstract
      * Return new instance of DocGeneratorBlockAbstract
      *
      * @param  DocGeneratorBlockModel $docGeneratorBlockModel
+     * @param  DocGeneratorConfig     $docGeneratorConfig
      * @return static
      */
     public static function factory(DocGeneratorBlockModel $docGeneratorBlockModel, DocGeneratorConfig $docGeneratorConfig)
@@ -68,6 +69,7 @@ abstract class DocGeneratorBlockAbstract
      * Constructor (hidden)
      *
      * @param DocGeneratorBlockModel $docGeneratorBlockModel
+     * @param DocGeneratorConfig     $docGeneratorConfig
      */
     final protected function __construct(DocGeneratorBlockModel $docGeneratorBlockModel, DocGeneratorConfig $docGeneratorConfig)
     {
