@@ -38,6 +38,17 @@ trait DocGeneratorModelHasOptionAttribute
     }
 
     /**
+     * Returns true if an option exists, otherwise false
+     *
+     * @param  string $option
+     * @return boolean
+     */
+    public function hasOption(string $option): bool
+    {
+        return isset($this->options[$option]);
+    }
+
+    /**
      * Get a single option
      *
      * @param  string $option
