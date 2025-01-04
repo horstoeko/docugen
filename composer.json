@@ -30,7 +30,8 @@
     "require": {
         "php": ">=7.3",
         "horstoeko/stringmanagement": "^1.0",
-        "swaggest/json-schema": "^0.12.43"
+        "swaggest/json-schema": "^0.12.43",
+        "symfony/expression-language": "^5|^6|^7"
     },
     "require-dev": {
         "nette/php-generator": "*",
