@@ -67,7 +67,7 @@ trait DocGeneratorModelHasOptionAttribute
      * @param  string $default
      * @return string
      */
-    public function getStringOptions(string $option, string $default): string
+    public function getStringOptions(string $option, string $default = ""): string
     {
         return (string)$this->getOption($option, $default);
     }
@@ -79,9 +79,21 @@ trait DocGeneratorModelHasOptionAttribute
      * @param  integer $default
      * @return integer
      */
-    public function getIntegerOptions(string $option, int $default): int
+    public function getIntegerOptions(string $option, int $default = 0): int
     {
         return (int)$this->getOption($option, $default);
+    }
+
+    /**
+     * Return a float option value
+     *
+     * @param  string $option
+     * @param  float  $default
+     * @return float
+     */
+    public function getFloatOptions(string $option, float $default = 0.0): int
+    {
+        return (float)$this->getOption($option, $default);
     }
 
     /**
@@ -91,7 +103,7 @@ trait DocGeneratorModelHasOptionAttribute
      * @param  boolean $default
      * @return boolean
      */
-    public function getBooleanOptions(string $option, bool $default): bool
+    public function getBooleanOptions(string $option, bool $default = false): bool
     {
         return (bool)$this->getOption($option, $default);
     }
