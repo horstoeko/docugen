@@ -1,0 +1,1216 @@
+{
+    "title": "Sample Project",
+    "description": "This is a sample project",
+    "codesnippets": [
+        {
+            "id": "CS_ZF_USE_BUILDER",
+            "lines": [
+                "use horstoeko\\zugferd\\codelists\\ZugferdCountryCodes;",
+                "use horstoeko\\zugferd\\codelists\\ZugferdCurrencyCodes;",
+                "use horstoeko\\zugferd\\codelists\\ZugferdElectronicAddressScheme;",
+                "use horstoeko\\zugferd\\codelists\\ZugferdInvoiceType;",
+                "use horstoeko\\zugferd\\codelists\\ZugferdReferenceCodeQualifiers;",
+                "use horstoeko\\zugferd\\codelists\\ZugferdUnitCodes;",
+                "use horstoeko\\zugferd\\codelists\\ZugferdVatCategoryCodes;",
+                "use horstoeko\\zugferd\\codelists\\ZugferdVatTypeCodes;",
+                "use horstoeko\\zugferd\\ZugferdDocumentBuilder;",
+                "use horstoeko\\zugferd\\ZugferdProfiles;"
+            ]
+        },
+        {
+            "id": "CS_ZF_AUTOLOAD",
+            "lines": [
+                "require __DIR__ . \"/../vendor/autoload.php\";",
+                "require __DIR__ . \"/00_ExampleHelpers.php\";"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE",
+            "lines": [
+                "$documentBuilder = ZugferdDocumentBuilder::createNew(ZugferdProfiles::PROFILE_EN16931);"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_INSTANCIATE_XRECHNUNG3_PROFILE",
+            "lines": [
+                "$documentBuilder = ZugferdDocumentBuilder::createNew(ZugferdProfiles::PROFILE_XRECHNUNG_3);"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_SET_GENERAL_INVOICE_INFORMATION",
+            "lines": [
+                "$documentBuilder->setDocumentInformation(",
+                "  'R-2024/00001',                                     // @TXTPART:TXTPART_DOCUMENT:2 number (BT-1)",
+                "  ZugferdInvoiceType::INVOICE,                        // Type \"@TXTPART:TXTPART_DOCUMENT:2\" (BT-3)",
+                "  DateTime::createFromFormat('Ymd', '20241231'),      // @TXTPART:TXTPART_DOCUMENT:2 fate (BT-2)",
+                "  ZugferdCurrencyCodes::EURO                          // @TXTPART:TXTPART_DOCUMENT:2 currency is EUR (Euro) (BT-5)",
+                ");"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_ADD_DOCUMENT_NOTE",
+            "lines": [
+                "$documentBuilder->addDocumentNote('Lieferant GmbH' . PHP_EOL . 'Lieferantenstraße 20' . PHP_EOL . '80333 München' . PHP_EOL . 'Deutschland' . PHP_EOL . 'Geschäftsführer: Hans Muster' . PHP_EOL . 'Handelsregisternummer: H A 123' . PHP_EOL . PHP_EOL, null, 'REG');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_SET_DOCUMENT_BILLING_PERIOD",
+            "lines": [
+                "$documentBuilder->setDocumentBillingPeriod(DateTime::createFromFormat('Ymd', '20250101'), DateTime::createFromFormat('Ymd', '20250131'), '01.01.2025 - 31.01.2025');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_ADD_DOCUMENTS_SUPPORTING_THE_INVOICE",
+            "lines": [
+                "$documentBuilder->addDocumentInvoiceSupportingDocumentWithUri('REFDOC-2024/00001-1', 'http.//some.url', 'Inhaltsstoffe Joghurt');",
+                "$documentBuilder->addDocumentInvoiceSupportingDocumentWithFile('REFDOC-2024/00001-2', __DIR__ . '/assets/00_AdditionalDocument.csv', 'Herkunftsnachweis Trennblätter');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_ADD_TENDER_OR_LOT_REFERENCE",
+            "lines": [
+                "$documentBuilder->addDocumentTenderOrLotReferenceDocument('LOS 738625');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_ADD_DETAILS_OF_INVOICED_OBJECT",
+            "lines": [
+                "$documentBuilder->addDocumentInvoicedObjectReferenceDocument('125', ZugferdReferenceCodeQualifiers::SALE_PERS_NUMB); // Sales person number"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_SET_CONTRACT_REFERENCE",
+            "lines": [
+                "$documentBuilder->setDocumentContractReferencedDocument('CON-2024/2025-001');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_SET_PROJECT_REFERENCE",
+            "lines": [
+                "$documentBuilder->setDocumentProcuringProject('PROJ-2025-001-1', 'Allgemeine Dienstleistungen');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_ADD_PAYMENTMEAN",
+            "lines": [
+                "$documentBuilder->addDocumentPaymentMeanToDirectDebit('DE12500105170648489890', 'R-2024/00001');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_ADD_PAYMENTTERM",
+            "lines": [
+                "$documentBuilder->addDocumentPaymentTerm('Wird von Konto DE12500105170648489890 abgebucht', DateTime::createFromFormat('Ymd', '20250131'), 'MANDATE-2024/000001');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_SET_SELLER",
+            "lines": [
+                "$documentBuilder->setDocumentSeller('Lieferant GmbH', '549910');",
+                "$documentBuilder->addDocumentSellerGlobalId('4000001123452', '0088');",
+                "$documentBuilder->addDocumentSellerTaxNumber('201/113/40209');",
+                "$documentBuilder->addDocumentSellerVATRegistrationNumber('DE123456789');",
+                "$documentBuilder->setDocumentSellerAddress('Lieferantenstraße 20', '', '', '80333', 'München', ZugferdCountryCodes::GERMANY);",
+                "$documentBuilder->setDocumentSellerContact('H. Müller', 'Verkauf', '+49-111-2222222', '+49-111-3333333', 'hm@lieferant.de');",
+                "$documentBuilder->setDocumentSellerCommunication(ZugferdElectronicAddressScheme::UNECE3155_EM, 'sales@lieferant.de');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_SET_BUYER",
+            "lines": [
+                "$documentBuilder->setDocumentBuyer('Kunden AG Mitte', 'GE2020211');",
+                "$documentBuilder->setDocumentBuyerAddress('Kundenstraße 15', '', '', '69876', 'Frankfurt', ZugferdCountryCodes::GERMANY);",
+                "$documentBuilder->setDocumentBuyerContact('H. Meier', 'Einkauf', '+49-333-4444444', '+49-333-5555555', 'hm@kunde.de');",
+                "$documentBuilder->setDocumentBuyerCommunication(ZugferdElectronicAddressScheme::UNECE3155_EM, 'purchase@kunde.de');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_SET_PAYEE",
+            "lines": [
+                "$documentBuilder->setDocumentPayee('Kunden AG Zahlungsdienstleistung');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_SET_BUYER_ORDER_REFERENCE",
+            "lines": [
+                "$documentBuilder->setDocumentBuyerOrderReferencedDocument('PO-2024-0003324');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_SET_SELLER_ORDER_REFERENCE",
+            "lines": [
+                "$documentBuilder->setDocumentSellerOrderReferencedDocument('SO-2024-000993337');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_SET_SHIP_TO",
+            "lines": [
+                "$documentBuilder->setDocumentShipTo('Kunden AG Ost');",
+                "$documentBuilder->setDocumentShipToAddress('Lieferstraße 1', '', '', '04109', 'Leipzig', ZugferdCountryCodes::GERMANY);"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_SET_DELIVERY_DATE",
+            "lines": [
+                "$documentBuilder->setDocumentSupplyChainEvent(DateTime::createFromFormat('Ymd', '20250115'));"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_ADD_POSITION_1",
+            "lines": [
+                "$documentBuilder->addNewPosition('1');",
+                "$documentBuilder->setDocumentPositionProductDetails('Trennblätter A4', '50er Pack', 'TB100A4');",
+                "$documentBuilder->setDocumentPositionNetPrice(9.9000);",
+                "$documentBuilder->setDocumentPositionQuantity(20, ZugferdUnitCodes::REC20_PIECE);",
+                "$documentBuilder->addDocumentPositionTax(ZugferdVatCategoryCodes::STAN_RATE, ZugferdVatTypeCodes::VALUE_ADDED_TAX, 19);",
+                "$documentBuilder->setDocumentPositionLineSummation(198.0);"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_ADD_POSITION_2",
+            "lines": [
+                "$documentBuilder->addNewPosition('2');",
+                "$documentBuilder->setDocumentPositionProductDetails('Joghurt Banane', 'B-Ware', 'ARNR2');",
+                "$documentBuilder->setDocumentPositionNetPrice(5.5000);",
+                "$documentBuilder->setDocumentPositionQuantity(50, ZugferdUnitCodes::REC20_PIECE);",
+                "$documentBuilder->addDocumentPositionTax(ZugferdVatCategoryCodes::STAN_RATE, ZugferdVatTypeCodes::VALUE_ADDED_TAX, 7);",
+                "$documentBuilder->setDocumentPositionLineSummation(275.0);"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_ADD_POSITION_3",
+            "lines": [
+                "$documentBuilder->addNewPosition('3');",
+                "$documentBuilder->setDocumentPositionProductDetails('Joghurt Erdbeer', '', 'ARNR3');",
+                "$documentBuilder->setDocumentPositionNetPrice(4.0000);",
+                "$documentBuilder->setDocumentPositionQuantity(100, ZugferdUnitCodes::REC20_PIECE);",
+                "$documentBuilder->addDocumentPositionTax(ZugferdVatCategoryCodes::STAN_RATE, ZugferdVatTypeCodes::VALUE_ADDED_TAX, 7);",
+                "$documentBuilder->setDocumentPositionLineSummation(400.0);"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_ADD_VAT_BREAKDOWN",
+            "lines": [
+                "$documentBuilder->addDocumentTax(ZugferdVatCategoryCodes::STAN_RATE, ZugferdVatTypeCodes::VALUE_ADDED_TAX, 198.0, 37.62, 19.0);",
+                "$documentBuilder->addDocumentTax(ZugferdVatCategoryCodes::STAN_RATE, ZugferdVatTypeCodes::VALUE_ADDED_TAX, 675.0, 47.25, 7.0);"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_SET_DOCUMENT_TOTALS",
+            "lines": [
+                "$documentBuilder->setDocumentSummation(957.87, 957.87, 873.00, 0.0, 0.0, 873.00, 84.87);"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_DOCUMENT_WRITE_XML_FILE",
+            "lines": [
+                "$documentBuilder->writeFile(__DIR__ . '/factur-x.xml');"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_ADD_DOCUMENT_WRITE_XML_STRING",
+            "lines": [
+                "$someStringVariable = $documentBuilder->getContent();"
+            ]
+        },
+        {
+            "id": "CS_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE",
+            "lines": [
+                "$documentBuilder->setDocumentBuyerReference('34676-342323');"
+            ]
+        }
+    ],
+    "texts": [
+        {
+            "id": "TXTPART_DOCUMENT",
+            "lines": [
+                "invoice",
+                "invoices",
+                "Invoice",
+                "Invoices"
+            ]
+        },
+        {
+            "id": "TXTPART_DOCUMENT_LINE",
+            "lines": [
+                "@TXTPART:TXTPART_DOCUMENT:0 line",
+                "@TXTPART:TXTPART_DOCUMENT:0 lines",
+                "@TXTPART:TXTPART_DOCUMENT:2 line",
+                "@TXTPART:TXTPART_DOCUMENT:2 lines"
+            ]
+        },
+        {
+            "id": "TXTPART_SURCHARGE",
+            "lines": [
+                "charge",
+                "charges",
+                "Charge",
+                "Charges"
+            ]
+        },
+        {
+            "id": "TXTPART_ALLOWANCE",
+            "lines": [
+                "discount",
+                "discounts",
+                "Discount",
+                "Discounts"
+            ]
+        },
+        {
+            "id": "TXTPART_PRICE",
+            "lines": [
+                "price",
+                "prices",
+                "Price",
+                "Prices"
+            ]
+        },
+        {
+            "id": "TXTPART_COST",
+            "lines": [
+                "cost",
+                "costs",
+                "Cost",
+                "Costs"
+            ]
+        },
+        {
+            "id": "TXTPART_AMOUNT",
+            "lines": [
+                "amount",
+                "amounts",
+                "Amount",
+                "Amounts"
+            ]
+        },
+        {
+            "id": "TXTPART_DELIVERY",
+            "lines": [
+                "delivery",
+                "deliveries",
+                "Delivery",
+                "Deliveries"
+            ]
+        },
+        {
+            "id": "TXTPART_DOCUMENT_BUYER",
+            "lines": [
+                "buyer (customer)"
+            ]
+        },
+        {
+            "id": "TXTPART_DOCUMENT_SELLER",
+            "lines": [
+                "seller (supplier)"
+            ]
+        },
+        {
+            "id": "TXTPART_DOCUMENT_POSITION_UNIT_PRICE",
+            "lines": [
+                "unit @TXTPART:TXTPART_PRICE"
+            ]
+        },
+        {
+            "id": "TXTPART_DOCUMENT_POSITION_UNIT_COST_NET",
+            "lines": [
+                "unit @TXTPART:TXTPART_COST"
+            ]
+        },
+        {
+            "id": "TXTPART_DOCUMENT_POSITION_QUANTITY",
+            "lines": [
+                "quantity"
+            ]
+        },
+        {
+            "id": "TXTPART_DOCUMENT_POSITION_LINE_AMOUNT",
+            "lines": [
+                "line @TXTPART:TXTPART_AMOUNT"
+            ]
+        },
+        {
+            "id": "TXTPART_DOCUMENT_POSITION_PRODUCTNAME",
+            "lines": [
+                "product name"
+            ]
+        },
+        {
+            "id": "TXTPART_DOCUMENT_POSITION_ITEMNO",
+            "lines": [
+                "item number"
+            ]
+        },
+        {
+            "id": "TXTPART_DOCUMENT_VAT",
+            "lines": [
+                "VAT"
+            ]
+        },
+        {
+            "id": "TXTPART_DOCUMENT_VAT_BREAKDOWN",
+            "lines": [
+                "@TXTPART:TXTPART_DOCUMENT_VAT breakdown"
+            ]
+        },
+        {
+            "id": "TXTPART_DOCUMENT_VAT_BASE_AMOUNT",
+            "lines": [
+                "VAT base @TXTPART:TXTPART_AMOUNT",
+                "VAT base @TXTPART:TXTPART_AMOUNT:1"
+            ]
+        },
+        {
+            "id": "TXT_ZF_COMPLETE_CODE",
+            "lines": [
+                "The complete code"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_1",
+            "lines": [
+                "First we create a new @TXTPART:TXTPART_DOCUMENT in EN16931-Profile (== COMFORT-Profile)"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_2",
+            "lines": [
+                "General @TXTPART:TXTPART_DOCUMENT Information"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_3",
+            "lines": [
+                "Not mandatory, but welcome are details such as managing director, commercial register entry or similar"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_4",
+            "lines": [
+                "Indication of when the period covered by the @TXTPART:TXTPART_DOCUMENT begins and when it ends. Also referred to as the @TXTPART:TXTPART_DELIVERY period"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_5",
+            "lines": [
+                "Add additional documents supporting the @TXTPART:TXTPART_DOCUMENT",
+                "Type code 916 is used without exception for @TXTPART:TXTPART_DOCUMENT justifying documents",
+                "First example: Specification of an external resource including the intended primary access method, e.g. http:// or ftp://",
+                "Second example: Specification of a local file to be included in the document as a BASE64-encoded attachment"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_6",
+            "lines": [
+                "Add details to the tender or lot reference. In some countries, a reference to the tender that led to the contract must be provided.",
+                "Type code 50 is used exclusively for the specification of the tender or lot reference"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_7",
+            "lines": [
+                "Add details of the calculated object",
+                "Only the type code 130 is used to transmit an object identifier. Depending on the application, an object identifier",
+                "can be a subscription number, a telephone number, a meter reading, a vehicle, a person, etc.",
+                "Note: Additional documents of type code 130 may only be specified once."
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_8",
+            "lines": [
+                "Adding details to the associated contract",
+                "The contract reference should be assigned once in the context of the specific trading relationship and for a defined period of time."
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_9",
+            "lines": [
+                "Adding a detail to a project reference",
+                "Enter the identifier of the project to which the @TXTPART:TXTPART_DOCUMENT refers and the name of the project."
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_10",
+            "lines": [
+                "We should also define how payments are handled. In our case we want to use",
+                "a SEPA direct debit. We book from the IBAN DE12500105170648489890. We also provide a Creditor-Reference",
+                "We also need a creditor reference as the second parameter which is required for direct debit"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_11",
+            "lines": [
+                "An indispensable part of an @TXTPART:TXTPART_DOCUMENT is the indication of the @TXTPART:TXTPART_DOCUMENT_SELLER. Let's do that now."
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_12",
+            "lines": [
+                "The @TXTPART:TXTPART_DOCUMENT_BUYER details are also an important part of the @TXTPART:TXTPART_DOCUMENT."
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_13",
+            "lines": [
+                "You can specify a different payee. It is possible to enter a postal address and",
+                "a contact, but some validators issue a warning."
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_14",
+            "lines": [
+                "Sometimes it happens that you want to refer to an order (order number) transmitted by the @TXTPART:TXTPART_DOCUMENT_BUYER when",
+                "issuing the @TXTPART:TXTPART_DOCUMENT. We enter the @TXTPART:TXTPART_DOCUMENT_BUYER order number here:"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_15",
+            "lines": [
+                "Sometimes the @TXTPART:TXTPART_DOCUMENT_SELLER wants to provide his @TXTPART:TXTPART_DOCUMENT_BUYER a reference to the internal sales order number"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_16",
+            "lines": [
+                "It is also possible to specify a different @TXTPART:TXTPART_DELIVERY point in the @TXTPART:TXTPART_DOCUMENT",
+                "It is possible to specify a contact at the different @TXTPART:TXTPART_DELIVERY point, but some validators issue a warning"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_17",
+            "lines": [
+                "A @TXTPART:TXTPART_DELIVERY date can also be specified within the @TXTPART:TXTPART_DOCUMENT"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_18",
+            "lines": [
+                "It is now time to add our first @TXTPART:TXTPART_DOCUMENT_LINE. This is defined as follows",
+                " - The @TXTPART:TXTPART_DOCUMENT_POSITION_PRODUCTNAME is \"Trennblätter A4\" and has a @TXTPART:TXTPART_DOCUMENT_SELLER assigned @TXTPART:TXTPART_DOCUMENT_POSITION_ITEMNO \"TB100A4\" (setDocumentPositionProductDetails)",
+                " - The @TXTPART:TXTPART_DOCUMENT_POSITION_UNIT_PRICE is 9.90 EUR (setDocumentPositionNetPrice)",
+                " - The @TXTPART:TXTPART_DOCUMENT_POSITION_QUANTITY is 20 pieces (setDocumentPositionQuantity)",
+                " - The @TXTPART:TXTPART_DOCUMENT_VAT is calculated with 19% (addDocumentPositionTax)",
+                " - The @TXTPART:TXTPART_DOCUMENT_POSITION_LINE_AMOUNT is 20 * 9.90 EUR = 198.00 EUR (setDocumentPositionLineSummation)"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_19",
+            "lines": [
+                "We now add a second @TXTPART:TXTPART_DOCUMENT_LINE.",
+                " - The @TXTPART:TXTPART_DOCUMENT_POSITION_PRODUCTNAME is \"Joghurt Banane\" and has a @TXTPART:TXTPART_DOCUMENT_SELLER assigned @TXTPART:TXTPART_DOCUMENT_POSITION_ITEMNO \"ARNR2\" (setDocumentPositionProductDetails)",
+                " - The @TXTPART:TXTPART_DOCUMENT_POSITION_UNIT_PRICE is 5.50 EUR (setDocumentPositionNetPrice)",
+                " - The @TXTPART:TXTPART_DOCUMENT_POSITION_QUANTITY is 50 pieces (setDocumentPositionQuantity)",
+                " - The @TXTPART:TXTPART_DOCUMENT_VAT is calculated with 7% (addDocumentPositionTax)",
+                " - The @TXTPART:TXTPART_DOCUMENT_POSITION_LINE_AMOUNT is 50 * 5.50 EUR = 275.00 EUR (setDocumentPositionLineSummation)"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_20",
+            "lines": [
+                "Last but not least, we add a third and final @TXTPART:TXTPART_DOCUMENT_LINE. This should essentially also serve to clarify the @TXTPART:TXTPART_DOCUMENT_VAT calculation in the following",
+                " - The @TXTPART:TXTPART_DOCUMENT_POSITION_PRODUCTNAME is \"Joghurt Erdbeer\" and has a @TXTPART:TXTPART_DOCUMENT_SELLER assigned @TXTPART:TXTPART_DOCUMENT_POSITION_ITEMNO \"ARNR3\" (setDocumentPositionProductDetails)",
+                " - The @TXTPART:TXTPART_DOCUMENT_POSITION_UNIT_PRICE is 4.00 EUR (setDocumentPositionNetPrice)",
+                " - The @TXTPART:TXTPART_DOCUMENT_POSITION_QUANTITY is 100 pieces (setDocumentPositionQuantity)",
+                " - The @TXTPART:TXTPART_DOCUMENT_VAT is calculated with 7% (addDocumentPositionTax)",
+                " - The @TXTPART:TXTPART_DOCUMENT_POSITION_LINE_AMOUNT is 100 * 4.00 EUR = 400.00 EUR (setDocumentPositionLineSummation)"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_21",
+            "lines": [
+                "Now we need to generate the @TXTPART:TXTPART_DOCUMENT_VAT_BREAKDOWN. This is an essential part of the @TXTPART:TXTPART_DOCUMENT.",
+                "You have to group the @TXTPART:TXTPART_DOCUMENT_VAT_BASE_AMOUNT:1 by @TXTPART:TXTPART_DOCUMENT_VAT-Category (\"S\"), @TXTPART:TXTPART_DOCUMENT_VAT-Type (\"VAT\") and @TXTPART:TXTPART_DOCUMENT_VAT-Percent (19%, 7%)",
+                "The calculation is as follows:",
+                "- The first @TXTPART:TXTPART_DOCUMENT_VAT summation comes at least from @TXTPART:TXTPART_DOCUMENT_LINE 1 - 19% @TXTPART:TXTPART_DOCUMENT_VAT from 198.00 EUR (Net-Amount) = 37.62",
+                "- The second @TXTPART:TXTPART_DOCUMENT_VAT summation comes at least from @TXTPART:TXTPART_DOCUMENT_LINE 2 & 3 - 7% @TXTPART:TXTPART_DOCUMENT_VAT from 275.00 EUR + 400.00 EUR = 675.00 EUR (Net-Amount) = 47.25"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_22",
+            "lines": [
+                "Finally, there is an equally important part of the @TXTPART:TXTPART_DOCUMENT - the totals.",
+                " 1. Grand total @TXTPART:TXTPART_AMOUNT = 198.00 EUR + 37.62 EUR (@TXTPART:TXTPART_DOCUMENT_VAT) + 675.00 EUR + 47.25 EUR (@TXTPART:TXTPART_DOCUMENT_VAT) = 957.87",
+                " 2. @TXTPART:TXTPART_AMOUNT:2 to pay = We assume that there was no pre-payment and set the @TXTPART:TXTPART_AMOUNT to be paid equal to the grand total @TXTPART:TXTPART_AMOUNT",
+                " 3. Net total @TXTPART:TXTPART_AMOUNT = 198.EUR (Position 1) + 675.00 EUR (Position 2 & 3) = 873.00 EUR",
+                " 4. @TXTPART:TXTPART_SURCHARGE:2 total @TXTPART:TXTPART_AMOUNT = 0.00 EUR since we don't have any @TXTPART:TXTPART_SURCHARGE:1 in the @TXTPART:TXTPART_DOCUMENT",
+                " 5. @TXTPART:TXTPART_ALLOWANCE:2 total @TXTPART:TXTPART_AMOUNT = 0.00 EUR since we don't have any @TXTPART:TXTPART_ALLOWANCE:1 in the @TXTPART:TXTPART_DOCUMENT",
+                " 6. @TXTPART:TXTPART_DOCUMENT_VAT basis total @TXTPART:TXTPART_AMOUNT = As a rule, this @TXTPART:TXTPART_AMOUNT corresponds to 3.",
+                " 7. @TXTPART:TXTPART_DOCUMENT_VAT total @TXTPART:TXTPART_AMOUNT = 19 % from 198.00 EUR = 37.62 EUR + 7% from 675.00 EUR = 47.28 EUR is 84.87 EUR"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_23",
+            "lines": [
+                "We can now generate the @TXTPART:TXTPART_DOCUMENT as a file..."
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_24",
+            "lines": [
+                "... or have the generated XML returned as a string"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_25",
+            "lines": [
+                "We should also define the payment terms as a textual information",
+                "The first parameter defines the textual description of our payment terms.",
+                "The second parameter defines the due date of the @TXTPART:TXTPART_DOCUMENT. As you have chosen a direct debit procedure, this is the date of the direct debit.",
+                "The third parameter defines the mandant reference which is required for direct debit"
+            ]
+        },
+        {
+            "id": "TXT_ZF_BUILDER_26",
+            "lines": [
+                "Specify a Routing ID (German: Leitweg-ID)",
+                "In the XRECHNUNG it is required to provide a routing ID (\"Leitweg ID\")"
+            ]
+        }
+    ],
+    "blocks": [
+        {
+            "id": "BLOCK_BLANK",
+            "type": "blank",
+            "lines": []
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_COMMON",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_USE_BUILDER",
+                "",
+                "@CS:CS_ZF_AUTOLOAD"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_COMPLETE_CODE",
+            "lines": [
+                "@TXT:TXT_ZF_COMPLETE_CODE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT01",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_1"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT02",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_2"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT03",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_3"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT04",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_4"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT05",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_5"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT06",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_6"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT07",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_7"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT08",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_8"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT09",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_9"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT10",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_10"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT11",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_11"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT12",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_12"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT13",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_13"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT14",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_14"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT15",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_15"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT16",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_16"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT17",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_17"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT18",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_18"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT19",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_19"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT20",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_20"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT21",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_21"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT22",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_22"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT23",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_23"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT24",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_24"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT25",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_25"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT26",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_26"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_INSTANCIATE_XRECHNUNG3_PROFILE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_INSTANCIATE_XRECHNUNG3_PROFILE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_SET_GENERAL_INVOICE_INFORMATION",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_SET_GENERAL_INVOICE_INFORMATION"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_SET_DOCUMENT_BILLING_PERIOD",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_SET_DOCUMENT_BILLING_PERIOD"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_ADD_DOCUMENT_NOTE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_ADD_DOCUMENT_NOTE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_ADD_DOCUMENTS_SUPPORTING_THE_INVOICE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_ADD_DOCUMENTS_SUPPORTING_THE_INVOICE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_ADD_TENDER_OR_LOT_REFERENCE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_ADD_TENDER_OR_LOT_REFERENCE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_ADD_DETAILS_OF_INVOICED_OBJECT",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_ADD_DETAILS_OF_INVOICED_OBJECT"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_SET_CONTRACT_REFERENCE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_SET_CONTRACT_REFERENCE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_SET_PROJECT_REFERENCE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_SET_PROJECT_REFERENCE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_ADD_PAYMENTMEAN",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_ADD_PAYMENTMEAN"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_ADD_PAYMENTTERM",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_ADD_PAYMENTTERM"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_SET_SELLER",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_SET_SELLER"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_SET_BUYER",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_SET_BUYER"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_SET_PAYEE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_SET_PAYEE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_SET_BUYER_ORDER_REFERENCE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_SET_BUYER_ORDER_REFERENCE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_SET_SELLER_ORDER_REFERENCE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_SET_SELLER_ORDER_REFERENCE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_SET_SHIP_TO",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_SET_SHIP_TO"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_SET_DELIVERY_DATE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_SET_DELIVERY_DATE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_ADD_POSITION_1",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_ADD_POSITION_1"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_ADD_POSITION_2",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_ADD_POSITION_2"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_ADD_POSITION_3",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_ADD_POSITION_3"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_ADD_VAT_BREAKDOWN",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_ADD_VAT_BREAKDOWN"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_ADD_DOCUMENT_TOTALS",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_SET_DOCUMENT_TOTALS"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_ADD_DOCUMENT_WRITE_XML_FILE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_DOCUMENT_WRITE_XML_FILE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_ADD_DOCUMENT_WRITE_XML_STRING",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_ADD_DOCUMENT_WRITE_XML_STRING"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE"
+            ]
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_COMPLETE_CODE",
+            "type": "code",
+            "lines": [
+                "@CS:CS_ZF_USE_BUILDER",
+                "",
+                "@CS:CS_ZF_AUTOLOAD",
+                "",
+                "@CS:CS_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE",
+                "",
+                "@CS:CS_ZF_BUILDER_SET_GENERAL_INVOICE_INFORMATION",
+                "",
+                "@CS:CS_ZF_BUILDER_ADD_DOCUMENT_NOTE",
+                "@CS:CS_ZF_BUILDER_SET_DOCUMENT_BILLING_PERIOD",
+                "@CS:CS_ZF_BUILDER_ADD_PAYMENTMEAN",
+                "@CS:CS_ZF_BUILDER_ADD_PAYMENTTERM",
+                "@CS:CS_ZF_BUILDER_SET_SELLER",
+                "@CS:CS_ZF_BUILDER_SET_BUYER",
+                "@CS:CS_ZF_BUILDER_SET_PAYEE",
+                "@CS:CS_ZF_BUILDER_SET_PAYEE",
+                "@CS:CS_ZF_BUILDER_SET_BUYER_ORDER_REFERENCE",
+                "@CS:BLOCK_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE",
+                "@CS:CS_ZF_BUILDER_SET_SHIP_TO",
+                "@CS:CS_ZF_BUILDER_SET_DELIVERY_DATE",
+                "@CS:CS_ZF_BUILDER_ADD_POSITION_1",
+                "@CS:CS_ZF_BUILDER_ADD_POSITION_2",
+                "@CS:CS_ZF_BUILDER_ADD_POSITION_3",
+                "@CS:CS_ZF_BUILDER_ADD_VAT_BREAKDOWN",
+                "@CS:CS_ZF_BUILDER_SET_DOCUMENT_TOTALS",
+                "@CS:CS_ZF_BUILDER_DOCUMENT_WRITE_XML_FILE"
+            ]
+        }
+    ],
+    "documentations": [
+        {
+            "id": "DOCUMENTATION_ZF_BUILDER_EN16931",
+            "title": "Example for ZugferdDocumentBuilder in EN16931 Profile",
+            "description": "The following lines will illustrate the usage of ZugferdDocumentBuilder in EN16931 Profile",
+            "blocks": [
+                "BLOCK_ZF_BUILDER_COMMON",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT01",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT02",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_GENERAL_INVOICE_INFORMATION",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT03",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_DOCUMENT_NOTE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT04",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_DOCUMENT_BILLING_PERIOD",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT05",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_DOCUMENTS_SUPPORTING_THE_INVOICE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT06",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_TENDER_OR_LOT_REFERENCE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT07",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_DETAILS_OF_INVOICED_OBJECT",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT08",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_CONTRACT_REFERENCE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT09",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_PROJECT_REFERENCE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT10",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_PAYMENTMEAN",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT25",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_PAYMENTTERM",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT11",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_SELLER",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT12",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_BUYER",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT13",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_PAYEE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT14",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_BUYER_ORDER_REFERENCE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT15",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_SELLER_ORDER_REFERENCE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT16",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_SHIP_TO",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT17",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_DELIVERY_DATE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT18",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_POSITION_1",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT19",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_POSITION_2",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT20",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_POSITION_3",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT21",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_VAT_BREAKDOWN",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT22",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_DOCUMENT_TOTALS",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT23",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_DOCUMENT_WRITE_XML_FILE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT24",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_DOCUMENT_WRITE_XML_STRING",
+                "BLOCK_BLANK"
+            ]
+        },
+        {
+            "id": "DOCUMENTATION_ZF_BUILDER_XRECHNUNG3",
+            "title": "Example for ZugferdDocumentBuilder in XRECHNUNG 3.x Profile",
+            "description": "The following lines will illustrate the usage of ZugferdDocumentBuilder in XRECHNUNG 3.x Profile",
+            "blocks": [
+                "BLOCK_ZF_BUILDER_COMMON",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT01",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_INSTANCIATE_XRECHNUNG3_PROFILE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT02",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_GENERAL_INVOICE_INFORMATION",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT03",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_DOCUMENT_NOTE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT04",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_DOCUMENT_BILLING_PERIOD",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT05",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_DOCUMENTS_SUPPORTING_THE_INVOICE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT06",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_TENDER_OR_LOT_REFERENCE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT07",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_DETAILS_OF_INVOICED_OBJECT",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT08",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_CONTRACT_REFERENCE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT09",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_PROJECT_REFERENCE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT10",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_PAYMENTMEAN",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT25",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_PAYMENTTERM",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT11",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_SELLER",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT12",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_BUYER",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT13",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_PAYEE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT26",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT14",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_BUYER_ORDER_REFERENCE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT15",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_SELLER_ORDER_REFERENCE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT16",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_SHIP_TO",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT17",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_SET_DELIVERY_DATE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT18",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_POSITION_1",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT19",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_POSITION_2",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT20",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_POSITION_3",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT21",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_VAT_BREAKDOWN",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT22",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_DOCUMENT_TOTALS",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT23",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_DOCUMENT_WRITE_XML_FILE",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_TXT24",
+                "BLOCK_BLANK",
+                "BLOCK_ZF_BUILDER_ADD_DOCUMENT_WRITE_XML_STRING",
+                "BLOCK_BLANK"
+            ]
+        }
+    ],
+    "outputs": [
+        {
+            "id": "OUTPUT_ZF_BUILDER_EN16931_MARKDOWN",
+            "title": "A valid example for ZugferdDocumentBuilder in EN16931 profile",
+            "description": "This example will show you the basic usage of the ZugferdDocumentBulder - here in EN16931 Profile",
+            "outputtype": "markdown",
+            "documentationid": "DOCUMENTATION_ZF_BUILDER_EN16931",
+            "filepath": "/examples",
+            "filename": "Example-ZugferdDocumentBuilder-in-EN16391-profile.md",
+            "titlemode": 0,
+            "descriptionmode": 1
+        },
+        {
+            "id": "OUTPUT_ZF_BUILDER_XRECHNUNG3_MARKDOWN",
+            "title": "A valid example for ZugferdDocumentBuilder in XRECHNUNG 3.x profile",
+            "description": "This example will show you the basic usage of the ZugferdDocumentBulder - here in XRECHNUNG 3.x Profile",
+            "outputtype": "markdown",
+            "documentationid": "DOCUMENTATION_ZF_BUILDER_XRECHNUNG3",
+            "filepath": "/examples",
+            "filename": "Example-ZugferdDocumentBuilder-in-XRECHNUNG3-profile.md",
+            "titlemode": 0,
+            "descriptionmode": 1
+        }
+    ]
+}

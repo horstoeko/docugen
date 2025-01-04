@@ -117,15 +117,16 @@ class DocGeneratorDocumentationBuilder
             array_filter(
                 $docGeneratorBlockModels,
                 function ($docGeneratorBlockModel) {
-                    if ($docGeneratorBlockModel->hasVisibleExpression()) {
-                        $docGeneratorExpressionLanguage = new DocGeneratorExpressionLanguage();
-                        $docGeneratorExpressionLanguage->addVariable("documentationmodel", $this->getDocGeneratorDocumentationModel());
-                        $docGeneratorExpressionLanguage->addVariable("blockmodel", $docGeneratorBlockModel);
-                        $docGeneratorExpressionLanguage->addVariable("config", $this->getDocGeneratorConfig());
-                        return $docGeneratorExpressionLanguage->evaluatesToBooleanTrue($docGeneratorBlockModel->getVisibleExpression());
+                    if ($docGeneratorBlockModel->hasVisibleExpression() === false) {
+                        return true;
                     }
 
-                    return true;
+                    $docGeneratorExpressionLanguage = new DocGeneratorExpressionLanguage();
+                    $docGeneratorExpressionLanguage->addVariable("documentationmodel", $this->getDocGeneratorDocumentationModel());
+                    $docGeneratorExpressionLanguage->addVariable("blockmodel", $docGeneratorBlockModel);
+                    $docGeneratorExpressionLanguage->addVariable("config", $this->getDocGeneratorConfig());
+
+                    return $docGeneratorExpressionLanguage->evaluatesToBooleanTrue($docGeneratorBlockModel->getVisibleExpression());
                 }
             );
 
