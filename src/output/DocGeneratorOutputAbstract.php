@@ -39,18 +39,18 @@ abstract class DocGeneratorOutputAbstract
     private $docGeneratorOutputModel;
 
     /**
+     * The calling output builder
+     *
+     * @var DocGeneratorOutputBuilder
+     */
+    private $docGeneratorOutputBuilder;
+
+    /**
      * List of generated documentations
      *
      * @var DocGeneratorDocumentationBuilder
      */
     private $docGeneratorDocumentationBuilder;
-
-    /**
-     * The global config
-     *
-     * @var DocGeneratorConfig
-     */
-    private $docGeneratorConfig;
 
     /**
      * Output buffer
@@ -63,25 +63,27 @@ abstract class DocGeneratorOutputAbstract
      * Create a new instance
      *
      * @param  DocGeneratorOutputModel          $docGeneratorOutputModel
+     * @param  DocGeneratorOutputBuilder        $docGeneratorOutputBuilder
      * @param  DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
      * @return DocGeneratorOutputAbstract
      */
-    public static function factory(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder, DocGeneratorConfig $docGeneratorConfig): DocGeneratorOutputAbstract
+    public static function factory(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorOutputBuilder $docGeneratorOutputBuilder, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder): DocGeneratorOutputAbstract
     {
-        return new static($docGeneratorOutputModel, $docGeneratorDocumentationBuilder, $docGeneratorConfig);
+        return new static($docGeneratorOutputModel, $docGeneratorOutputBuilder, $docGeneratorDocumentationBuilder);
     }
 
     /**
      * Constructor (hidden)
      *
      * @param DocGeneratorOutputModel          $docGeneratorOutputModel
+     * @param DocGeneratorOutputBuilder        $docGeneratorOutputBuilder
      * @param DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
      */
-    final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder, DocGeneratorConfig $docGeneratorConfig)
+    final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorOutputBuilder $docGeneratorOutputBuilder, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder)
     {
         $this->docGeneratorOutputModel = $docGeneratorOutputModel;
         $this->docGeneratorDocumentationBuilder = $docGeneratorDocumentationBuilder;
-        $this->docGeneratorConfig = $docGeneratorConfig;
+        $this->docGeneratorOutputBuilder = $docGeneratorOutputBuilder;
         $this->docGeneratorOutputBuffer = DocGeneratorOutputBuffer::factory();
     }
 
@@ -93,6 +95,16 @@ abstract class DocGeneratorOutputAbstract
     public function getDocGeneratorOutputModel(): DocGeneratorOutputModel
     {
         return $this->docGeneratorOutputModel;
+    }
+
+    /**
+     * Returns the associated output builder
+     *
+     * @return DocGeneratorOutputBuilder
+     */
+    public function getDocGeneratorOutputBuilder(): DocGeneratorOutputBuilder
+    {
+        return $this->docGeneratorOutputBuilder;
     }
 
     /**
@@ -132,7 +144,7 @@ abstract class DocGeneratorOutputAbstract
      */
     public function getDocGeneratorConfig(): DocGeneratorConfig
     {
-        return $this->docGeneratorConfig;
+        return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorConfig();
     }
 
     /**

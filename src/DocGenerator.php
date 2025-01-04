@@ -169,8 +169,7 @@ class DocGenerator
         $this->docGeneratorOutputBuilders[] =
             DocGeneratorOutputBuilder::factory(
                 $docGeneratorOutputModel,
-                $docGeneratorDocumentationBuilder,
-                $this->getDocGeneratorConfig()
+                $docGeneratorDocumentationBuilder
             )->build();
 
         return $this;

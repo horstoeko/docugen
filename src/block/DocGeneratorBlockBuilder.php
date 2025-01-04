@@ -9,9 +9,10 @@
 
 namespace horstoeko\docugen\block;
 
-use horstoeko\docugen\DocGeneratorConfig;
-use horstoeko\docugen\model\DocGeneratorBlockModel;
 use horstoeko\docugen\block\DocGeneratorBlockAbstract;
+use horstoeko\docugen\DocGeneratorConfig;
+use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
+use horstoeko\docugen\model\DocGeneratorBlockModel;
 
 /**
  * Class representing a builder for a documentation block
@@ -32,11 +33,11 @@ class DocGeneratorBlockBuilder
     private $docGeneratorBlockModel;
 
     /**
-     * The global config
+     * The calling documentation build
      *
-     * @var DocGeneratorConfig
+     * @var DocGeneratorDocumentationBuilder
      */
-    private $docGeneratorConfig;
+    private $docGeneratorDocumentationBuilder;
 
     /**
      * Block instance
@@ -48,25 +49,25 @@ class DocGeneratorBlockBuilder
     /**
      * Create a new instance of DocGeneratorBlockBuilder
      *
-     * @param  DocGeneratorBlockModel $docGeneratorBlockModel
-     * @param  DocGeneratorConfig     $docGeneratorConfig
+     * @param  DocGeneratorBlockModel           $docGeneratorBlockModel
+     * @param  DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
      * @return DocGeneratorBlockBuilder
      */
-    public static function factory(DocGeneratorBlockModel $docGeneratorBlockModel, DocGeneratorConfig $docGeneratorConfig): DocGeneratorBlockBuilder
+    public static function factory(DocGeneratorBlockModel $docGeneratorBlockModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder): DocGeneratorBlockBuilder
     {
-        return new static($docGeneratorBlockModel, $docGeneratorConfig);
+        return new static($docGeneratorBlockModel, $docGeneratorDocumentationBuilder);
     }
 
     /**
      * Constructor (hidden)
      *
-     * @param DocGeneratorBlockModel $docGeneratorBlockModel
-     * @param DocGeneratorConfig     $docGeneratorConfig
+     * @param DocGeneratorBlockModel           $docGeneratorBlockModel
+     * @param DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
      */
-    final protected function __construct(DocGeneratorBlockModel $docGeneratorBlockModel, DocGeneratorConfig $docGeneratorConfig)
+    final protected function __construct(DocGeneratorBlockModel $docGeneratorBlockModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder)
     {
         $this->docGeneratorBlockModel = $docGeneratorBlockModel;
-        $this->docGeneratorConfig = $docGeneratorConfig;
+        $this->docGeneratorDocumentationBuilder = $docGeneratorDocumentationBuilder;
     }
 
     /**
@@ -80,13 +81,23 @@ class DocGeneratorBlockBuilder
     }
 
     /**
+     * Returns the calling documentation builder
+     *
+     * @return DocGeneratorDocumentationBuilder
+     */
+    public function getDocGeneratorDocumentationBuilder(): DocGeneratorDocumentationBuilder
+    {
+        return $this->docGeneratorDocumentationBuilder;
+    }
+
+    /**
      * Returns the global configuration
      *
      * @return DocGeneratorConfig
      */
     public function getDocGeneratorConfig(): DocGeneratorConfig
     {
-        return $this->docGeneratorConfig;
+        return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorConfig();
     }
 
     /**
@@ -125,7 +136,7 @@ class DocGeneratorBlockBuilder
         $this->docGeneratorBlockAbstract =
             $blockClassName::factory(
                 $this->getDocGeneratorBlockModel(),
-                $this->getDocGeneratorConfig()
+                $this
             )->build();
 
         return $this;

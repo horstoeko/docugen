@@ -107,7 +107,7 @@ class DocGeneratorDocumentationBuilder
         foreach ($this->docGeneratorDocumentationModel->getBlocks() as $documentationBlockId) {
             $this->docGeneratorBlockBuilders[] = DocGeneratorBlockBuilder::factory(
                 $this->getDocGeneratorConfig()->getBlocks()->findByIdOrFail($documentationBlockId),
-                $this->getDocGeneratorConfig()
+                $this
             )->build();
         }
 
