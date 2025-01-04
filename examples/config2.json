@@ -573,6 +573,18 @@
             "lines": []
         },
         {
+            "id": "BLOCK_BLANK_IF_STYLE_IS_EN16931",
+            "type": "blank",
+            "lines": [],
+            "visibleexpression": "outputmodel.getStringOptions('STYLE') == 'EN16931'"
+        },
+        {
+            "id": "BLOCK_BLANK_IF_STYLE_IS_XRECHNUNG",
+            "type": "blank",
+            "lines": [],
+            "visibleexpression": "outputmodel.getStringOptions('STYLE') == 'XRECHNUNG'"
+        },
+        {
             "id": "BLOCK_ZF_BUILDER_COMMON",
             "type": "code",
             "lines": [
@@ -741,7 +753,8 @@
             "id": "BLOCK_ZF_BUILDER_TXT26",
             "lines": [
                 "@TXT:TXT_ZF_BUILDER_26"
-            ]
+            ],
+            "visibleexpression": "outputmodel.getStringOptions('STYLE') == 'XRECHNUNG'"
         },
         {
             "id": "BLOCK_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE",
@@ -930,7 +943,8 @@
             "type": "code",
             "lines": [
                 "@CS:CS_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE"
-            ]
+            ],
+            "visibleexpression": "outputmodel.getStringOptions('STYLE') == 'XRECHNUNG'"
         },
         {
             "id": "BLOCK_ZF_BUILDER_COMPLETE_CODE",
@@ -953,7 +967,7 @@
                 "@CS:CS_ZF_BUILDER_SET_PAYEE",
                 "@CS:CS_ZF_BUILDER_SET_PAYEE",
                 "@CS:CS_ZF_BUILDER_SET_BUYER_ORDER_REFERENCE",
-                "@CS:BLOCK_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE",
+                "@CS:CS_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE",
                 "@CS:CS_ZF_BUILDER_SET_SHIP_TO",
                 "@CS:CS_ZF_BUILDER_SET_DELIVERY_DATE",
                 "@CS:CS_ZF_BUILDER_ADD_POSITION_1",
@@ -967,118 +981,9 @@
     ],
     "documentations": [
         {
-            "id": "DOCUMENTATION_ZF_BUILDER_EN16931",
-            "title": "Example for ZugferdDocumentBuilder in EN16931 Profile",
-            "description": "The following lines will illustrate the usage of ZugferdDocumentBuilder in EN16931 Profile",
-            "blocks": [
-                "BLOCK_ZF_BUILDER_COMMON",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT01",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT02",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_SET_GENERAL_INVOICE_INFORMATION",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT03",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_ADD_DOCUMENT_NOTE",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT04",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_SET_DOCUMENT_BILLING_PERIOD",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT05",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_ADD_DOCUMENTS_SUPPORTING_THE_INVOICE",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT06",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_ADD_TENDER_OR_LOT_REFERENCE",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT07",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_ADD_DETAILS_OF_INVOICED_OBJECT",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT08",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_SET_CONTRACT_REFERENCE",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT09",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_SET_PROJECT_REFERENCE",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT10",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_ADD_PAYMENTMEAN",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT25",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_ADD_PAYMENTTERM",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT11",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_SET_SELLER",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT12",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_SET_BUYER",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT13",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_SET_PAYEE",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT14",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_SET_BUYER_ORDER_REFERENCE",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT15",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_SET_SELLER_ORDER_REFERENCE",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT16",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_SET_SHIP_TO",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT17",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_SET_DELIVERY_DATE",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT18",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_ADD_POSITION_1",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT19",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_ADD_POSITION_2",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT20",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_ADD_POSITION_3",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT21",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_ADD_VAT_BREAKDOWN",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT22",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_ADD_DOCUMENT_TOTALS",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT23",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_ADD_DOCUMENT_WRITE_XML_FILE",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT24",
-                "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_ADD_DOCUMENT_WRITE_XML_STRING",
-                "BLOCK_BLANK"
-            ]
-        },
-        {
-            "id": "DOCUMENTATION_ZF_BUILDER_XRECHNUNG3",
-            "title": "Example for ZugferdDocumentBuilder in XRECHNUNG 3.x Profile",
-            "description": "The following lines will illustrate the usage of ZugferdDocumentBuilder in XRECHNUNG 3.x Profile",
+            "id": "DOCUMENTATION_ZF_BUILDER",
+            "title": "Example for ZugferdDocumentBuilder",
+            "description": "The following lines will illustrate the usage of ZugferdDocumentBuilder",
             "blocks": [
                 "BLOCK_ZF_BUILDER_COMMON",
                 "BLOCK_BLANK",
@@ -1139,9 +1044,9 @@
                 "BLOCK_ZF_BUILDER_SET_PAYEE",
                 "BLOCK_BLANK",
                 "BLOCK_ZF_BUILDER_TXT26",
-                "BLOCK_BLANK",
+                "BLOCK_BLANK_IF_STYLE_IS_XRECHNUNG",
                 "BLOCK_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE",
-                "BLOCK_BLANK",
+                "BLOCK_BLANK_IF_STYLE_IS_XRECHNUNG",
                 "BLOCK_ZF_BUILDER_TXT14",
                 "BLOCK_BLANK",
                 "BLOCK_ZF_BUILDER_SET_BUYER_ORDER_REFERENCE",
@@ -1195,22 +1100,34 @@
             "title": "A valid example for ZugferdDocumentBuilder in EN16931 profile",
             "description": "This example will show you the basic usage of the ZugferdDocumentBulder - here in EN16931 Profile",
             "outputtype": "markdown",
-            "documentationid": "DOCUMENTATION_ZF_BUILDER_EN16931",
+            "documentationid": "DOCUMENTATION_ZF_BUILDER",
             "filepath": "/examples",
             "filename": "Example-ZugferdDocumentBuilder-in-EN16391-profile.md",
             "titlemode": 0,
-            "descriptionmode": 1
+            "descriptionmode": 1,
+            "options": [
+                {
+                    "id": "STYLE",
+                    "value": "EN16931"
+                }
+            ]
         },
         {
             "id": "OUTPUT_ZF_BUILDER_XRECHNUNG3_MARKDOWN",
             "title": "A valid example for ZugferdDocumentBuilder in XRECHNUNG 3.x profile",
             "description": "This example will show you the basic usage of the ZugferdDocumentBulder - here in XRECHNUNG 3.x Profile",
             "outputtype": "markdown",
-            "documentationid": "DOCUMENTATION_ZF_BUILDER_XRECHNUNG3",
+            "documentationid": "DOCUMENTATION_ZF_BUILDER",
             "filepath": "/examples",
             "filename": "Example-ZugferdDocumentBuilder-in-XRECHNUNG3-profile.md",
             "titlemode": 0,
-            "descriptionmode": 1
+            "descriptionmode": 1,
+            "options": [
+                {
+                    "id": "STYLE",
+                    "value": "XRECHNUNG"
+                }
+            ]
         }
     ]
 }

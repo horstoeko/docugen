@@ -42,7 +42,7 @@ class DocGeneratorDocumentationBuilder
     private $docGeneratorOutputModel;
 
     /**
-     * The creator config
+     * The configuration for the documentation generator
      *
      * @var DocGeneratorConfig
      */
@@ -142,8 +142,8 @@ class DocGeneratorDocumentationBuilder
                     }
 
                     $docGeneratorExpressionLanguage = DocGeneratorExpressionLanguage::factory();
-                    $docGeneratorExpressionLanguage->addVariable("documentationmodel", $this->getDocGeneratorDocumentationModel());
                     $docGeneratorExpressionLanguage->addVariable("blockmodel", $docGeneratorBlockModel);
+                    $docGeneratorExpressionLanguage->addVariable("documentationmodel", $this->getDocGeneratorDocumentationModel());
                     $docGeneratorExpressionLanguage->addVariable("outputmodel", $this->getDocGeneratorOutputModel());
                     $docGeneratorExpressionLanguage->addVariable("config", $this->getDocGeneratorConfig());
 

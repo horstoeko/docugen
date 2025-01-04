@@ -23,7 +23,7 @@ use horstoeko\docugen\DocGeneratorConfig;
 class DocGeneratorLineParser
 {
     /**
-     * The creator config
+     * The configuration for the documentation generator
      *
      * @var DocGeneratorConfig
      */
@@ -39,6 +39,8 @@ class DocGeneratorLineParser
     /**
      * Create a new instance
      *
+     * @param  DocGeneratorConfig       $docGeneratorConfig
+     * @param  DocGeneratorOutputBuffer $docGeneratorOutputBuffer
      * @return DocGeneratorLineParser
      */
     public static function factory(DocGeneratorConfig $docGeneratorConfig, DocGeneratorOutputBuffer $docGeneratorOutputBuffer): DocGeneratorLineParser
@@ -49,6 +51,7 @@ class DocGeneratorLineParser
     /**
      * Constructor (hidden)
      *
+     * @param  DocGeneratorConfig       $docGeneratorConfig
      * @param  DocGeneratorOutputBuffer $docGeneratorOutputBuffer
      * @return static
      */
@@ -81,7 +84,7 @@ class DocGeneratorLineParser
      * Parse code snippted includes
      *
      * @param  mixed $line
-     * @return boolean
+     * @return bool
      */
     protected function mustIncludeCodeSnippet($line): bool
     {
@@ -116,7 +119,7 @@ class DocGeneratorLineParser
      * Parse text includes
      *
      * @param  mixed $line
-     * @return boolean
+     * @return bool
      */
     protected function mustIncludeText($line): bool
     {
@@ -150,7 +153,7 @@ class DocGeneratorLineParser
     /**
      * Replace text parts
      *
-     * @param  array &$lines
+     * @param  array<string> &$lines
      * @return void
      */
     protected function replaceTextParts(array &$lines): void
