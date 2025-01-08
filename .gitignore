@@ -84,3 +84,4 @@ _backup*
 
 /examples/example*.*
 /examples/Example*.*
+/examples/0?_*.*

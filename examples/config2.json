@@ -1328,7 +1328,7 @@
             "outputtype": "php",
             "documentationid": "DOCUMENTATION_ZF_BUILDER",
             "filepath": "/examples",
-            "filename": "Example-ZugferdDocumentBuilder-in-EN16391-profile.php",
+            "filename": "01_ZugferdDocumentBuilder_EN16931.php",
             "titlemode": 0,
             "descriptionmode": 1,
             "options": [
@@ -1345,7 +1345,7 @@
             "outputtype": "php",
             "documentationid": "DOCUMENTATION_ZF_BUILDER",
             "filepath": "/examples",
-            "filename": "Example-ZugferdDocumentBuilder-in-XRECHNUNG3-profile.php",
+            "filename": "01_ZugferdDocumentBuilder_XRECHNUNG3.php",
             "titlemode": 0,
             "descriptionmode": 1,
             "options": [
