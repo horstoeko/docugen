@@ -415,6 +415,12 @@
             ]
         },
         {
+            "id": "TXT_ZF_BUILDER_1A",
+            "lines": [
+                "First we create a new @TXTPART:TXTPART_DOCUMENT in XRECHNUNG-Profile (Version 3.x)"
+            ]
+        },
+        {
             "id": "TXT_ZF_BUILDER_2",
             "lines": [
                 "General @TXTPART:TXTPART_DOCUMENT Information"
@@ -699,10 +705,18 @@
             "visibleexpression": "outputmodel.getOutputType() == 'php'"
         },
         {
-            "id": "BLOCK_ZF_BUILDER_TXT01",
+            "id": "BLOCK_ZF_BUILDER_TXT01_IF_PROFILE_IS_EN16931",
             "lines": [
                 "@TXT:TXT_ZF_BUILDER_1"
-            ]
+            ],
+            "visibleexpression": "outputmodel.getStringOptions('PROFILE') == 'EN16931'"
+        },
+        {
+            "id": "BLOCK_ZF_BUILDER_TXT01_IF_PROFILE_IS_XRECHNUNG",
+            "lines": [
+                "@TXT:TXT_ZF_BUILDER_1A"
+            ],
+            "visibleexpression": "outputmodel.getStringOptions('PROFILE') == 'XRECHNUNG'"
         },
         {
             "id": "BLOCK_ZF_BUILDER_TXT02",
@@ -1151,7 +1165,8 @@
                 "BLOCK_ZF_BUILDER_COMMON_IF_OUTPUTTYPE_IS_MARKDOWN",
                 "BLOCK_ZF_BUILDER_COMMON_IF_OUTPUTTYPE_IS_PHP",
                 "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT01",
+                "BLOCK_ZF_BUILDER_TXT01_IF_PROFILE_IS_EN16931",
+                "BLOCK_ZF_BUILDER_TXT01_IF_PROFILE_IS_XRECHNUNG",
                 "BLOCK_BLANK",
                 "BLOCK_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE",
                 "BLOCK_ZF_BUILDER_INSTANCIATE_XRECHNUNG3_PROFILE",
