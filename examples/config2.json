@@ -451,9 +451,8 @@
         {
             "id": "TXT_ZF_BUILDER_7",
             "lines": [
-                "Add details of the calculated object",
-                "Only the type code 130 is used to transmit an object identifier. Depending on the application, an object identifier",
-                "can be a subscription number, a telephone number, a meter reading, a vehicle, a person, etc.",
+                "Add details of the calculated object. Only the type code 130 is used to transmit an object identifier. Depending on the application,",
+                "an object identifier can be a subscription number, a telephone number, a meter reading, a vehicle, a person, etc.",
                 "Note: Additional documents of type code 130 may only be specified once."
             ]
         },
@@ -850,7 +849,7 @@
             ]
         },
         {
-            "id": "BLOCK_ZF_BUILDER_TXT26",
+            "id": "BLOCK_ZF_BUILDER_TXT26_IF_PROFILE_IS_XRECHNUNG",
             "lines": [
                 "@TXT:TXT_ZF_BUILDER_26"
             ],
@@ -1056,7 +1055,7 @@
             "visibleexpression": "outputmodel.getOutputType() == 'php'"
         },
         {
-            "id": "BLOCK_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE",
+            "id": "BLOCK_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE_IF_PROFILE_IS_XRECHNUNG",
             "type": "code",
             "lines": [
                 "@CS:CS_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE"
@@ -1077,14 +1076,18 @@
                 "",
                 "@CS:CS_ZF_BUILDER_ADD_DOCUMENT_NOTE",
                 "@CS:CS_ZF_BUILDER_SET_DOCUMENT_BILLING_PERIOD",
+                "@CS:CS_ZF_BUILDER_ADD_DOCUMENTS_SUPPORTING_THE_INVOICE",
+                "@CS:CS_ZF_BUILDER_ADD_TENDER_OR_LOT_REFERENCE",
+                "@CS:CS_ZF_BUILDER_ADD_DETAILS_OF_INVOICED_OBJECT",
+                "@CS:CS_ZF_BUILDER_SET_CONTRACT_REFERENCE",
+                "@CS:CS_ZF_BUILDER_SET_PROJECT_REFERENCE",
                 "@CS:CS_ZF_BUILDER_ADD_PAYMENTMEAN",
                 "@CS:CS_ZF_BUILDER_ADD_PAYMENTTERM",
                 "@CS:CS_ZF_BUILDER_SET_SELLER",
                 "@CS:CS_ZF_BUILDER_SET_BUYER",
                 "@CS:CS_ZF_BUILDER_SET_PAYEE",
-                "@CS:CS_ZF_BUILDER_SET_PAYEE",
                 "@CS:CS_ZF_BUILDER_SET_BUYER_ORDER_REFERENCE",
-                "@CS:CS_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE",
+                "@CS:CS_ZF_BUILDER_SET_SELLER_ORDER_REFERENCE",
                 "@CS:CS_ZF_BUILDER_SET_SHIP_TO",
                 "@CS:CS_ZF_BUILDER_SET_DELIVERY_DATE",
                 "@CS:CS_ZF_BUILDER_ADD_POSITION_1",
@@ -1110,14 +1113,19 @@
                 "",
                 "@CS:CS_ZF_BUILDER_ADD_DOCUMENT_NOTE",
                 "@CS:CS_ZF_BUILDER_SET_DOCUMENT_BILLING_PERIOD",
+                "@CS:CS_ZF_BUILDER_ADD_DOCUMENTS_SUPPORTING_THE_INVOICE",
+                "@CS:CS_ZF_BUILDER_ADD_TENDER_OR_LOT_REFERENCE",
+                "@CS:CS_ZF_BUILDER_ADD_DETAILS_OF_INVOICED_OBJECT",
+                "@CS:CS_ZF_BUILDER_SET_CONTRACT_REFERENCE",
+                "@CS:CS_ZF_BUILDER_SET_PROJECT_REFERENCE",
                 "@CS:CS_ZF_BUILDER_ADD_PAYMENTMEAN",
                 "@CS:CS_ZF_BUILDER_ADD_PAYMENTTERM",
                 "@CS:CS_ZF_BUILDER_SET_SELLER",
                 "@CS:CS_ZF_BUILDER_SET_BUYER",
                 "@CS:CS_ZF_BUILDER_SET_PAYEE",
-                "@CS:CS_ZF_BUILDER_SET_PAYEE",
-                "@CS:CS_ZF_BUILDER_SET_BUYER_ORDER_REFERENCE",
                 "@CS:CS_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE",
+                "@CS:CS_ZF_BUILDER_SET_BUYER_ORDER_REFERENCE",
+                "@CS:CS_ZF_BUILDER_SET_SELLER_ORDER_REFERENCE",
                 "@CS:CS_ZF_BUILDER_SET_SHIP_TO",
                 "@CS:CS_ZF_BUILDER_SET_DELIVERY_DATE",
                 "@CS:CS_ZF_BUILDER_ADD_POSITION_1",
@@ -1200,9 +1208,9 @@
                 "BLOCK_BLANK",
                 "BLOCK_ZF_BUILDER_SET_PAYEE",
                 "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT26",
+                "BLOCK_ZF_BUILDER_TXT26_IF_PROFILE_IS_XRECHNUNG",
                 "BLOCK_BLANK_IF_PROFILE_IS_XRECHNUNG",
-                "BLOCK_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE",
+                "BLOCK_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE_IF_PROFILE_IS_XRECHNUNG",
                 "BLOCK_BLANK_IF_PROFILE_IS_XRECHNUNG",
                 "BLOCK_ZF_BUILDER_TXT14",
                 "BLOCK_BLANK",
