@@ -32,7 +32,7 @@ trait DocGeneratorExpressionLanguageTrait
      */
     public function evaluate(string $expression, array $variables)
     {
-        return DocGeneratorExpressionLanguage::factory()->addVariables($variables)->evaluate($expression);
+        return DocGeneratorExpressionLanguage::factory()->setVariables($variables)->evaluate($expression);
     }
 
     /**

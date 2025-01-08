@@ -56,13 +56,13 @@ class DocGeneratorExpressionLanguage
     }
 
     /**
-     * Add a new variable
+     * Set a variable
      *
      * @param  string $variableName
      * @param  mixed  $variableValue
      * @return DocGeneratorExpressionLanguage
      */
-    public function addVariable(string $variableName, $variableValue): DocGeneratorExpressionLanguage
+    public function setVariable(string $variableName, $variableValue): DocGeneratorExpressionLanguage
     {
         $this->variables[$variableName] = $variableValue;
 
@@ -70,17 +70,17 @@ class DocGeneratorExpressionLanguage
     }
 
     /**
-     * Add multiple variables
+     * Set multiple variables
      *
      * @param  array<string,mixed> $variables
      * @return DocGeneratorExpressionLanguage
      */
-    public function addVariables(array $variables): DocGeneratorExpressionLanguage
+    public function setVariables(array $variables): DocGeneratorExpressionLanguage
     {
         array_walk(
             $variables,
             function ($variableValue, $variableName): void {
-                $this->addVariable($variableName, $variableValue);
+                $this->setVariable($variableName, $variableValue);
             }
         );
 

@@ -150,10 +150,10 @@ class DocGeneratorDocumentationBuilder
                     }
 
                     $docGeneratorExpressionLanguage = DocGeneratorExpressionLanguage::factory();
-                    $docGeneratorExpressionLanguage->addVariable("blockmodel", $docGeneratorBlockModel);
-                    $docGeneratorExpressionLanguage->addVariable("documentationmodel", $this->getDocGeneratorDocumentationModel());
-                    $docGeneratorExpressionLanguage->addVariable("outputmodel", $this->getDocGeneratorOutputModel());
-                    $docGeneratorExpressionLanguage->addVariable("config", $this->getDocGeneratorConfig());
+                    $docGeneratorExpressionLanguage->setVariable("blockmodel", $docGeneratorBlockModel);
+                    $docGeneratorExpressionLanguage->setVariable("documentationmodel", $this->getDocGeneratorDocumentationModel());
+                    $docGeneratorExpressionLanguage->setVariable("outputmodel", $this->getDocGeneratorOutputModel());
+                    $docGeneratorExpressionLanguage->setVariable("config", $this->getDocGeneratorConfig());
 
                     return $docGeneratorExpressionLanguage->evaluatesToBooleanTrue($docGeneratorBlockModel->getVisibleExpression());
                 }
