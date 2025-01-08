@@ -630,13 +630,13 @@
             "id": "BLOCK_BLANK_IF_PROFILE_IS_EN16931",
             "lines": [],
             "type": "blank",
-            "visibleexpression": "outputmodel.getStringOptions('PROFILE') == 'EN16931'"
+            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'EN16931'"
         },
         {
             "id": "BLOCK_BLANK_IF_PROFILE_IS_XRECHNUNG",
             "lines": [],
             "type": "blank",
-            "visibleexpression": "outputmodel.getStringOptions('PROFILE') == 'XRECHNUNG'"
+            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'"
         },
         {
             "id": "BLOCK_BLANK_IF_OUTPUTTYPE_IS_MARKDOWN",
@@ -654,13 +654,13 @@
             "id": "BLOCK_BLANK_IF_OUTPUTTYPE_IS_MARKDOWN_AND_COMPLETE_CODE_ALLOWED",
             "lines": [],
             "type": "blank",
-            "visibleexpression": "outputmodel.getBooleanOptions('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown'"
+            "visibleexpression": "outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown'"
         },
         {
             "id": "BLOCK_BLANK_IF_OUTPUTTYPE_IS_PHP_AND_COMPLETE_CODE_ALLOWED",
             "lines": [],
             "type": "blank",
-            "visibleexpression": "outputmodel.getBooleanOptions('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'php'"
+            "visibleexpression": "outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'php'"
         },
         {
             "id": "BLOCK_TXT_ZF_DOCUMENTATION_IF_OUTPUTTYPE_IS_MARKDOWN",
@@ -681,7 +681,7 @@
             "lines": [
                 "@TXT:TXT_ZF_COMPLETE_CODE_MD"
             ],
-            "visibleexpression": "outputmodel.getBooleanOptions('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown'"
+            "visibleexpression": "outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown'"
         },
         {
             "id": "BLOCK_ZF_BUILDER_COMMON_IF_OUTPUTTYPE_IS_MARKDOWN",
@@ -709,14 +709,14 @@
             "lines": [
                 "@TXT:TXT_ZF_BUILDER_1"
             ],
-            "visibleexpression": "outputmodel.getStringOptions('PROFILE') == 'EN16931'"
+            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'EN16931'"
         },
         {
             "id": "BLOCK_ZF_BUILDER_TXT01_IF_PROFILE_IS_XRECHNUNG",
             "lines": [
                 "@TXT:TXT_ZF_BUILDER_1A"
             ],
-            "visibleexpression": "outputmodel.getStringOptions('PROFILE') == 'XRECHNUNG'"
+            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'"
         },
         {
             "id": "BLOCK_ZF_BUILDER_TXT02",
@@ -867,7 +867,7 @@
             "lines": [
                 "@TXT:TXT_ZF_BUILDER_26"
             ],
-            "visibleexpression": "outputmodel.getStringOptions('PROFILE') == 'XRECHNUNG'"
+            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'"
         },
         {
             "id": "BLOCK_ZF_BUILDER_TXT27_IF_OUTPUTTYPE_IS_PHP",
@@ -882,7 +882,7 @@
             "lines": [
                 "@CS:CS_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE"
             ],
-            "visibleexpression": "outputmodel.getStringOptions('PROFILE') != 'XRECHNUNG'"
+            "visibleexpression": "outputmodel.getStringOption('PROFILE') != 'XRECHNUNG'"
         },
         {
             "id": "BLOCK_ZF_BUILDER_INSTANCIATE_XRECHNUNG3_PROFILE",
@@ -890,7 +890,7 @@
             "lines": [
                 "@CS:CS_ZF_BUILDER_INSTANCIATE_XRECHNUNG3_PROFILE"
             ],
-            "visibleexpression": "outputmodel.getStringOptions('PROFILE') == 'XRECHNUNG'"
+            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'"
         },
         {
             "id": "BLOCK_ZF_BUILDER_SET_GENERAL_INVOICE_INFORMATION",
@@ -1074,7 +1074,7 @@
             "lines": [
                 "@CS:CS_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE"
             ],
-            "visibleexpression": "outputmodel.getStringOptions('PROFILE') == 'XRECHNUNG'"
+            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'"
         },
         {
             "id": "BLOCK_ZF_BUILDER_COMPLETE_CODE_IF_OUTPUTTYPE_IS_MARKDOWN_AND_COMPLETE_CODE_ALLOWED_AND_PROFILE_IS_EN16931",
@@ -1111,7 +1111,7 @@
                 "@CS:CS_ZF_BUILDER_SET_DOCUMENT_TOTALS",
                 "@CS:CS_ZF_BUILDER_DOCUMENT_WRITE_XML_FILE"
             ],
-            "visibleexpression": "outputmodel.getBooleanOptions('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown' and outputmodel.getStringOptions('PROFILE') == 'EN16931'"
+            "visibleexpression": "outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown' and outputmodel.getStringOption('PROFILE') == 'EN16931'"
         },
         {
             "id": "BLOCK_ZF_BUILDER_COMPLETE_CODE_IF_OUTPUTTYPE_IS_MARKDOWN_AND_COMPLETE_CODE_ALLOWED_AND_PROFILE_IS_XRECHNUNG",
@@ -1149,7 +1149,7 @@
                 "@CS:CS_ZF_BUILDER_SET_DOCUMENT_TOTALS",
                 "@CS:CS_ZF_BUILDER_DOCUMENT_WRITE_XML_FILE"
             ],
-            "visibleexpression": "outputmodel.getBooleanOptions('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown' and outputmodel.getStringOptions('PROFILE') == 'XRECHNUNG'"
+            "visibleexpression": "outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown' and outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'"
         }
     ],
     "documentations": [
