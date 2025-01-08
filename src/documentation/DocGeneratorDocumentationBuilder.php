@@ -125,34 +125,11 @@ class DocGeneratorDocumentationBuilder
      */
     public function build(): DocGeneratorDocumentationBuilder
     {
-        $docGeneratorExpressionLanguage = DocGeneratorExpressionLanguage::factory();
-        $docGeneratorExpressionLanguage->setVariable("documentationmodel", $this->getDocGeneratorDocumentationModel());
-        $docGeneratorExpressionLanguage->setVariable("outputmodel", $this->getDocGeneratorOutputModel());
-        $docGeneratorExpressionLanguage->setVariable("config", $this->getDocGeneratorConfig());
-
         $docGeneratorBlocks =
             array_filter(
                 $this->docGeneratorDocumentationModel->getBlocks(),
                 function ($docGeneratorBlockId) {
                     return preg_match('/^[^#]/', $docGeneratorBlockId);
-                }
-            );
-
-        $docGeneratorBlocks =
-            array_map(
-                function ($docGeneratorBlockId) use ($docGeneratorExpressionLanguage) {
-                    return preg_match('/^=(.*)$/', $docGeneratorBlockId, $docGeneratorBlockIdMatches)
-                        ? (string)$docGeneratorExpressionLanguage->evaluate($docGeneratorBlockIdMatches[1])
-                        : $docGeneratorBlockId;
-                },
-                $docGeneratorBlocks
-            );
-
-        $docGeneratorBlocks =
-            array_filter(
-                $docGeneratorBlocks,
-                function ($docGeneratorBlockId) {
-                    return $docGeneratorBlockId !== null && trim($docGeneratorBlockId) !== "";
                 }
             );
 
@@ -167,11 +144,15 @@ class DocGeneratorDocumentationBuilder
         $docGeneratorBlockModels =
             array_filter(
                 $docGeneratorBlockModels,
-                function ($docGeneratorBlockModel) use ($docGeneratorExpressionLanguage) {
+                function ($docGeneratorBlockModel) {
                     if ($docGeneratorBlockModel->hasVisibleExpression() === false) {
                         return true;
                     }
 
+                    $docGeneratorExpressionLanguage = DocGeneratorExpressionLanguage::factory();
+                    $docGeneratorExpressionLanguage->setVariable("documentationmodel", $this->getDocGeneratorDocumentationModel());
+                    $docGeneratorExpressionLanguage->setVariable("outputmodel", $this->getDocGeneratorOutputModel());
+                    $docGeneratorExpressionLanguage->setVariable("config", $this->getDocGeneratorConfig());
                     $docGeneratorExpressionLanguage->setVariable("blockmodel", $docGeneratorBlockModel);
 
                     return $docGeneratorExpressionLanguage->evaluatesToBooleanTrue($docGeneratorBlockModel->getVisibleExpression());
