@@ -142,7 +142,7 @@ class DocGeneratorDocumentationBuilder
             array_map(
                 function ($docGeneratorBlockId) use ($docGeneratorExpressionLanguage) {
                     return preg_match('/^=(.*)$/', $docGeneratorBlockId, $docGeneratorBlockIdMatches)
-                        ? $docGeneratorExpressionLanguage->evaluate($docGeneratorBlockIdMatches[1])
+                        ? (string)$docGeneratorExpressionLanguage->evaluate($docGeneratorBlockIdMatches[1])
                         : $docGeneratorBlockId;
                 },
                 $docGeneratorBlocks
@@ -152,7 +152,7 @@ class DocGeneratorDocumentationBuilder
             array_filter(
                 $docGeneratorBlocks,
                 function ($docGeneratorBlockId) {
-                    return $docGeneratorBlockId !== null;
+                    return $docGeneratorBlockId !== null && trim($docGeneratorBlockId) !== "";
                 }
             );
 
