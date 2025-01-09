@@ -9,6 +9,8 @@
 
 namespace horstoeko\docugen\model;
 
+use RuntimeException;
+
 /**
  * Class representing the a collection of documentations
  *
@@ -37,11 +39,11 @@ class DocGeneratorDocumentationModelCollection extends DocGeneratorAbstractModel
     public function findById(string $id): ?DocGeneratorDocumentationModel
     {
         /**
-         * @var DocGeneratorDocumentationModel|null $documentationModel
+         * @var DocGeneratorDocumentationModel|null $docGeneratorAbstractModel
          */
-        $documentationModel = $this->findByAttribute("id", $id);
+        $docGeneratorAbstractModel = $this->findByAttribute("id", $id);
 
-        return $documentationModel;
+        return $docGeneratorAbstractModel;
     }
 
     /**
@@ -49,6 +51,7 @@ class DocGeneratorDocumentationModelCollection extends DocGeneratorAbstractModel
      *
      * @param  string $id
      * @return DocGeneratorDocumentationModel
+     * @throws RuntimeException
      */
     public function findByIdOrFail(string $id): DocGeneratorDocumentationModel
     {

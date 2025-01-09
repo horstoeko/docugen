@@ -39,11 +39,11 @@ class DocGeneratorBlockModelCollection extends DocGeneratorAbstractModelCollecti
     public function findById(string $id): ?DocGeneratorBlockModel
     {
         /**
-         * @var DocGeneratorBlockModel|null $blockModel
+         * @var DocGeneratorBlockModel|null $docGeneratorAbstractModel
          */
-        $blockModel = $this->findByAttribute("id", $id);
+        $docGeneratorAbstractModel = $this->findByAttribute("id", $id);
 
-        return $blockModel;
+        return $docGeneratorAbstractModel;
     }
 
     /**
