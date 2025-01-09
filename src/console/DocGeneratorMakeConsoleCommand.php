@@ -43,8 +43,6 @@ class DocGeneratorMakeConsoleCommand extends DocGeneratorBaseConsoleCommand
     {
         $docGeneratorConfig = DocGeneratorConfig::loadFromFile($this->inputInterface->getOption('config'));
 
-        $this->outputInterface->writeln($docGeneratorConfig->getRootDirectory());
-
         DocGenerator::factory($docGeneratorConfig)->build();
 
         return DocGeneratorBaseConsoleCommand::SUCCESS;
