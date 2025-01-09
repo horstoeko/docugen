@@ -1236,11 +1236,11 @@
                 "# ----------------------------------------------------------------------------------------------------",
                 "# Output complete code in MARKDOWN Code only",
                 "# ----------------------------------------------------------------------------------------------------",
-                "=outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown'|BLOCK_BLANK",
-                "=outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown'|BLOCK_ZF_COMPLETE_CODE",
-                "=outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown'|BLOCK_BLANK",
-                "=outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown' and outputmodel.getStringOption('PROFILE') == 'EN16931'|BLOCK_ZF_BUILDER_COMPLETE_CODE_EN16931",
-                "=outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown' and outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'|BLOCK_ZF_BUILDER_COMPLETE_CODE_XRECHNUNG",
+                "=outputmodel.getOutputType() == 'markdown'|BLOCK_BLANK",
+                "=outputmodel.getOutputType() == 'markdown'|BLOCK_ZF_COMPLETE_CODE",
+                "=outputmodel.getOutputType() == 'markdown'|BLOCK_BLANK",
+                "=outputmodel.getOutputType() == 'markdown' and outputmodel.getStringOption('PROFILE') == 'EN16931'|BLOCK_ZF_BUILDER_COMPLETE_CODE_EN16931",
+                "=outputmodel.getOutputType() == 'markdown' and outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'|BLOCK_ZF_BUILDER_COMPLETE_CODE_XRECHNUNG",
                 "# ----------------------------------------------------------------------------------------------------",
                 "# Finished",
                 "# ----------------------------------------------------------------------------------------------------",
@@ -1263,10 +1263,6 @@
                 {
                     "id": "PROFILE",
                     "value": "EN16931"
-                },
-                {
-                    "id": "ALLOWCOMPLETECODE",
-                    "value": true
                 }
             ]
         },
@@ -1284,10 +1280,6 @@
                 {
                     "id": "PROFILE",
                     "value": "XRECHNUNG"
-                },
-                {
-                    "id": "ALLOWCOMPLETECODE",
-                    "value": true
                 }
             ]
         },
