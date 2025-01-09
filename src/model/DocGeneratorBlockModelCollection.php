@@ -55,6 +55,11 @@ class DocGeneratorBlockModelCollection extends DocGeneratorAbstractModelCollecti
      */
     public function findByIdOrFail(string $id): DocGeneratorBlockModel
     {
-        return $this->findByAttributeOrFail("id", $id);
+        /**
+         * @var DocGeneratorBlockModel $model
+         */
+        $model = $this->findByAttributeOrFail("id", $id);
+
+        return $model;
     }
 }
