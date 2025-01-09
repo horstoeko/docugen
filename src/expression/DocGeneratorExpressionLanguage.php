@@ -9,6 +9,7 @@
 
 namespace horstoeko\docugen\expression;
 
+use horstoeko\docugen\expression\DocGeneratorExpressionFunctionProvider;
 use Symfony\Component\DependencyInjection\ExpressionLanguage;
 use Symfony\Component\ExpressionLanguage\SyntaxError;
 
@@ -53,6 +54,7 @@ class DocGeneratorExpressionLanguage
     final protected function __construct()
     {
         $this->expressionLanguageInstance = new ExpressionLanguage();
+        $this->expressionLanguageInstance->registerProvider(new DocGeneratorExpressionFunctionProvider());
     }
 
     /**
