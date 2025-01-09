@@ -30,13 +30,13 @@
             ]
         },
         {
-            "id": "CS_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE",
+            "id": "CS_ZF_BUILDER_INSTANCIATE_EN16931",
             "lines": [
                 "$documentBuilder = ZugferdDocumentBuilder::createNew(ZugferdProfiles::PROFILE_EN16931);"
             ]
         },
         {
-            "id": "CS_ZF_BUILDER_INSTANCIATE_XRECHNUNG3_PROFILE",
+            "id": "CS_ZF_BUILDER_INSTANCIATE_XRECHNUNG",
             "lines": [
                 "$documentBuilder = ZugferdDocumentBuilder::createNew(ZugferdProfiles::PROFILE_XRECHNUNG_3);"
             ]
@@ -627,96 +627,53 @@
             "type": "blank"
         },
         {
-            "id": "BLOCK_BLANK_IF_PROFILE_IS_EN16931",
-            "lines": [],
-            "type": "blank",
-            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'EN16931'"
-        },
-        {
-            "id": "BLOCK_BLANK_IF_PROFILE_IS_XRECHNUNG",
-            "lines": [],
-            "type": "blank",
-            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'"
-        },
-        {
-            "id": "BLOCK_BLANK_IF_OUTPUTTYPE_IS_MARKDOWN",
-            "lines": [],
-            "type": "blank",
-            "visibleexpression": "outputmodel.getOutputType() == 'markdown'"
-        },
-        {
-            "id": "BLOCK_BLANK_IF_OUTPUTTYPE_IS_PHP",
-            "lines": [],
-            "type": "blank",
-            "visibleexpression": "outputmodel.getOutputType() == 'php'"
-        },
-        {
-            "id": "BLOCK_BLANK_IF_OUTPUTTYPE_IS_MARKDOWN_AND_COMPLETE_CODE_ALLOWED",
-            "lines": [],
-            "type": "blank",
-            "visibleexpression": "outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown'"
-        },
-        {
-            "id": "BLOCK_BLANK_IF_OUTPUTTYPE_IS_PHP_AND_COMPLETE_CODE_ALLOWED",
-            "lines": [],
-            "type": "blank",
-            "visibleexpression": "outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'php'"
-        },
-        {
-            "id": "BLOCK_TXT_ZF_DOCUMENTATION_IF_OUTPUTTYPE_IS_MARKDOWN",
+            "id": "BLOCK_TXT_ZF_DOCUMENTATION",
             "lines": [
                 "@TXT:TXT_ZF_DOCUMENTATION_MD"
-            ],
-            "visibleexpression": "outputmodel.getOutputType() == 'markdown'"
+            ]
         },
         {
-            "id": "BLOCK_ZF_PREREQUIREMENTS_IF_OUTPUTTYPE_IS_MARKDOWN",
+            "id": "BLOCK_ZF_PREREQUIREMENTS",
             "lines": [
                 "@TXT:TXT_ZF_PREREQUIREMENTS"
-            ],
-            "visibleexpression": "outputmodel.getOutputType() == 'markdown'"
+            ]
         },
         {
-            "id": "BLOCK_ZF_COMPLETE_CODE_IF_OUTPUTTYPE_IS_MARKDOWN_AND_COMPLETE_CODE_ALLOWED",
+            "id": "BLOCK_ZF_COMPLETE_CODE",
             "lines": [
                 "@TXT:TXT_ZF_COMPLETE_CODE_MD"
-            ],
-            "visibleexpression": "outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown'"
+            ]
         },
         {
-            "id": "BLOCK_ZF_BUILDER_COMMON_IF_OUTPUTTYPE_IS_MARKDOWN",
+            "id": "BLOCK_ZF_BUILDER_COMMON_1",
             "type": "code",
             "lines": [
                 "@CS:CS_ZF_USE_BUILDER",
                 "",
                 "@CS:CS_ZF_AUTOLOAD"
-            ],
-            "visibleexpression": "outputmodel.getOutputType() == 'markdown'"
+            ]
         },
         {
-            "id": "BLOCK_ZF_BUILDER_COMMON_IF_OUTPUTTYPE_IS_PHP",
+            "id": "BLOCK_ZF_BUILDER_COMMON_2",
             "type": "code",
             "lines": [
                 "@CS:CS_ZF_USE_BUILDER",
                 "",
                 "@CS:CS_ZF_AUTOLOAD",
                 "@CS:CS_ZF_EXAMPLEHELPER"
-            ],
-            "visibleexpression": "outputmodel.getOutputType() == 'php'"
+            ]
         },
         {
-            "id": "BLOCK_ZF_BUILDER_TXT01_IF_PROFILE_IS_EN16931",
+            "id": "BLOCK_ZF_BUILDER_TXT01_EN16931",
             "lines": [
                 "@TXT:TXT_ZF_BUILDER_1"
-            ],
-            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'EN16931'"
+            ]
         },
         {
-            "id": "BLOCK_ZF_BUILDER_TXT01_IF_PROFILE_IS_XRECHNUNG",
+            "id": "BLOCK_ZF_BUILDER_TXT01_XRECHNUNG",
             "lines": [
                 "@TXT:TXT_ZF_BUILDER_1A"
-            ],
-            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'"
+            ]
         },
         {
             "id": "BLOCK_ZF_BUILDER_TXT02",
@@ -863,34 +820,30 @@
             ]
         },
         {
-            "id": "BLOCK_ZF_BUILDER_TXT26_IF_PROFILE_IS_XRECHNUNG",
+            "id": "BLOCK_ZF_BUILDER_TXT26",
             "lines": [
                 "@TXT:TXT_ZF_BUILDER_26"
-            ],
-            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'"
+            ]
         },
         {
-            "id": "BLOCK_ZF_BUILDER_TXT27_IF_OUTPUTTYPE_IS_PHP",
+            "id": "BLOCK_ZF_BUILDER_TXT27",
             "lines": [
                 "@TXT:TXT_ZF_BUILDER_27"
-            ],
-            "visibleexpression": "outputmodel.getOutputType() === 'php'"
+            ]
         },
         {
-            "id": "BLOCK_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE",
+            "id": "BLOCK_ZF_BUILDER_INSTANCIATE_EN16931",
             "type": "code",
             "lines": [
-                "@CS:CS_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE"
-            ],
-            "visibleexpression": "outputmodel.getStringOption('PROFILE') != 'XRECHNUNG'"
+                "@CS:CS_ZF_BUILDER_INSTANCIATE_EN16931"
+            ]
         },
         {
-            "id": "BLOCK_ZF_BUILDER_INSTANCIATE_XRECHNUNG3_PROFILE",
+            "id": "BLOCK_ZF_BUILDER_INSTANCIATE_XRECHNUNG",
             "type": "code",
             "lines": [
-                "@CS:CS_ZF_BUILDER_INSTANCIATE_XRECHNUNG3_PROFILE"
-            ],
-            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'"
+                "@CS:CS_ZF_BUILDER_INSTANCIATE_XRECHNUNG"
+            ]
         },
         {
             "id": "BLOCK_ZF_BUILDER_SET_GENERAL_INVOICE_INFORMATION",
@@ -1061,30 +1014,28 @@
             ]
         },
         {
-            "id": "BLOCK_ZF_BUILDER_EXAMPLE_VALIDATE_XML_IF_OUTPUTTYPE_IS_PHP",
+            "id": "BLOCK_ZF_BUILDER_EXAMPLE_VALIDATE_XML",
             "type": "code",
             "lines": [
                 "@CS:CS_ZF_BUILDER_EXAMPLE_VALIDATE_XML"
-            ],
-            "visibleexpression": "outputmodel.getOutputType() == 'php'"
+            ]
         },
         {
-            "id": "BLOCK_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE_IF_PROFILE_IS_XRECHNUNG",
+            "id": "BLOCK_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE",
             "type": "code",
             "lines": [
                 "@CS:CS_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE"
-            ],
-            "visibleexpression": "outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'"
+            ]
         },
         {
-            "id": "BLOCK_ZF_BUILDER_COMPLETE_CODE_IF_OUTPUTTYPE_IS_MARKDOWN_AND_COMPLETE_CODE_ALLOWED_AND_PROFILE_IS_EN16931",
+            "id": "BLOCK_ZF_BUILDER_COMPLETE_CODE_EN16931",
             "type": "code",
             "lines": [
                 "@CS:CS_ZF_USE_BUILDER",
                 "",
                 "@CS:CS_ZF_AUTOLOAD",
                 "",
-                "@CS:CS_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE",
+                "@CS:CS_ZF_BUILDER_INSTANCIATE_EN16931",
                 "",
                 "@CS:CS_ZF_BUILDER_SET_GENERAL_INVOICE_INFORMATION",
                 "",
@@ -1110,18 +1061,17 @@
                 "@CS:CS_ZF_BUILDER_ADD_VAT_BREAKDOWN",
                 "@CS:CS_ZF_BUILDER_SET_DOCUMENT_TOTALS",
                 "@CS:CS_ZF_BUILDER_DOCUMENT_WRITE_XML_FILE"
-            ],
-            "visibleexpression": "outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown' and outputmodel.getStringOption('PROFILE') == 'EN16931'"
+            ]
         },
         {
-            "id": "BLOCK_ZF_BUILDER_COMPLETE_CODE_IF_OUTPUTTYPE_IS_MARKDOWN_AND_COMPLETE_CODE_ALLOWED_AND_PROFILE_IS_XRECHNUNG",
+            "id": "BLOCK_ZF_BUILDER_COMPLETE_CODE_XRECHNUNG",
             "type": "code",
             "lines": [
                 "@CS:CS_ZF_USE_BUILDER",
                 "",
                 "@CS:CS_ZF_AUTOLOAD",
                 "",
-                "@CS:CS_ZF_BUILDER_INSTANCIATE_XRECHNUNG3_PROFILE",
+                "@CS:CS_ZF_BUILDER_INSTANCIATE_XRECHNUNG",
                 "",
                 "@CS:CS_ZF_BUILDER_SET_GENERAL_INVOICE_INFORMATION",
                 "",
@@ -1148,8 +1098,7 @@
                 "@CS:CS_ZF_BUILDER_ADD_VAT_BREAKDOWN",
                 "@CS:CS_ZF_BUILDER_SET_DOCUMENT_TOTALS",
                 "@CS:CS_ZF_BUILDER_DOCUMENT_WRITE_XML_FILE"
-            ],
-            "visibleexpression": "outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown' and outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'"
+            ]
         }
     ],
     "documentations": [
@@ -1158,21 +1107,21 @@
             "title": "Example for ZugferdDocumentBuilder",
             "description": "The following lines will illustrate the usage of ZugferdDocumentBuilder",
             "blocks": [
-                "BLOCK_TXT_ZF_DOCUMENTATION_IF_OUTPUTTYPE_IS_MARKDOWN",
-                "BLOCK_BLANK_IF_OUTPUTTYPE_IS_MARKDOWN",
-                "BLOCK_ZF_PREREQUIREMENTS_IF_OUTPUTTYPE_IS_MARKDOWN",
-                "BLOCK_BLANK_IF_OUTPUTTYPE_IS_MARKDOWN",
-                "BLOCK_ZF_BUILDER_COMMON_IF_OUTPUTTYPE_IS_MARKDOWN",
-                "BLOCK_ZF_BUILDER_COMMON_IF_OUTPUTTYPE_IS_PHP",
+                "=outputmodel.getOutputType() == 'markdown'|BLOCK_TXT_ZF_DOCUMENTATION",
+                "=outputmodel.getOutputType() == 'markdown'|BLOCK_BLANK",
+                "=outputmodel.getOutputType() == 'markdown'|BLOCK_ZF_PREREQUIREMENTS",
+                "=outputmodel.getOutputType() == 'markdown'|BLOCK_BLANK",
+                "=outputmodel.getOutputType() == 'markdown'|BLOCK_ZF_BUILDER_COMMON_1",
+                "=outputmodel.getOutputType() == 'php'|BLOCK_ZF_BUILDER_COMMON_2",
                 "BLOCK_BLANK",
                 "# ----------------------------------------------------------------------------------------------------",
                 "# Instanciate ZugferdDocumentBuilder",
                 "# ----------------------------------------------------------------------------------------------------",
-                "BLOCK_ZF_BUILDER_TXT01_IF_PROFILE_IS_EN16931",
-                "BLOCK_ZF_BUILDER_TXT01_IF_PROFILE_IS_XRECHNUNG",
+                "=outputmodel.getStringOption('PROFILE') == 'EN16931'|BLOCK_ZF_BUILDER_TXT01_EN16931",
+                "=outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'|BLOCK_ZF_BUILDER_TXT01_XRECHNUNG",
                 "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_INSTANCIATE_EN16931_PROFILE",
-                "BLOCK_ZF_BUILDER_INSTANCIATE_XRECHNUNG3_PROFILE",
+                "=outputmodel.getStringOption('PROFILE') == 'EN16931'|BLOCK_ZF_BUILDER_INSTANCIATE_EN16931",
+                "=outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'|BLOCK_ZF_BUILDER_INSTANCIATE_XRECHNUNG",
                 "BLOCK_BLANK",
                 "# ----------------------------------------------------------------------------------------------------",
                 "# Fill ZugferdDocumentBuilder",
@@ -1229,10 +1178,10 @@
                 "BLOCK_BLANK",
                 "BLOCK_ZF_BUILDER_SET_PAYEE",
                 "BLOCK_BLANK",
-                "BLOCK_ZF_BUILDER_TXT26_IF_PROFILE_IS_XRECHNUNG",
-                "BLOCK_BLANK_IF_PROFILE_IS_XRECHNUNG",
-                "BLOCK_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE_IF_PROFILE_IS_XRECHNUNG",
-                "BLOCK_BLANK_IF_PROFILE_IS_XRECHNUNG",
+                "=outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'|BLOCK_ZF_BUILDER_TXT26",
+                "=outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'|BLOCK_BLANK",
+                "=outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'|BLOCK_ZF_BUILDER_SET_DOCUMENT_BUYER_REFERENCE",
+                "=outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'|BLOCK_BLANK",
                 "BLOCK_ZF_BUILDER_TXT14",
                 "BLOCK_BLANK",
                 "BLOCK_ZF_BUILDER_SET_BUYER_ORDER_REFERENCE",
@@ -1279,19 +1228,19 @@
                 "# ----------------------------------------------------------------------------------------------------",
                 "# Output validation-call in PHP Code only",
                 "# ----------------------------------------------------------------------------------------------------",
-                "BLOCK_BLANK_IF_OUTPUTTYPE_IS_PHP",
-                "BLOCK_ZF_BUILDER_TXT27_IF_OUTPUTTYPE_IS_PHP",
-                "BLOCK_BLANK_IF_OUTPUTTYPE_IS_PHP",
-                "BLOCK_ZF_BUILDER_EXAMPLE_VALIDATE_XML_IF_OUTPUTTYPE_IS_PHP",
-                "BLOCK_BLANK_IF_OUTPUTTYPE_IS_PHP",
+                "=outputmodel.getOutputType() == 'php'|BLOCK_BLANK",
+                "=outputmodel.getOutputType() == 'php'|BLOCK_ZF_BUILDER_TXT27",
+                "=outputmodel.getOutputType() == 'php'|BLOCK_BLANK",
+                "=outputmodel.getOutputType() == 'php'|BLOCK_ZF_BUILDER_EXAMPLE_VALIDATE_XML",
+                "=outputmodel.getOutputType() == 'php'|BLOCK_BLANK",
                 "# ----------------------------------------------------------------------------------------------------",
                 "# Output complete code in MARKDOWN Code only",
                 "# ----------------------------------------------------------------------------------------------------",
-                "BLOCK_BLANK_IF_OUTPUTTYPE_IS_MARKDOWN_AND_COMPLETE_CODE_ALLOWED",
-                "BLOCK_ZF_COMPLETE_CODE_IF_OUTPUTTYPE_IS_MARKDOWN_AND_COMPLETE_CODE_ALLOWED",
-                "BLOCK_BLANK_IF_OUTPUTTYPE_IS_MARKDOWN_AND_COMPLETE_CODE_ALLOWED",
-                "BLOCK_ZF_BUILDER_COMPLETE_CODE_IF_OUTPUTTYPE_IS_MARKDOWN_AND_COMPLETE_CODE_ALLOWED_AND_PROFILE_IS_EN16931",
-                "BLOCK_ZF_BUILDER_COMPLETE_CODE_IF_OUTPUTTYPE_IS_MARKDOWN_AND_COMPLETE_CODE_ALLOWED_AND_PROFILE_IS_XRECHNUNG",
+                "=outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown'|BLOCK_BLANK",
+                "=outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown'|BLOCK_ZF_COMPLETE_CODE",
+                "=outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown'|BLOCK_BLANK",
+                "=outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown' and outputmodel.getStringOption('PROFILE') == 'EN16931'|BLOCK_ZF_BUILDER_COMPLETE_CODE_EN16931",
+                "=outputmodel.getBooleanOption('ALLOWCOMPLETECODE') == true and outputmodel.getOutputType() == 'markdown' and outputmodel.getStringOption('PROFILE') == 'XRECHNUNG'|BLOCK_ZF_BUILDER_COMPLETE_CODE_XRECHNUNG",
                 "# ----------------------------------------------------------------------------------------------------",
                 "# Finished",
                 "# ----------------------------------------------------------------------------------------------------",
@@ -1322,7 +1271,7 @@
             ]
         },
         {
-            "id": "OUTPUT_ZF_BUILDER_XRECHNUNG3_MARKDOWN",
+            "id": "OUTPUT_ZF_BUILDER_XRECHNUNG_MARKDOWN",
             "title": "A valid example for ZugferdDocumentBuilder in XRECHNUNG 3.x profile",
             "description": "This example will show you the basic usage of the ZugferdDocumentBulder - here in XRECHNUNG 3.x Profile",
             "outputtype": "markdown",
@@ -1360,7 +1309,7 @@
             ]
         },
         {
-            "id": "OUTPUT_ZF_BUILDER_XRECHNUNG3_MARKDOWN",
+            "id": "OUTPUT_ZF_BUILDER_XRECHNUNG_MARKDOWN",
             "title": "A valid example for ZugferdDocumentBuilder in XRECHNUNG 3.x profile",
             "description": "This example will show you the basic usage of the ZugferdDocumentBulder - here in XRECHNUNG 3.x Profile",
             "outputtype": "php",
