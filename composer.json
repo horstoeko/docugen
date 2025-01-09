@@ -31,6 +31,7 @@
         "php": ">=7.3",
         "horstoeko/stringmanagement": "^1.0",
         "swaggest/json-schema": "^0.12.43",
+        "symfony/console": "^5|^6|^7",
         "symfony/expression-language": "^5|^6|^7"
     },
     "require-dev": {
@@ -45,6 +46,9 @@
         "sebastian/phpcpd": "^6",
         "squizlabs/php_codesniffer": "^3"
     },
+    "bin": [
+        "src/bin/DocGeneratorConsole"
+    ],
     "scripts": {
         "tests": "./vendor/bin/phpunit ./tests/",
         "testsreal": "./vendor/bin/phpunit --configuration ./build/phpunit.xml",
