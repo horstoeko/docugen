@@ -93,9 +93,9 @@ class ExtractClass
      */
     public function getArray(): array
     {
-        $reflectionClass = new ReflectionClass($this->className);
-        $classDocComment = $reflectionClass->getDocComment();
-        $methods = $reflectionClass->getMethods(ReflectionMethod::IS_PUBLIC); // Only public methods
+        $reflection = new ReflectionClass($this->className);
+        $classDocComment = $reflection->getDocComment();
+        $methods = $reflection->getMethods(ReflectionMethod::IS_PUBLIC); // Only public methods
         $docBlockFactory = DocBlockFactory::createInstance();
         $result = [];
         $result['methods'] = [];
@@ -104,8 +104,8 @@ class ExtractClass
             $classDocBlock = $docBlockFactory->create($classDocComment);
             $deprecatedTag = $classDocBlock->getTagsByName('deprecated');
             $result['class'] = [
-                'summary' => $classDocBlock->getSummary() ?: '',
-                'description' => (string)$classDocBlock->getDescription() ?: '',
+                'summary' => in_array($classDocBlock->getSummary(), ['', '0'], true) ? '' : $classDocBlock->getSummary(),
+                'description' => (string)$classDocBlock->getDescription() !== '' && (string)$classDocBlock->getDescription() !== '0' ? (string)$classDocBlock->getDescription() : '',
                 'deprecated' => $deprecatedTag === [] ? '' : (string)$deprecatedTag[0]
             ];
         } else {
@@ -141,8 +141,8 @@ class ExtractClass
                 $docBlock = $docBlockFactory->create($docComment);
 
                 // Extract summary and description
-                $methodDetails['summary'] = $docBlock->getSummary() ?: 'No summary available.';
-                $methodDetails['description'] = (string)$docBlock->getDescription() ?: '';
+                $methodDetails['summary'] = in_array($docBlock->getSummary(), ['', '0'], true) ? 'No summary available.' : $docBlock->getSummary();
+                $methodDetails['description'] = (string)$docBlock->getDescription() !== '' && (string)$docBlock->getDescription() !== '0' ? (string)$docBlock->getDescription() : '';
                 $methodDetails['static'] = $method->isStatic();
                 $methodDetails['abstract'] = $method->isAbstract();
                 $methodDetails['final'] = $method->isFinal();
@@ -255,11 +255,11 @@ class MarkDownGenerator
     /**
      * Constructor
      *
-     * @param ExtractClass $extractClass
+     * @param ExtractClass $extractor
      */
-    public function __construct(ExtractClass $extractClass)
+    public function __construct(ExtractClass $extractor)
     {
-        $this->extractor = $extractClass;
+        $this->extractor = $extractor;
     }
 
     /**
@@ -273,8 +273,8 @@ class MarkDownGenerator
 
         $this->addLineH2("Summary");
 
-        $customPhpPrinter = new CustomPhpPrinter();
-        $classType = new ClassType($this->extractor->getClassBasename());
+        $phpPrinter = new CustomPhpPrinter();
+        $phpClass = new ClassType($this->extractor->getClassBasename());
 
         if (!empty($metaData['class']['summary'])) {
             $this->addLine($this->removeSprintfPlaceholder($metaData['class']['summary'] ?? ""))->addEmptyLine();
@@ -333,7 +333,7 @@ class MarkDownGenerator
 
             $this->addLineH4("Signature");
 
-            $phpMethod = $classType->addMethod($methodName);
+            $phpMethod = $phpClass->addMethod($methodName);
             $phpMethod->setPublic();
             $phpMethod->setStatic($methodData["methodDetails"]["static"] === true);
             $phpMethod->setAbstract($methodData["methodDetails"]["abstract"] === true);
@@ -353,7 +353,7 @@ class MarkDownGenerator
             }
 
             $this->addLineRaw("```php");
-            $this->addLineRaw($customPhpPrinter->printMethod($phpMethod));
+            $this->addLineRaw($phpPrinter->printMethod($phpMethod));
             $this->addLineRaw("```");
 
             if (!empty($methodData["parameters"])) {
@@ -513,7 +513,7 @@ class MarkDownGenerator
      */
     private function addToLastLine(string $string, string $delimiter = "", ...$args): MarkDownGenerator
     {
-        if (empty($this->lines)) {
+        if ($this->lines === []) {
             return $this->addLine($string, ...$args);
         }
 
@@ -580,6 +580,8 @@ class MarkDownGenerator
     private function sanatizeString(string $string): string
     {
         $string = str_replace("\n", "<br/>", $string);
+        $string = str_replace("__BT-, From __", "", $string);
+        $string = str_replace("__BT-, From", "__BT-??, From", $string);
 
         return trim($string);
     }
@@ -612,7 +614,7 @@ class MarkDownGenerator
         }
 
         if ($string === '$this') {
-            $string = 'static';
+            return 'static';
         }
 
         return $string;
