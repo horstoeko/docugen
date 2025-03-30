@@ -27,13 +27,6 @@ use horstoeko\docugen\block\DocGeneratorBlockBuilder;
 abstract class DocGeneratorBlockAbstract
 {
     /**
-     * The block to handle
-     *
-     * @var DocGeneratorBlockModel
-     */
-    private $docGeneratorBlockModel;
-
-    /**
      * The calling block builder
      *
      * @var DocGeneratorBlockBuilder
@@ -57,13 +50,12 @@ abstract class DocGeneratorBlockAbstract
     /**
      * Return new instance of DocGeneratorBlockAbstract
      *
-     * @param  DocGeneratorBlockModel   $docGeneratorBlockModel
      * @param  DocGeneratorBlockBuilder $docGeneratorBlockBuilder
      * @return static
      */
-    public static function factory(DocGeneratorBlockModel $docGeneratorBlockModel, DocGeneratorBlockBuilder $docGeneratorBlockBuilder)
+    public static function factory(DocGeneratorBlockBuilder $docGeneratorBlockBuilder)
     {
-        return new static($docGeneratorBlockModel, $docGeneratorBlockBuilder);
+        return new static($docGeneratorBlockBuilder);
     }
 
     /**
@@ -72,22 +64,11 @@ abstract class DocGeneratorBlockAbstract
      * @param DocGeneratorBlockModel   $docGeneratorBlockModel
      * @param DocGeneratorBlockBuilder $docGeneratorBlockBuilder
      */
-    final protected function __construct(DocGeneratorBlockModel $docGeneratorBlockModel, DocGeneratorBlockBuilder $docGeneratorBlockBuilder)
+    final protected function __construct(DocGeneratorBlockBuilder $docGeneratorBlockBuilder)
     {
-        $this->docGeneratorBlockModel = $docGeneratorBlockModel;
         $this->docGeneratorBlockBuilder = $docGeneratorBlockBuilder;
         $this->docGeneratorOutputBuffer = DocGeneratorOutputBuffer::factory();
         $this->docGeneratorLineParser = DocGeneratorLineParser::factory($this->getDocGeneratorConfig(), $this->getDocGeneratorOutputBuffer());
-    }
-
-    /**
-     * Returns the associated block model
-     *
-     * @return DocGeneratorBlockModel
-     */
-    public function getDocGeneratorBlockModel(): DocGeneratorBlockModel
-    {
-        return $this->docGeneratorBlockModel;
     }
 
     /**
@@ -98,16 +79,6 @@ abstract class DocGeneratorBlockAbstract
     public function getDocGeneratorBlockBuilder(): DocGeneratorBlockBuilder
     {
         return $this->docGeneratorBlockBuilder;
-    }
-
-    /**
-     * Returns the global configuration
-     *
-     * @return DocGeneratorConfig
-     */
-    public function getDocGeneratorConfig(): DocGeneratorConfig
-    {
-        return $this->getDocGeneratorBlockBuilder()->getDocGeneratorConfig();
     }
 
     /**
@@ -131,11 +102,24 @@ abstract class DocGeneratorBlockAbstract
     }
 
     /**
-     * Generate a single block
+     * Returns the associated block model
      *
-     * @return DocGeneratorBlockAbstract
+     * @return DocGeneratorBlockModel
      */
-    abstract public function build(): DocGeneratorBlockAbstract;
+    public function getDocGeneratorBlockModel(): DocGeneratorBlockModel
+    {
+        return $this->getDocGeneratorBlockBuilder()->getDocGeneratorBlockModel();
+    }
+
+    /**
+     * Returns the global configuration
+     *
+     * @return DocGeneratorConfig
+     */
+    public function getDocGeneratorConfig(): DocGeneratorConfig
+    {
+        return $this->getDocGeneratorBlockBuilder()->getDocGeneratorConfig();
+    }
 
     /**
      * Get all the lines from the block
@@ -146,4 +130,11 @@ abstract class DocGeneratorBlockAbstract
     {
         return $this->getDocGeneratorOutputBuffer()->getLines();
     }
+
+    /**
+     * Generate a single block
+     *
+     * @return DocGeneratorBlockAbstract
+     */
+    abstract public function build(): DocGeneratorBlockAbstract;
 }

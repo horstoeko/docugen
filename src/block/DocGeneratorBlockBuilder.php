@@ -91,16 +91,6 @@ class DocGeneratorBlockBuilder
     }
 
     /**
-     * Returns the global configuration
-     *
-     * @return DocGeneratorConfig
-     */
-    public function getDocGeneratorConfig(): DocGeneratorConfig
-    {
-        return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorConfig();
-    }
-
-    /**
      * Get the block instance (object)
      *
      * @return DocGeneratorBlockAbstract
@@ -108,6 +98,16 @@ class DocGeneratorBlockBuilder
     public function getBlockInstance(): DocGeneratorBlockAbstract
     {
         return $this->docGeneratorBlockAbstract;
+    }
+
+    /**
+     * Returns the global configuration
+     *
+     * @return DocGeneratorConfig
+     */
+    public function getDocGeneratorConfig(): DocGeneratorConfig
+    {
+        return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorConfig();
     }
 
     /**
@@ -133,11 +133,7 @@ class DocGeneratorBlockBuilder
                 ucFirst($this->getDocGeneratorBlockModel()->getType())
             );
 
-        $this->docGeneratorBlockAbstract =
-            $blockClassName::factory(
-                $this->getDocGeneratorBlockModel(),
-                $this
-            )->build();
+        $this->docGeneratorBlockAbstract = $blockClassName::factory($this)->build();
 
         return $this;
     }

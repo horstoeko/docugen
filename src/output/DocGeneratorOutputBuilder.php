@@ -25,13 +25,6 @@ use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
 class DocGeneratorOutputBuilder
 {
     /**
-     * The output definition model
-     *
-     * @var DocGeneratorOutputModel
-     */
-    private $docGeneratorOutputModel;
-
-    /**
      * List of generated documentations
      *
      * @var DocGeneratorDocumentationBuilder
@@ -48,36 +41,23 @@ class DocGeneratorOutputBuilder
     /**
      * Create a new instance
      *
-     * @param  DocGeneratorOutputModel          $docGeneratorOutputModel
      * @param  DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
      * @return DocGeneratorOutputBuilder
      */
-    public static function factory(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder): DocGeneratorOutputBuilder
+    public static function factory(DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder): DocGeneratorOutputBuilder
     {
-        return new static($docGeneratorOutputModel, $docGeneratorDocumentationBuilder);
+        return new static($docGeneratorDocumentationBuilder);
     }
 
     /**
      * Constructor (hidden)
      *
-     * @param  DocGeneratorOutputModel          $docGeneratorOutputModel
      * @param  DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
      * @return void
      */
-    final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder)
+    final protected function __construct(DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder)
     {
-        $this->docGeneratorOutputModel = $docGeneratorOutputModel;
         $this->docGeneratorDocumentationBuilder = $docGeneratorDocumentationBuilder;
-    }
-
-    /**
-     * Returns the associated output model
-     *
-     * @return DocGeneratorOutputModel
-     */
-    public function getDocGeneratorOutputModel(): DocGeneratorOutputModel
-    {
-        return $this->docGeneratorOutputModel;
     }
 
     /**
@@ -88,6 +68,16 @@ class DocGeneratorOutputBuilder
     public function getDocGeneratorDocumentationBuilder(): DocGeneratorDocumentationBuilder
     {
         return $this->docGeneratorDocumentationBuilder;
+    }
+
+    /**
+     * Returns the associated output model
+     *
+     * @return DocGeneratorOutputModel
+     */
+    public function getDocGeneratorOutputModel(): DocGeneratorOutputModel
+    {
+        return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorOutputModel();
     }
 
     /**
@@ -123,12 +113,7 @@ class DocGeneratorOutputBuilder
                 ucFirst($this->getDocGeneratorOutputModel()->getOutputType())
             );
 
-        $this->docGeneratorOutputAbstract =
-            $outputClassName::factory(
-                $this->getDocGeneratorOutputModel(),
-                $this,
-                $this->getDocGeneratorDocumentationBuilder()
-            )->build()->writeFile();
+        $this->docGeneratorOutputAbstract = $outputClassName::factory($this)->build()->writeFile();
 
         return $this;
     }

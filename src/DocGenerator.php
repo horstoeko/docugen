@@ -99,9 +99,6 @@ class DocGenerator
     protected function generateSingleDocumentations(DocGeneratorOutputModel $docGeneratorOutputModel): DocGenerator
     {
         DocGeneratorDocumentationBuilder::factory(
-            $this->getDocGeneratorConfig()->getDocumentations()->findByIdOrFail(
-                $docGeneratorOutputModel->getDocumentationId()
-            ),
             $docGeneratorOutputModel,
             $this->getDocGeneratorConfig()
         )->build();

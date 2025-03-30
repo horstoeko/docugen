@@ -32,25 +32,11 @@ use horstoeko\stringmanagement\PathUtils;
 abstract class DocGeneratorOutputAbstract
 {
     /**
-     * The output definition model
-     *
-     * @var DocGeneratorOutputModel
-     */
-    private $docGeneratorOutputModel;
-
-    /**
      * The calling output builder
      *
      * @var DocGeneratorOutputBuilder
      */
     private $docGeneratorOutputBuilder;
-
-    /**
-     * List of generated documentations
-     *
-     * @var DocGeneratorDocumentationBuilder
-     */
-    private $docGeneratorDocumentationBuilder;
 
     /**
      * Output buffer
@@ -62,39 +48,23 @@ abstract class DocGeneratorOutputAbstract
     /**
      * Create a new instance
      *
-     * @param  DocGeneratorOutputModel          $docGeneratorOutputModel
-     * @param  DocGeneratorOutputBuilder        $docGeneratorOutputBuilder
-     * @param  DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
+     * @param  DocGeneratorOutputBuilder $docGeneratorOutputBuilder
      * @return DocGeneratorOutputAbstract
      */
-    public static function factory(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorOutputBuilder $docGeneratorOutputBuilder, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder): DocGeneratorOutputAbstract
+    public static function factory(DocGeneratorOutputBuilder $docGeneratorOutputBuilder): DocGeneratorOutputAbstract
     {
-        return new static($docGeneratorOutputModel, $docGeneratorOutputBuilder, $docGeneratorDocumentationBuilder);
+        return new static($docGeneratorOutputBuilder);
     }
 
     /**
      * Constructor (hidden)
      *
-     * @param DocGeneratorOutputModel          $docGeneratorOutputModel
-     * @param DocGeneratorOutputBuilder        $docGeneratorOutputBuilder
-     * @param DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder
+     * @param DocGeneratorOutputBuilder $docGeneratorOutputBuilder
      */
-    final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorOutputBuilder $docGeneratorOutputBuilder, DocGeneratorDocumentationBuilder $docGeneratorDocumentationBuilder)
+    final protected function __construct(DocGeneratorOutputBuilder $docGeneratorOutputBuilder)
     {
-        $this->docGeneratorOutputModel = $docGeneratorOutputModel;
         $this->docGeneratorOutputBuilder = $docGeneratorOutputBuilder;
-        $this->docGeneratorDocumentationBuilder = $docGeneratorDocumentationBuilder;
         $this->docGeneratorOutputBuffer = DocGeneratorOutputBuffer::factory();
-    }
-
-    /**
-     * Returns the associated output model
-     *
-     * @return DocGeneratorOutputModel
-     */
-    public function getDocGeneratorOutputModel(): DocGeneratorOutputModel
-    {
-        return $this->docGeneratorOutputModel;
     }
 
     /**
@@ -108,13 +78,33 @@ abstract class DocGeneratorOutputAbstract
     }
 
     /**
+     * Returns the internal output buffer
+     *
+     * @return DocGeneratorOutputBuffer
+     */
+    public function getDocGeneratorOutputBuffer(): DocGeneratorOutputBuffer
+    {
+        return $this->docGeneratorOutputBuffer;
+    }
+
+    /**
      * Returns the associated document builder
      *
      * @return DocGeneratorDocumentationBuilder
      */
     public function getDocGeneratorDocumentationBuilder(): DocGeneratorDocumentationBuilder
     {
-        return $this->docGeneratorDocumentationBuilder;
+        return $this->getDocGeneratorOutputBuilder()->getDocGeneratorDocumentationBuilder();
+    }
+
+    /**
+     * Returns the associated output model
+     *
+     * @return DocGeneratorOutputModel
+     */
+    public function getDocGeneratorOutputModel(): DocGeneratorOutputModel
+    {
+        return $this->getDocGeneratorOutputBuilder()->getDocGeneratorOutputModel();
     }
 
     /**
@@ -145,16 +135,6 @@ abstract class DocGeneratorOutputAbstract
     public function getDocGeneratorConfig(): DocGeneratorConfig
     {
         return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorConfig();
-    }
-
-    /**
-     * Returns the internal output buffer
-     *
-     * @return DocGeneratorOutputBuffer
-     */
-    public function getDocGeneratorOutputBuffer(): DocGeneratorOutputBuffer
-    {
-        return $this->docGeneratorOutputBuffer;
     }
 
     /**

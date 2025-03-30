@@ -15,6 +15,7 @@ use horstoeko\docugen\block\DocGeneratorBlockBuilder;
 use horstoeko\docugen\output\DocGeneratorOutputBuilder;
 use horstoeko\docugen\model\DocGeneratorDocumentationModel;
 use horstoeko\docugen\expression\DocGeneratorExpressionLanguage;
+use RuntimeException;
 
 /**
  * Class representing the generator for a single documentation
@@ -27,13 +28,6 @@ use horstoeko\docugen\expression\DocGeneratorExpressionLanguage;
  */
 class DocGeneratorDocumentationBuilder
 {
-    /**
-     * The documentation to handle
-     *
-     * @var DocGeneratorDocumentationModel
-     */
-    private $docGeneratorDocumentationModel;
-
     /**
      * The associated output model
      *
@@ -58,34 +52,26 @@ class DocGeneratorDocumentationBuilder
     /**
      * Create a new instance
      *
+     * @param  DocGeneratorOutputModel $docGeneratorOutputModel
+     * @param  DocGeneratorConfig      $docGeneratorConfig
      * @return DocGeneratorDocumentationBuilder
      */
-    public static function factory(DocGeneratorDocumentationModel $docGeneratorDocumentationModel, DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorConfig $docGeneratorConfig): DocGeneratorDocumentationBuilder
+    public static function factory(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorConfig $docGeneratorConfig): DocGeneratorDocumentationBuilder
     {
-        return new static($docGeneratorDocumentationModel, $docGeneratorOutputModel, $docGeneratorConfig);
+        return new static($docGeneratorOutputModel, $docGeneratorConfig);
     }
 
     /**
      * Constructor (hidden)
      *
-     * @param  DocGeneratorDocumentationModel $docGeneratorDocumentationModel
+     * @param  DocGeneratorOutputModel $docGeneratorOutputModel
+     * @param  DocGeneratorConfig      $docGeneratorConfig
      * @return static
      */
-    final protected function __construct(DocGeneratorDocumentationModel $docGeneratorDocumentationModel, DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorConfig $docGeneratorConfig)
+    final protected function __construct(DocGeneratorOutputModel $docGeneratorOutputModel, DocGeneratorConfig $docGeneratorConfig)
     {
-        $this->docGeneratorDocumentationModel = $docGeneratorDocumentationModel;
         $this->docGeneratorOutputModel = $docGeneratorOutputModel;
         $this->docGeneratorConfig = $docGeneratorConfig;
-    }
-
-    /**
-     * Returns the associated documentation model
-     *
-     * @return DocGeneratorDocumentationModel
-     */
-    public function getDocGeneratorDocumentationModel(): DocGeneratorDocumentationModel
-    {
-        return $this->docGeneratorDocumentationModel;
     }
 
     /**
@@ -119,6 +105,17 @@ class DocGeneratorDocumentationBuilder
     }
 
     /**
+     * Returns the associated documentation model
+     *
+     * @return DocGeneratorDocumentationModel
+     * @throws RuntimeException
+     */
+    public function getDocGeneratorDocumentationModel(): DocGeneratorDocumentationModel
+    {
+        return $this->getDocGeneratorConfig()->getDocumentations()->findByIdOrFail($this->getDocGeneratorOutputModel()->getDocumentationId());
+    }
+
+    /**
      * Generate the documentation
      *
      * @return DocGeneratorDocumentationBuilder
@@ -126,13 +123,14 @@ class DocGeneratorDocumentationBuilder
     public function build(): DocGeneratorDocumentationBuilder
     {
         $docGeneratorExpressionLanguage = DocGeneratorExpressionLanguage::factory();
-        $docGeneratorExpressionLanguage->setVariable("documentationmodel", $this->getDocGeneratorDocumentationModel());
-        $docGeneratorExpressionLanguage->setVariable("outputmodel", $this->getDocGeneratorOutputModel());
-        $docGeneratorExpressionLanguage->setVariable("config", $this->getDocGeneratorConfig());
+        $docGeneratorExpressionLanguage
+            ->setVariable("documentationmodel", $this->getDocGeneratorDocumentationModel())
+            ->setVariable("outputmodel", $this->getDocGeneratorOutputModel())
+            ->setVariable("config", $this->getDocGeneratorConfig());
 
         $docGeneratorBlocks =
             array_filter(
-                $this->docGeneratorDocumentationModel->getBlocks(),
+                $this->getDocGeneratorDocumentationModel()->getBlocks(),
                 function ($docGeneratorBlockId) {
                     return preg_match('/^[^#]/', $docGeneratorBlockId);
                 }
@@ -172,23 +170,17 @@ class DocGeneratorDocumentationBuilder
                         return true;
                     }
 
-                    $docGeneratorExpressionLanguage->setVariable("blockmodel", $docGeneratorBlockModel);
-
-                    return $docGeneratorExpressionLanguage->evaluatesToBooleanTrue($docGeneratorBlockModel->getVisibleExpression());
+                    return $docGeneratorExpressionLanguage
+                        ->setVariable("blockmodel", $docGeneratorBlockModel)
+                        ->evaluatesToBooleanTrue($docGeneratorBlockModel->getVisibleExpression());
                 }
             );
 
         foreach ($docGeneratorBlockModels as $docGeneratorBlockModel) {
-            $this->docGeneratorBlockBuilders[] = DocGeneratorBlockBuilder::factory(
-                $docGeneratorBlockModel,
-                $this
-            )->build();
+            $this->docGeneratorBlockBuilders[] = DocGeneratorBlockBuilder::factory($docGeneratorBlockModel, $this)->build();
         }
 
-        DocGeneratorOutputBuilder::factory(
-            $this->getDocGeneratorOutputModel(),
-            $this
-        )->build()->writeFile();
+        DocGeneratorOutputBuilder::factory($this)->build()->writeFile();
 
         return $this;
     }
