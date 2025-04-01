@@ -193,9 +193,7 @@
                 "required": [
                     "id",
                     "outputtype",
-                    "documentationid",
-                    "filepath",
-                    "filename"
+                    "documentationid"
                 ],
                 "properties": {
                     "id": {
@@ -215,17 +213,6 @@
                             },
                             {
                                 "const": "markdown"
-                            }
-                        ]
-                    },
-                    "outputdestination": {
-                        "type": "integer",
-                        "oneOf": [
-                            {
-                                "const": 0
-                            },
-                            {
-                                "const": 1
                             }
                         ]
                     },
@@ -269,6 +256,17 @@
                             }
                         ]
                     },
+                    "outputdestination": {
+                        "type": "integer",
+                        "oneOf": [
+                            {
+                                "const": 0
+                            },
+                            {
+                                "const": 1
+                            }
+                        ]
+                    },
                     "options": {
                         "type": "array",
                         "items": {
@@ -286,7 +284,24 @@
                             }
                         }
                     }
-                }
+                },
+                "allOf": [
+                    {
+                        "if": {
+                            "properties": {
+                                "outputdestination": {
+                                    "const": 0
+                                }
+                            }
+                        },
+                        "then": {
+                            "required": [
+                                "filepath",
+                                "filename"
+                            ]
+                        }
+                    }
+                ]
             }
         }
     }

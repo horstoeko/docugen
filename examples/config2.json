@@ -1259,6 +1259,7 @@
             "filename": "Example-ZugferdDocumentBuilder-in-EN16391-profile.md",
             "titlemode": 0,
             "descriptionmode": 0,
+            "outputdestination": 0,
             "options": [
                 {
                     "id": "PROFILE",
@@ -1276,6 +1277,7 @@
             "filename": "Example-ZugferdDocumentBuilder-in-XRECHNUNG3-profile.md",
             "titlemode": 0,
             "descriptionmode": 0,
+            "outputdestination": 0,
             "options": [
                 {
                     "id": "PROFILE",
@@ -1293,6 +1295,7 @@
             "filename": "01_ZugferdDocumentBuilder_EN16931.php",
             "titlemode": 0,
             "descriptionmode": 1,
+            "outputdestination": 0,
             "options": [
                 {
                     "id": "PROFILE",
@@ -1310,6 +1313,7 @@
             "filename": "01_ZugferdDocumentBuilder_XRECHNUNG3.php",
             "titlemode": 0,
             "descriptionmode": 1,
+            "outputdestination": 0,
             "options": [
                 {
                     "id": "PROFILE",
