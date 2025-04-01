@@ -162,11 +162,29 @@ abstract class DocGeneratorOutputAbstract
     }
 
     /**
-     * Write the output to a file
+     * Output to a specific destination (see outputdestination property)
      *
      * @return DocGeneratorOutputAbstract
      */
-    public function writeFile(): DocGeneratorOutputAbstract
+    public function output(): DocGeneratorOutputAbstract
+    {
+        if ($this->getDocGeneratorOutputModel()->getOutputDestination() === 0) {
+            return $this->outputToFile();
+        }
+
+        if ($this->getDocGeneratorOutputModel()->getOutputDestination() === 1) {
+            return $this->outputToScreen();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Generate the output to a file
+     *
+     * @return DocGeneratorOutputAbstract
+     */
+    public function outputToFile(): DocGeneratorOutputAbstract
     {
         $filepath = $this->getDocGeneratorOutputModel()->getFilePathIsAbsolute() ? $this->getDocGeneratorOutputModel()->getFilePath() : PathUtils::combinePathWithPath($this->getDocGeneratorConfig()->getRootDirectory(), $this->getDocGeneratorOutputModel()->getFilePath());
 
@@ -176,6 +194,18 @@ abstract class DocGeneratorOutputAbstract
             $filenameToOutput,
             implode(PHP_EOL, $this->getDocGeneratorOutputBuffer()->getLines())
         );
+
+        return $this;
+    }
+
+    /**
+     * Generate the output to STDOUT
+     *
+     * @return DocGeneratorOutputAbstract
+     */
+    public function outputToScreen(): DocGeneratorOutputAbstract
+    {
+        echo implode(PHP_EOL, $this->getDocGeneratorOutputBuffer()->getLines());
 
         return $this;
     }

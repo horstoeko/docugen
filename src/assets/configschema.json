@@ -218,6 +218,17 @@
                             }
                         ]
                     },
+                    "outputdestination": {
+                        "type": "integer",
+                        "oneOf": [
+                            {
+                                "const": 0
+                            },
+                            {
+                                "const": 1
+                            }
+                        ]
+                    },
                     "documentationid": {
                         "type": "string"
                     },

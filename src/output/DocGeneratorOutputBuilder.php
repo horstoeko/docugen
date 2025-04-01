@@ -113,7 +113,7 @@ class DocGeneratorOutputBuilder
                 ucFirst($this->getDocGeneratorOutputModel()->getOutputType())
             );
 
-        $this->docGeneratorOutputAbstract = $outputClassName::factory($this)->build()->writeFile();
+        $this->docGeneratorOutputAbstract = $outputClassName::factory($this)->build();
 
         return $this;
     }
@@ -123,9 +123,9 @@ class DocGeneratorOutputBuilder
      *
      * @return DocGeneratorOutputBuilder
      */
-    public function writeFile(): DocGeneratorOutputBuilder
+    public function output(): DocGeneratorOutputBuilder
     {
-        $this->getOutputInstance()->writeFile();
+        $this->getOutputInstance()->output();
 
         return $this;
     }

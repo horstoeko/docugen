@@ -180,7 +180,7 @@ class DocGeneratorDocumentationBuilder
             $this->docGeneratorBlockBuilders[] = DocGeneratorBlockBuilder::factory($docGeneratorBlockModel, $this)->build();
         }
 
-        DocGeneratorOutputBuilder::factory($this)->build()->writeFile();
+        DocGeneratorOutputBuilder::factory($this)->build()->output();
 
         return $this;
     }

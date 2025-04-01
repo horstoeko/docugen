@@ -77,6 +77,13 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
     protected $descriptionMode = 0;
 
     /**
+     * Indicator where to output (0 = file, 1 = screen)
+     *
+     * @var integer
+     */
+    protected $outputdestination = 0;
+
+    /**
      * @inheritDoc
      */
     protected function fillAttributes(stdClass $modelData): void
@@ -91,6 +98,7 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
         $this->filePathIsAbsolute = $modelData->filepathisabsolute ?? false;
         $this->titleMode = $modelData->titlemode ?? 0;
         $this->descriptionMode = $modelData->descriptionmode ?? 0;
+        $this->outputdestination = $modelData->outputdestination ?? 0;
         $this->options = array_column($modelData->options ?? [], "value", "id");
     }
 
@@ -162,5 +170,15 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
     public function getDescriptionMode(): int
     {
         return $this->descriptionMode;
+    }
+
+    /**
+     * Returns the indicator where to output (0 = file, 1 = screen)
+     *
+     * @return integer
+     */
+    public function getOutputDestination(): int
+    {
+        return $this->outputdestination;
     }
 }
