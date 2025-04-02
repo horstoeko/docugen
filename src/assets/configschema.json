@@ -128,7 +128,9 @@
                                 "id": {
                                     "type": "string"
                                 },
-                                "value": {}
+                                "value": {
+                                    "type": ["string", "integer", "boolean", "array"]
+                                }
                             }
                         }
                     },
@@ -178,7 +180,9 @@
                                 "id": {
                                     "type": "string"
                                 },
-                                "value": {}
+                                "value": {
+                                    "type": ["string", "integer", "boolean", "array"]
+                                }
                             }
                         }
                     }
@@ -283,7 +287,9 @@
                                 "id": {
                                     "type": "string"
                                 },
-                                "value": {}
+                                "value": {
+                                    "type": ["string", "integer", "boolean", "array"]
+                                }
                             }
                         }
                     }
