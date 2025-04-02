@@ -220,6 +220,9 @@
                             },
                             {
                                 "const": "html"
+                            },
+                            {
+                                "const": "custom"
                             }
                         ]
                     },
