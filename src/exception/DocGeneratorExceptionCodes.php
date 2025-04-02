@@ -25,4 +25,8 @@ class DocGeneratorExceptionCodes
     public const FILENOTREADABLE = -2001;
 
     public const INVALIDJSONCONTENT = -3000;
+
+    public const UNKNWONCLASS = -4000;
+
+    public const CLASSMUSTINHERITFROM = -4001;
 }

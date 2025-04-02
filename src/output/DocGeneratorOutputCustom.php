@@ -13,7 +13,8 @@ use horstoeko\docugen\block\DocGeneratorBlockBlank;
 use horstoeko\docugen\block\DocGeneratorBlockCode;
 use horstoeko\docugen\block\DocGeneratorBlockComment;
 use horstoeko\docugen\DocGeneratorOutputBuffer;
-use horstoeko\docugen\output\DocGeneratorOutputAbstract;
+use horstoeko\docugen\exception\DocGeneratorClassMustInheritFromException;
+use horstoeko\docugen\exception\DocGeneratorUnknownClassException;
 use horstoeko\stringmanagement\StringUtils;
 
 /**
@@ -35,6 +36,16 @@ class DocGeneratorOutputCustom extends DocGeneratorOutputAbstract
     protected $docGeneratorOutputCustomInstance;
 
     /**
+     * Returns the internal output buffer
+     *
+     * @return DocGeneratorOutputBuffer
+     */
+    public function getDocGeneratorOutputBuffer(): DocGeneratorOutputBuffer
+    {
+        return $this->docGeneratorOutputCustomInstance->getDocGeneratorOutputBuffer();
+    }
+
+    /**
      * @inheritDoc
      */
     public function build(): DocGeneratorOutputAbstract
@@ -42,15 +53,15 @@ class DocGeneratorOutputCustom extends DocGeneratorOutputAbstract
         $docGeneratorOutputCustomClassname = $this->getDocGeneratorOutputModel()->getOption('class', '');
 
         if (StringUtils::stringIsNullOrEmpty($docGeneratorOutputCustomClassname)) {
-            return $this;
+            throw new DocGeneratorUnknownClassException("<empty>");
         }
 
         if (!class_exists($docGeneratorOutputCustomClassname)) {
-            return $this;
+            throw new DocGeneratorUnknownClassException($docGeneratorOutputCustomClassname);
         }
 
         if (!is_a($docGeneratorOutputCustomClassname, DocGeneratorOutputAbstract::class, true)) {
-            return $this;
+            throw new DocGeneratorClassMustInheritFromException($docGeneratorOutputCustomClassname, DocGeneratorOutputAbstract::class);
         }
 
         $this->docGeneratorOutputCustomInstance = $docGeneratorOutputCustomClassname::factory($this->getDocGeneratorOutputBuilder());
@@ -58,14 +69,6 @@ class DocGeneratorOutputCustom extends DocGeneratorOutputAbstract
         parent::build();
 
         return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getDocGeneratorOutputBuffer(): DocGeneratorOutputBuffer
-    {
-        return $this->docGeneratorOutputCustomInstance->getDocGeneratorOutputBuffer();
     }
 
     /**
