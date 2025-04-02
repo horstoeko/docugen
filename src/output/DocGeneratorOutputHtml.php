@@ -32,18 +32,11 @@ class DocGeneratorOutputHtml extends DocGeneratorOutputMarkdown
             'allow_unsafe_links' => false,
         ]);
 
-        $lines = $this->getDocGeneratorOutputBuffer()->getLinesAsString();
-        $lines = $converter->convert($lines);
-
-        $this->getDocGeneratorOutputBuffer()->setLinesFromString($lines);
-
-        /*
-        $this->getDocGeneratorOutputBuffer()->processLines(
-            function (string $line) use ($converter) {
-                return $converter->convert($line);
-            }
+        $this->getDocGeneratorOutputBuffer()->setLinesFromString(
+            $converter->convert(
+                $this->getDocGeneratorOutputBuffer()->getLinesAsString()
+            )
         );
-        */
 
         return $this;
     }
