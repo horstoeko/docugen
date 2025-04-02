@@ -143,4 +143,30 @@ class DocGeneratorOutputBuffer
 
         return $this;
     }
+
+    /**
+     * Prepend lines to buffer
+     *
+     * @param array $lines
+     * @return DocGeneratorOutputBuffer
+     */
+    public function prependLines(array $lines): DocGeneratorOutputBuffer
+    {
+        array_unshift($this->lines, ...$lines);
+
+        return $this;
+    }
+
+    /**
+     * Append lines to buffer
+     *
+     * @param array $lines
+     * @return DocGeneratorOutputBuffer
+     */
+    public function appendLines(array $lines): DocGeneratorOutputBuffer
+    {
+        $this->lines = array_merge($this->lines, $lines);
+
+        return $this;
+    }
 }

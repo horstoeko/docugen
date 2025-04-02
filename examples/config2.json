@@ -1354,6 +1354,27 @@
                 {
                     "id": "PROFILE",
                     "value": "XRECHNUNG"
+                },
+                {
+                    "id": "prepend",
+                    "value": [
+                        "<!DOCTYPE html>",
+                        "<html>",
+                        "<head>",
+                        "<style>",
+                        "body { font-family: 'Courier'; }",
+                        "pre { padding: .5rem; border: 1px solid #a0a0a0; background-color: #ffffee }",
+                        "</style>",
+                        "</head>",
+                        "<body>"
+                    ]
+                },
+                {
+                    "id": "append",
+                    "value": [
+                        "</body>",
+                        "</html>"
+                    ]
                 }
             ]
         }

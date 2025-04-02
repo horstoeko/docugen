@@ -107,4 +107,16 @@ trait DocGeneratorModelHasOptionAttribute
     {
         return (bool)$this->getOption($option, $default);
     }
+
+    /**
+     * Return a array option value
+     *
+     * @param  string $option
+     * @param  array  $default
+     * @return array
+     */
+    public function getArrayOption(string $option, array $default = []): array
+    {
+        return (array)$this->getOption($option, $default);
+    }
 }
