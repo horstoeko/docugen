@@ -13,6 +13,7 @@ use horstoeko\docugen\block\DocGeneratorBlockBlank;
 use horstoeko\docugen\block\DocGeneratorBlockBuilder;
 use horstoeko\docugen\block\DocGeneratorBlockCode;
 use horstoeko\docugen\block\DocGeneratorBlockComment;
+use horstoeko\docugen\block\DocGeneratorBlockCustom;
 use horstoeko\docugen\DocGeneratorConfig;
 use horstoeko\docugen\DocGeneratorOutputBuffer;
 use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
@@ -153,6 +154,8 @@ abstract class DocGeneratorOutputAbstract
                 $this->renderCodeBlock($docGeneratorBlockBuilder->getBlockInstance());
             } elseif ($docGeneratorBlockBuilder->getBlockInstance() instanceof DocGeneratorBlockBlank) {
                 $this->renderBlankBlock($docGeneratorBlockBuilder->getBlockInstance());
+            } elseif ($docGeneratorBlockBuilder->getBlockInstance() instanceof DocGeneratorBlockCustom) {
+                $this->renderCustomBlock($docGeneratorBlockBuilder->getBlockInstance());
             }
         }
 
@@ -213,6 +216,7 @@ abstract class DocGeneratorOutputAbstract
     /**
      * Render a comment block
      *
+     * @param  DocGeneratorBlockComment $docGeneratorBlockComment
      * @return void
      */
     abstract protected function renderCommentBlock(DocGeneratorBlockComment $docGeneratorBlockComment): void;
@@ -220,6 +224,7 @@ abstract class DocGeneratorOutputAbstract
     /**
      * Render a code block
      *
+     * @param  DocGeneratorBlockCode $docGeneratorBlockCode
      * @return void
      */
     abstract protected function renderCodeBlock(DocGeneratorBlockCode $docGeneratorBlockCode): void;
@@ -227,9 +232,21 @@ abstract class DocGeneratorOutputAbstract
     /**
      * Render a blank block
      *
+     * @param  DocGeneratorBlockBlank $docGeneratorBlockBlank
      * @return void
      */
     abstract protected function renderBlankBlock(DocGeneratorBlockBlank $docGeneratorBlockBlank): void;
+
+    /**
+     * Render a custom block
+     *
+     * @param  DocGeneratorBlockCustom $docGeneratorBlockCustom
+     * @return void
+     */
+    protected function renderCustomBlock(DocGeneratorBlockCustom $docGeneratorBlockCustom): void
+    {
+        $docGeneratorBlockCustom->build();
+    }
 
     /**
      * Do something before rendering all blocks
