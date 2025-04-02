@@ -141,18 +141,9 @@ class DocGeneratorBlockBuilder
     {
         $blockClassName =
             sprintf(
-                'horstoeko\docugen\block\DocGeneratorBlock%s%s',
-                ucFirst($this->getDocGeneratorBlockModel()->getType()),
-                ucFirst($this->getDocGeneratorOutputModel()->getOutputType())
+                'horstoeko\docugen\block\DocGeneratorBlock%s',
+                ucFirst($this->getDocGeneratorBlockModel()->getType())
             );
-
-        if (!class_exists($blockClassName)) {
-            $blockClassName =
-                sprintf(
-                    'horstoeko\docugen\block\DocGeneratorBlock%s',
-                    ucFirst($this->getDocGeneratorBlockModel()->getType())
-                );
-        }
 
         if (!class_exists($blockClassName)) {
             throw new DocGeneratorUnknownClassException($blockClassName);
