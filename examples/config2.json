@@ -1356,28 +1356,6 @@
                     "value": "XRECHNUNG"
                 }
             ]
-        },
-        {
-            "id": "OUTPUT_ZF_BUILDER_XRECHNUNG_CUSTOM",
-            "title": "A valid example for ZugferdDocumentBuilder in XRECHNUNG 3.x profile",
-            "description": "This example will show you the basic usage of the ZugferdDocumentBulder - here in XRECHNUNG 3.x Profile",
-            "outputtype": "custom",
-            "documentationid": "DOCUMENTATION_ZF_BUILDER",
-            "filepath": "/examples",
-            "filename": "Example-ZugferdDocumentBuilder-in-XRECHNUNG3-profile.out",
-            "titlemode": 0,
-            "descriptionmode": 0,
-            "outputdestination": 0,
-            "options": [
-                {
-                    "id": "PROFILE",
-                    "value": "XRECHNUNG"
-                },
-                {
-                    "id": "class",
-                    "value": "CustomOutputter"
-                }
-            ]
         }
     ]
 }

@@ -10,8 +10,9 @@
 namespace horstoeko\docugen\output;
 
 use horstoeko\docugen\DocGeneratorConfig;
-use horstoeko\docugen\model\DocGeneratorOutputModel;
 use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
+use horstoeko\docugen\exception\DocGeneratorUnknownClassException;
+use horstoeko\docugen\model\DocGeneratorOutputModel;
 
 /**
  * Class representing the generator for a single documentation
@@ -107,11 +108,23 @@ class DocGeneratorOutputBuilder
      */
     public function build(): DocGeneratorOutputBuilder
     {
+        $outputClassNamespace =
+            $this->getDocGeneratorOutputModel()->getOption('classnamespace', 'horstoeko\docugen\output');
+
+        $outputClassNameBase =
+            $this->getDocGeneratorOutputModel()->getOption('classnamebase', 'DocGeneratorOutput');
+
         $outputClassName =
             sprintf(
-                'horstoeko\docugen\output\DocGeneratorOutput%s',
+                '%s\%s%s',
+                $outputClassNamespace,
+                $outputClassNameBase,
                 ucFirst($this->getDocGeneratorOutputModel()->getOutputType())
             );
+
+        if (!class_exists($outputClassName)) {
+            throw new DocGeneratorUnknownClassException($outputClassName);
+        }
 
         $this->docGeneratorOutputAbstract = $outputClassName::factory($this)->build();
 
