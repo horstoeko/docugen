@@ -9,11 +9,9 @@
 
 namespace horstoeko\docugen\block;
 
-use horstoeko\docugen\DocGeneratorLineParser;
 use horstoeko\docugen\DocGeneratorOutputBuffer;
 use horstoeko\docugen\exception\DocGeneratorClassMustInheritFromException;
 use horstoeko\docugen\exception\DocGeneratorUnknownClassException;
-use horstoeko\docugen\model\DocGeneratorBlockModel;
 use horstoeko\stringmanagement\StringUtils;
 
 /**
