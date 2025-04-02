@@ -96,6 +96,42 @@ class DocGeneratorOutputBuffer
     }
 
     /**
+     * Set all lines
+     *
+     * @param  array<string> $lines
+     * @return DocGeneratorOutputBuffer
+     */
+    public function setLines(array $lines): DocGeneratorOutputBuffer
+    {
+        $this->lines = $lines;
+
+        return $this;
+    }
+
+    /**
+     * Get all the lines in the buffer as a single string
+     *
+     * @return string
+     */
+    public function getLinesAsString(): string
+    {
+        return implode("\n", $this->lines);
+    }
+
+    /**
+     * Set all lines from a single string
+     *
+     * @param  string $lines
+     * @return DocGeneratorOutputBuffer
+     */
+    public function setLinesFromString(string $lines): DocGeneratorOutputBuffer
+    {
+        $this->lines = explode("\n", $lines);
+
+        return $this;
+    }
+
+    /**
      * Process lines via a callback
      *
      * @param  callable $callBack
