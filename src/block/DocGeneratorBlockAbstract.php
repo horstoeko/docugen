@@ -122,16 +122,6 @@ abstract class DocGeneratorBlockAbstract
     }
 
     /**
-     * Returns the associated output model
-     *
-     * @return DocGeneratorOutputModel
-     */
-    public function getDocGeneratorOutputModel(): DocGeneratorOutputModel
-    {
-        return $this->getDocGeneratorBlockBuilder()->getDocGeneratorOutputModel();
-    }
-
-    /**
      * Get all the lines from the block
      *
      * @return array<string>

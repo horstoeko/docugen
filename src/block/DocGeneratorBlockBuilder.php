@@ -93,16 +93,6 @@ class DocGeneratorBlockBuilder
     }
 
     /**
-     * Returns the associated output model
-     *
-     * @return DocGeneratorOutputModel
-     */
-    public function getDocGeneratorOutputModel(): DocGeneratorOutputModel
-    {
-        return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorOutputModel();
-    }
-
-    /**
      * Get the block instance (object)
      *
      * @return DocGeneratorBlockAbstract
