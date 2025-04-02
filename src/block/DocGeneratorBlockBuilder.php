@@ -9,10 +9,12 @@
 
 namespace horstoeko\docugen\block;
 
-use horstoeko\docugen\block\DocGeneratorBlockAbstract;
 use horstoeko\docugen\DocGeneratorConfig;
-use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
 use horstoeko\docugen\model\DocGeneratorBlockModel;
+use horstoeko\docugen\model\DocGeneratorOutputModel;
+use horstoeko\docugen\block\DocGeneratorBlockAbstract;
+use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
+use horstoeko\docugen\exception\DocGeneratorUnknownClassException;
 
 /**
  * Class representing a builder for a documentation block
@@ -91,6 +93,16 @@ class DocGeneratorBlockBuilder
     }
 
     /**
+     * Returns the associated output model
+     *
+     * @return DocGeneratorOutputModel
+     */
+    public function getDocGeneratorOutputModel(): DocGeneratorOutputModel
+    {
+        return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorOutputModel();
+    }
+
+    /**
      * Get the block instance (object)
      *
      * @return DocGeneratorBlockAbstract
@@ -129,9 +141,22 @@ class DocGeneratorBlockBuilder
     {
         $blockClassName =
             sprintf(
-                'horstoeko\docugen\block\DocGeneratorBlock%s',
-                ucFirst($this->getDocGeneratorBlockModel()->getType())
+                'horstoeko\docugen\block\DocGeneratorBlock%s%s',
+                ucFirst($this->getDocGeneratorBlockModel()->getType()),
+                ucFirst($this->getDocGeneratorOutputModel()->getOutputType())
             );
+
+        if (!class_exists($blockClassName)) {
+            $blockClassName =
+                sprintf(
+                    'horstoeko\docugen\block\DocGeneratorBlock%s',
+                    ucFirst($this->getDocGeneratorBlockModel()->getType())
+                );
+        }
+
+        if (!class_exists($blockClassName)) {
+            throw new DocGeneratorUnknownClassException($blockClassName);
+        }
 
         $this->docGeneratorBlockAbstract = $blockClassName::factory($this)->build();
 

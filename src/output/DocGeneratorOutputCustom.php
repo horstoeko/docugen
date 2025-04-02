@@ -13,7 +13,6 @@ use horstoeko\stringmanagement\StringUtils;
 use horstoeko\docugen\DocGeneratorOutputBuffer;
 use horstoeko\docugen\block\DocGeneratorBlockCode;
 use horstoeko\docugen\block\DocGeneratorBlockBlank;
-use horstoeko\docugen\block\DocGeneratorBlockCustom;
 use horstoeko\docugen\block\DocGeneratorBlockComment;
 use horstoeko\docugen\exception\DocGeneratorUnknownClassException;
 use horstoeko\docugen\exception\DocGeneratorClassMustInheritFromException;

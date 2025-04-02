@@ -13,6 +13,7 @@ use horstoeko\docugen\DocGeneratorConfig;
 use horstoeko\docugen\DocGeneratorLineParser;
 use horstoeko\docugen\DocGeneratorOutputBuffer;
 use horstoeko\docugen\model\DocGeneratorBlockModel;
+use horstoeko\docugen\model\DocGeneratorOutputModel;
 use horstoeko\docugen\block\DocGeneratorBlockBuilder;
 
 /**
@@ -118,6 +119,16 @@ abstract class DocGeneratorBlockAbstract
     public function getDocGeneratorConfig(): DocGeneratorConfig
     {
         return $this->getDocGeneratorBlockBuilder()->getDocGeneratorConfig();
+    }
+
+    /**
+     * Returns the associated output model
+     *
+     * @return DocGeneratorOutputModel
+     */
+    public function getDocGeneratorOutputModel(): DocGeneratorOutputModel
+    {
+        return $this->getDocGeneratorBlockBuilder()->getDocGeneratorOutputModel();
     }
 
     /**

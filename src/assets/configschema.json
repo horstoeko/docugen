@@ -103,9 +103,6 @@
                             },
                             {
                                 "const": "blank"
-                            },
-                            {
-                                "const": "custom"
                             }
                         ]
                     },
