@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
- namespace horstoeko\docugen\exception;
+namespace horstoeko\docugen\exception;
 
 /**
  * Class representing the base class of exceptions

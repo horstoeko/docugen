@@ -20,7 +20,7 @@ namespace horstoeko\docugen\model\traits;
  */
 trait DocGeneratorCommonModelAttributesTrait
 {
-    use DocGeneratorModelHasIdAttribute,
-        DocGeneratorModelHasTitleAttribute,
-        DocGeneratorModelHasDescriptionAttribute;
+    use DocGeneratorModelHasIdAttribute;
+    use DocGeneratorModelHasTitleAttribute;
+    use DocGeneratorModelHasDescriptionAttribute;
 }
