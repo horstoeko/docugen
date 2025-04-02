@@ -61,7 +61,6 @@ abstract class DocGeneratorBlockAbstract
     /**
      * Constructor (hidden)
      *
-     * @param DocGeneratorBlockModel   $docGeneratorBlockModel
      * @param DocGeneratorBlockBuilder $docGeneratorBlockBuilder
      */
     final protected function __construct(DocGeneratorBlockBuilder $docGeneratorBlockBuilder)

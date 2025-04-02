@@ -98,7 +98,7 @@ class DocGeneratorOutputBuffer
     /**
      * Process lines via a callback
      *
-     * @param callable $callBack
+     * @param  callable $callBack
      * @return DocGeneratorOutputBuffer
      */
     public function processLines(callable $callBack): DocGeneratorOutputBuffer

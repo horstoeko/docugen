@@ -36,6 +36,7 @@
         "symfony/expression-language": "^5|^6|^7"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^0|^1|^2|^3",
         "nette/php-generator": "*",
         "pdepend/pdepend": "^2",
         "phpdocumentor/reflection-docblock": "^5",
@@ -60,8 +61,8 @@
         "phpcbf2": "./vendor/bin/phpcbf --standard=./build/phpcsrules_psr2.xml -q ./src ./tests",
         "phpcbf12": "./vendor/bin/phpcbf --standard=./build/phpcsrules_psr12.xml -q ./src ./tests",
         "phpcbfsq": "./vendor/bin/phpcbf --standard=./build/phpcsrules_squiz.xml -q ./src ./tests",
-        "phpstan": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --autoload-file=vendor/autoload.php --no-interaction --no-progress --xdebug",
-        "phpstan_cs": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --autoload-file=vendor/autoload.php --no-interaction --no-progress --error-format=checkstyle --xdebug",
+        "phpstan": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --no-interaction --no-progress",
+        "phpstan_cs": "./vendor/bin/phpstan analyze -c ./build/phpstan.neon --no-interaction --no-progress --error-format=checkstyle",
         "makedoc": "phing -f ./build.xml projectdoc",
         "checkstyle": [
             "Composer\\Config::disableProcessTimeout",
@@ -69,7 +70,7 @@
             "vendor/bin/pdepend --jdepend-xml=build/logs/jdepend.xml --jdepend-chart=build/pdepend/dependencies.svg --overview-pyramid=build/pdepend/overview-pyramid.svg src",
             "vendor/bin/phpmd src xml build/phpmd.xml --reportfile build/logs/pmd.xml --exclude src/entities/",
             "vendor/bin/phpcs --report=checkstyle --report-file=build/logs/checkstyle.xml --standard=build/phpcsrules.xml --extensions=php --ignore=autoload.php src tests",
-            "vendor/bin/phpstan analyze -c build/phpstan.neon --autoload-file=vendor/autoload.php --no-interaction --no-progress --error-format=checkstyle > build/logs/checkstyle_phpstan.xml",
+            "vendor/bin/phpstan analyze -c build/phpstan.neon --no-interaction --no-progress --error-format=checkstyle > build/logs/checkstyle_phpstan.xml",
             "vendor/bin/phpcpd --log-pmd build/logs/pmd-cpd.xml --exclude src/entities/ src"
         ],
         "rector": "vendor/bin/rector --config=./build/phprectorconfig.php"

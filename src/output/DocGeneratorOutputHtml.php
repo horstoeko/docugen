@@ -27,16 +27,16 @@ class DocGeneratorOutputHtml extends DocGeneratorOutputMarkdown
      */
     protected function afterAllBlocks(): DocGeneratorOutputAbstract
     {
-        parent::afterAllBlocks();
-
         $converter = new GithubFlavoredMarkdownConverter([
             'html_input' => 'strip',
             'allow_unsafe_links' => false,
         ]);
 
-        $this->getDocGeneratorOutputBuffer()->processLines(function(string $line) use ($converter) {
-            return $converter->convert($line);
-        });
+        $this->getDocGeneratorOutputBuffer()->processLines(
+            function (string $line) use ($converter) {
+                return $converter->convert($line);
+            }
+        );
 
         return $this;
     }

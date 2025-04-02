@@ -83,10 +83,10 @@ class DocGeneratorLineParser
     /**
      * Parse code snippted includes
      *
-     * @param  mixed $line
+     * @param  string $line
      * @return bool
      */
-    protected function mustIncludeCodeSnippet($line): bool
+    protected function mustIncludeCodeSnippet(string $line): bool
     {
         if (in_array(preg_match('/^@CS:(\w+)(:\d+)?(:\d+)?$/', $line, $matches), [0, false], true)) {
             return false;
@@ -118,10 +118,10 @@ class DocGeneratorLineParser
     /**
      * Parse text includes
      *
-     * @param  mixed $line
+     * @param  string $line
      * @return bool
      */
-    protected function mustIncludeText($line): bool
+    protected function mustIncludeText(string $line): bool
     {
         if (in_array(preg_match('/^@TXT:(\w+)(:\d+)?(:\d+)?$/', $line, $matches), [0, false], true)) {
             return false;
@@ -153,15 +153,16 @@ class DocGeneratorLineParser
     /**
      * Replace text parts
      *
-     * @param  array<string> &$lines
-     * @return void
+     * @param     array<string> $lines
+     * @param-out array<string> $lines
+     * @return    void
      */
     protected function replaceTextParts(array &$lines): void
     {
         do {
             $hasReplacedSomething = false;
             foreach ($lines as $lineKey => $lineValue) {
-                $hasReplacedSomething = $hasReplacedSomething || $this->hasReplacedTextPart($lineValue);
+                $hasReplacedSomething = $hasReplacedSomething || $this->checkReplaceableTextPart($lineValue);
                 $lines[$lineKey] = $lineValue;
             }
         } while ($hasReplacedSomething);
@@ -170,10 +171,11 @@ class DocGeneratorLineParser
     /**
      * Replace text parts
      *
-     * @param  mixed &$line
-     * @return bool
+     * @param     string $line
+     * @param-out string $line
+     * @return    bool
      */
-    protected function hasReplacedTextPart(&$line): bool
+    protected function checkReplaceableTextPart(string &$line): bool
     {
         if (in_array(preg_match('/@TXTPART:(\w+)(:\d+)?/', $line, $matches), [0, false], true)) {
             return false;
