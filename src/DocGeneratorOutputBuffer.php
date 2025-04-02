@@ -94,4 +94,17 @@ class DocGeneratorOutputBuffer
     {
         return $this->lines;
     }
+
+    /**
+     * Process lines via a callback
+     *
+     * @param callable $callBack
+     * @return DocGeneratorOutputBuffer
+     */
+    public function processLines(callable $callBack): DocGeneratorOutputBuffer
+    {
+        $this->lines = array_map($callBack, $this->lines);
+
+        return $this;
+    }
 }
