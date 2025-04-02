@@ -1362,8 +1362,8 @@
                         "<html>",
                         "<head>",
                         "<style>",
-                        "body { font-family: 'Courier'; padding-left: 1rem; padding-right: 1rem; }",
-                        "pre { padding: .5rem; border: 1px solid #a0a0a0; background-color: #ffffee; }",
+                        "body { font-family: 'Verdana'; padding-left: 1rem; padding-right: 1rem; }",
+                        "pre { font-family: 'Courier'; padding: .5rem; border: 1px solid #a0a0a0; background-color: #ffffee; }",
                         "</style>",
                         "</head>",
                         "<body>"
