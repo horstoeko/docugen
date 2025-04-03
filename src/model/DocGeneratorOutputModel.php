@@ -201,8 +201,8 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
      */
     public function isOneOfOutputTypes(array $outputTypes): bool
     {
-        return array_filter($outputTypes, function ($type) {
-            return $this->isOutputType($type);
+        return array_filter($outputTypes, function ($outputType) {
+            return $this->isOutputType($outputType);
         }) !== [];
     }
 }
