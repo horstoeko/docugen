@@ -115,7 +115,7 @@ class DocGeneratorOutputBuffer
      */
     public function getLinesAsString(): string
     {
-        return implode("\n", $this->lines);
+        return implode(PHP_EOL, $this->lines);
     }
 
     /**
@@ -126,7 +126,7 @@ class DocGeneratorOutputBuffer
      */
     public function setLinesFromString(string $lines): DocGeneratorOutputBuffer
     {
-        $this->lines = explode("\n", $lines);
+        $this->lines = explode(PHP_EOL, $lines);
 
         return $this;
     }
