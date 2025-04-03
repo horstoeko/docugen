@@ -108,25 +108,25 @@ class DocGeneratorOutputBuilder
      */
     public function build(): DocGeneratorOutputBuilder
     {
-        $outputClassNamespace =
+        $docGeneratorOutputClassNamespace =
             $this->getDocGeneratorOutputModel()->getOption('classnamespace', 'horstoeko\docugen\output');
 
-        $outputClassNameBase =
+        $docGeneratorOutputClassBasename =
             $this->getDocGeneratorOutputModel()->getOption('classnamebase', 'DocGeneratorOutput');
 
-        $outputClassName =
+        $docGeneratorOutputClassName =
             sprintf(
                 '%s\%s%s',
-                $outputClassNamespace,
-                $outputClassNameBase,
+                $docGeneratorOutputClassNamespace,
+                $docGeneratorOutputClassBasename,
                 ucFirst($this->getDocGeneratorOutputModel()->getOutputType())
             );
 
-        if (!class_exists($outputClassName)) {
-            throw new DocGeneratorUnknownClassException($outputClassName);
+        if (!class_exists($docGeneratorOutputClassName)) {
+            throw new DocGeneratorUnknownClassException($docGeneratorOutputClassName);
         }
 
-        $this->docGeneratorOutputAbstract = $outputClassName::factory($this)->build();
+        $this->docGeneratorOutputAbstract = $docGeneratorOutputClassName::factory($this)->build();
 
         return $this;
     }
