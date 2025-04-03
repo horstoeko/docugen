@@ -93,16 +93,6 @@ class DocGeneratorBlockBuilder
     }
 
     /**
-     * Get the block instance (object)
-     *
-     * @return DocGeneratorBlockAbstract
-     */
-    public function getBlockInstance(): DocGeneratorBlockAbstract
-    {
-        return $this->docGeneratorBlockAbstract;
-    }
-
-    /**
      * Returns the global configuration
      *
      * @return DocGeneratorConfig
@@ -110,6 +100,16 @@ class DocGeneratorBlockBuilder
     public function getDocGeneratorConfig(): DocGeneratorConfig
     {
         return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorConfig();
+    }
+
+    /**
+     * Get the block instance (object)
+     *
+     * @return DocGeneratorBlockAbstract
+     */
+    public function getBlockInstance(): DocGeneratorBlockAbstract
+    {
+        return $this->docGeneratorBlockAbstract;
     }
 
     /**
