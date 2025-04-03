@@ -1359,11 +1359,16 @@
                     "id": "prepend",
                     "value": [
                         "<!DOCTYPE html>",
-                        "<html>",
+                        "<html lang=\"en\">",
                         "<head>",
+                        "<title>A valid example for ZugferdDocumentBuilder in XRECHNUNG 3.x profile</title>",
+                        "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css\">",
+                        "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css\">",
+                        "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js\"></script>",
+                        "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js\"></script>",
                         "<style>",
                         "body { font-family: 'Verdana'; padding-left: 1rem; padding-right: 1rem; }",
-                        "pre { font-family: 'Courier'; padding: .5rem; border: 1px solid #a0a0a0; background-color: #ffffee; }",
+                        "pre { font-family: 'Courier'; padding: 0rem; border: 1px solid #a0a0a0; background-color: #ffffee; }",
                         "</style>",
                         "</head>",
                         "<body>"
@@ -1372,6 +1377,7 @@
                 {
                     "id": "append",
                     "value": [
+                        "<script>hljs.highlightAll();</script>",
                         "</body>",
                         "</html>"
                     ]

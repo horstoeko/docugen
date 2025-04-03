@@ -41,13 +41,13 @@ class DocGeneratorOutputHtml extends DocGeneratorOutputMarkdown
         if ($this->getDocGeneratorOutputModel()->hasOption('prepend')) {
             $this->getDocGeneratorOutputBuffer()->prependLines($this->getDocGeneratorOutputModel()->getArrayOption('prepend'));
         } else {
-            $this->getDocGeneratorOutputBuffer()->prependLines(['<!DOCTYPE html>','<html>','<head>','</head>','<body>']);
+            $this->getDocGeneratorOutputBuffer()->prependLines(['<!DOCTYPE html>', '<html>', '<head>', '</head>', '<body>']);
         }
 
         if ($this->getDocGeneratorOutputModel()->hasOption('append')) {
             $this->getDocGeneratorOutputBuffer()->appendLines($this->getDocGeneratorOutputModel()->getArrayOption('append'));
         } else {
-            $this->getDocGeneratorOutputBuffer()->appendLines(['</body>','</html>']);
+            $this->getDocGeneratorOutputBuffer()->appendLines(['</body>', '</html>']);
         }
 
         return $this;
