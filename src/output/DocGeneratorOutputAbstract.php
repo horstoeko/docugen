@@ -108,6 +108,16 @@ abstract class DocGeneratorOutputAbstract
     }
 
     /**
+     * Returns the global configuration
+     *
+     * @return DocGeneratorConfig
+     */
+    public function getDocGeneratorConfig(): DocGeneratorConfig
+    {
+        return $this->getDocGeneratorOutputBuilder()->getDocGeneratorConfig();
+    }
+
+    /**
      * Returns the documentation model
      *
      * @return DocGeneratorDocumentationModel
@@ -125,16 +135,6 @@ abstract class DocGeneratorOutputAbstract
     public function getDocGeneratorBlockBuilders(): array
     {
         return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorBlockBuilders();
-    }
-
-    /**
-     * Returns the global configuration
-     *
-     * @return DocGeneratorConfig
-     */
-    public function getDocGeneratorConfig(): DocGeneratorConfig
-    {
-        return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorConfig();
     }
 
     /**
