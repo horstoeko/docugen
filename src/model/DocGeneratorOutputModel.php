@@ -181,4 +181,28 @@ class DocGeneratorOutputModel extends DocGeneratorAbstractModel
     {
         return $this->outputdestination;
     }
+
+    /**
+     * Returns true if the given outputtype is set
+     *
+     * @param  string $outputType
+     * @return boolean
+     */
+    public function isOutputType(string $outputType): bool
+    {
+        return strcasecmp($this->getOutputType(), $outputType) === 0;
+    }
+
+    /**
+     * Check if one of the given outputtypes is set
+     *
+     * @param  array<string> $outputTypes
+     * @return bool
+     */
+    public function isOneOfOutputTypes(array $outputTypes): bool
+    {
+        return array_filter($outputTypes, function ($type) {
+            return $this->isOutputType($type);
+        }) !== [];
+    }
 }
