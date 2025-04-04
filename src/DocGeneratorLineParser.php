@@ -69,11 +69,10 @@ class DocGeneratorLineParser
      */
     public function parseLine(string $line): void
     {
-        if ($this->mustIncludeCodeSnippet($line)) {
-            return;
-        }
+        $codeSnippetsDetected = $this->detectAndIncludeCodeSnippets($line);
+        $textsDetected = $this->detectAndIncludeTexts($line);
 
-        if ($this->mustIncludeText($line)) {
+        if ($codeSnippetsDetected || $textsDetected) {
             return;
         }
 
@@ -86,7 +85,7 @@ class DocGeneratorLineParser
      * @param  string $line
      * @return bool
      */
-    protected function mustIncludeCodeSnippet(string $line): bool
+    protected function detectAndIncludeCodeSnippets(string $line): bool
     {
         if (in_array(preg_match('/^@CS:(\w+)(:\d+)?(:\d+)?$/', $line, $matches), [0, false], true)) {
             return false;
@@ -121,7 +120,7 @@ class DocGeneratorLineParser
      * @param  string $line
      * @return bool
      */
-    protected function mustIncludeText(string $line): bool
+    protected function detectAndIncludeTexts(string $line): bool
     {
         if (in_array(preg_match('/^@TXT:(\w+)(:\d+)?(:\d+)?$/', $line, $matches), [0, false], true)) {
             return false;
@@ -162,7 +161,7 @@ class DocGeneratorLineParser
         do {
             $hasReplacedSomething = false;
             foreach ($lines as $lineKey => $lineValue) {
-                $hasReplacedSomething = $hasReplacedSomething || $this->checkReplaceableTextPart($lineValue);
+                $hasReplacedSomething = $hasReplacedSomething || $this->detectAndReplaceTextParts($lineValue);
                 $lines[$lineKey] = $lineValue;
             }
         } while ($hasReplacedSomething);
@@ -175,7 +174,7 @@ class DocGeneratorLineParser
      * @param-out string $line
      * @return    bool
      */
-    protected function checkReplaceableTextPart(string &$line): bool
+    protected function detectAndReplaceTextParts(string &$line): bool
     {
         if (in_array(preg_match('/@TXTPART:(\w+)(:\d+)?/', $line, $matches), [0, false], true)) {
             return false;
