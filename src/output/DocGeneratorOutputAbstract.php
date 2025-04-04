@@ -186,7 +186,12 @@ abstract class DocGeneratorOutputAbstract
      */
     public function outputToFile(): DocGeneratorOutputAbstract
     {
-        $filepath = $this->getDocGeneratorOutputModel()->getFilePathIsAbsolute() ? $this->getDocGeneratorOutputModel()->getFilePath() : PathUtils::combinePathWithPath($this->getDocGeneratorConfig()->getRootDirectory(), $this->getDocGeneratorOutputModel()->getFilePath());
+        $filepath = $this->getDocGeneratorOutputModel()->getFilePathIsAbsolute()
+            ? $this->getDocGeneratorOutputModel()->getFilePath()
+            : PathUtils::combinePathWithPath(
+                $this->getDocGeneratorConfig()->getRootDirectory(),
+                $this->getDocGeneratorOutputModel()->getFilePath()
+            );
 
         $filenameToOutput = PathUtils::combinePathWithFile($filepath, $this->getDocGeneratorOutputModel()->getFileName());
 

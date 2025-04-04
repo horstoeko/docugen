@@ -147,7 +147,7 @@ class DocGeneratorOutputBuffer
     /**
      * Prepend lines to buffer
      *
-     * @param array $lines
+     * @param  array $lines
      * @return DocGeneratorOutputBuffer
      */
     public function prependLines(array $lines): DocGeneratorOutputBuffer
@@ -160,7 +160,7 @@ class DocGeneratorOutputBuffer
     /**
      * Append lines to buffer
      *
-     * @param array $lines
+     * @param  array $lines
      * @return DocGeneratorOutputBuffer
      */
     public function appendLines(array $lines): DocGeneratorOutputBuffer
