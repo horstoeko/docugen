@@ -31,6 +31,7 @@
         "php": ">=7.3",
         "horstoeko/stringmanagement": "^1.0",
         "league/commonmark": "^0|^1|^2",
+        "mpdf/mpdf": "^8.2",
         "swaggest/json-schema": "^0.12.43",
         "symfony/console": "^5|^6|^7",
         "symfony/expression-language": "^5|^6|^7"

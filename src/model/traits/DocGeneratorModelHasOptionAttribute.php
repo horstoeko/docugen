@@ -9,6 +9,8 @@
 
 namespace horstoeko\docugen\model\traits;
 
+use horstoeko\docugen\utils\DocGeneratorObjectUtils;
+
 /**
  * Trait representing handling of model option attribute
  *
@@ -118,5 +120,17 @@ trait DocGeneratorModelHasOptionAttribute
     public function getArrayOption(string $option, array $default = []): array
     {
         return (array)$this->getOption($option, $default);
+    }
+
+    /**
+     * Return a object option value
+     *
+     * @param  string $option
+     * @param  array  $default
+     * @return array
+     */
+    public function getObjectOption(string $option, array $default = []): array
+    {
+        return DocGeneratorObjectUtils::objectToArray($this->getOption($option, $default));
     }
 }

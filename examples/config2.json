@@ -1107,11 +1107,11 @@
             "title": "Example for ZugferdDocumentBuilder",
             "description": "The following lines will illustrate the usage of ZugferdDocumentBuilder",
             "blocks": [
-                "=(outputmodel.isOneOfOutputTypes(['markdown','html']) === true)|BLOCK_TXT_ZF_DOCUMENTATION",
-                "=(outputmodel.isOneOfOutputTypes(['markdown','html']) === true)|BLOCK_BLANK",
-                "=(outputmodel.isOneOfOutputTypes(['markdown','html']) === true)|BLOCK_ZF_PREREQUIREMENTS",
-                "=(outputmodel.isOneOfOutputTypes(['markdown','html']) === true)|BLOCK_BLANK",
-                "=(outputmodel.isOneOfOutputTypes(['markdown','html']) === true)|BLOCK_ZF_BUILDER_COMMON_1",
+                "=(outputmodel.isOneOfOutputTypes(['markdown','html','pdf']) === true)|BLOCK_TXT_ZF_DOCUMENTATION",
+                "=(outputmodel.isOneOfOutputTypes(['markdown','html','pdf']) === true)|BLOCK_BLANK",
+                "=(outputmodel.isOneOfOutputTypes(['markdown','html','pdf']) === true)|BLOCK_ZF_PREREQUIREMENTS",
+                "=(outputmodel.isOneOfOutputTypes(['markdown','html','pdf']) === true)|BLOCK_BLANK",
+                "=(outputmodel.isOneOfOutputTypes(['markdown','html','pdf']) === true)|BLOCK_ZF_BUILDER_COMMON_1",
                 "=(outputmodel.isOneOfOutputTypes(['php']) === true)|BLOCK_ZF_BUILDER_COMMON_2",
                 "BLOCK_BLANK",
                 "# ----------------------------------------------------------------------------------------------------",
@@ -1236,11 +1236,11 @@
                 "# ----------------------------------------------------------------------------------------------------",
                 "# Output complete code in MARKDOWN Code only",
                 "# ----------------------------------------------------------------------------------------------------",
-                "=(outputmodel.isOneOfOutputTypes(['markdown','html']) === true)|BLOCK_BLANK",
-                "=(outputmodel.isOneOfOutputTypes(['markdown','html']) === true)|BLOCK_ZF_COMPLETE_CODE",
-                "=(outputmodel.isOneOfOutputTypes(['markdown','html']) === true)|BLOCK_BLANK",
-                "=(outputmodel.isOneOfOutputTypes(['markdown','html']) === true) and (outputmodel.getStringOption('PROFILE') == 'EN16931')|BLOCK_ZF_BUILDER_COMPLETE_CODE_EN16931",
-                "=(outputmodel.isOneOfOutputTypes(['markdown','html']) === true) and (outputmodel.getStringOption('PROFILE') == 'XRECHNUNG')|BLOCK_ZF_BUILDER_COMPLETE_CODE_XRECHNUNG",
+                "=(outputmodel.isOneOfOutputTypes(['markdown','html','pdf']) === true)|BLOCK_BLANK",
+                "=(outputmodel.isOneOfOutputTypes(['markdown','html','pdf']) === true)|BLOCK_ZF_COMPLETE_CODE",
+                "=(outputmodel.isOneOfOutputTypes(['markdown','html','pdf']) === true)|BLOCK_BLANK",
+                "=(outputmodel.isOneOfOutputTypes(['markdown','html','pdf']) === true) and (outputmodel.getStringOption('PROFILE') == 'EN16931')|BLOCK_ZF_BUILDER_COMPLETE_CODE_EN16931",
+                "=(outputmodel.isOneOfOutputTypes(['markdown','html','pdf']) === true) and (outputmodel.getStringOption('PROFILE') == 'XRECHNUNG')|BLOCK_ZF_BUILDER_COMPLETE_CODE_XRECHNUNG",
                 "# ----------------------------------------------------------------------------------------------------",
                 "# Finished",
                 "# ----------------------------------------------------------------------------------------------------",
@@ -1396,6 +1396,102 @@
                         "<style>",
                         "body { font-family: 'Verdana'; padding-left: 1rem; padding-right: 1rem; }",
                         "pre { font-family: 'Courier'; padding: 0rem; border: 1px solid #a0a0a0; background-color: #ffffee; }",
+                        "</style>",
+                        "</head>",
+                        "<body>"
+                    ]
+                },
+                {
+                    "id": "append",
+                    "value": [
+                        "<script>hljs.highlightAll();</script>",
+                        "</body>",
+                        "</html>"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "OUTPUT_ZF_BUILDER_EN16931_HTML",
+            "title": "A valid example for ZugferdDocumentBuilder in EN16931 profile",
+            "description": "This example will show you the basic usage of the ZugferdDocumentBulder - here in EN16931 Profile",
+            "outputtype": "pdf",
+            "documentationid": "DOCUMENTATION_ZF_BUILDER",
+            "filepath": "/examples",
+            "filename": "Example-ZugferdDocumentBuilder-in-EN16391-profile.pdf",
+            "titlemode": 0,
+            "descriptionmode": 0,
+            "outputdestination": 0,
+            "options": [
+                {
+                    "id": "PROFILE",
+                    "value": "EN16931"
+                },
+                {
+                    "id": "paperorientation",
+                    "value": "landscape"
+                },
+                {
+                    "id": "pdfaenbled",
+                    "value": false
+                },
+                {
+                    "id": "prepend",
+                    "value": [
+                        "<!DOCTYPE html>",
+                        "<html lang=\"en\">",
+                        "<head>",
+                        "<title>A valid example for ZugferdDocumentBuilder in XRECHNUNG 3.x profile</title>",
+                        "<style>",
+                        "body {font-size: 7pt;}",
+                        "</style>",
+                        "</head>",
+                        "<body>"
+                    ]
+                },
+                {
+                    "id": "append",
+                    "value": [
+                        "<script>hljs.highlightAll();</script>",
+                        "</body>",
+                        "</html>"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "OUTPUT_ZF_BUILDER_XRECHNUNG_HTML",
+            "title": "A valid example for ZugferdDocumentBuilder in XRECHNUNG 3.x profile",
+            "description": "This example will show you the basic usage of the ZugferdDocumentBulder - here in XRECHNUNG 3.x Profile",
+            "outputtype": "pdf",
+            "documentationid": "DOCUMENTATION_ZF_BUILDER",
+            "filepath": "/examples",
+            "filename": "Example-ZugferdDocumentBuilder-in-XRECHNUNG3-profile.pdf",
+            "titlemode": 0,
+            "descriptionmode": 0,
+            "outputdestination": 0,
+            "options": [
+                {
+                    "id": "PROFILE",
+                    "value": "XRECHNUNG"
+                },
+                {
+                    "id": "paperorientation",
+                    "value": "landscape"
+                },
+                {
+                    "id": "pdfaenbled",
+                    "value": false
+                },
+                {
+                    "id": "prepend",
+                    "value": [
+                        "<!DOCTYPE html>",
+                        "<html lang=\"en\">",
+                        "<head>",
+                        "<title>A valid example for ZugferdDocumentBuilder in XRECHNUNG 3.x profile</title>",
+                        "<style>",
+                        "body {font-size: 7pt;}",
                         "</style>",
                         "</head>",
                         "<body>"
