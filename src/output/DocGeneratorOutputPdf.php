@@ -75,6 +75,7 @@ class DocGeneratorOutputPdf extends DocGeneratorOutputHtml
         $customFontDefault = $this->getDocGeneratorOutputModel()->getStringOption('defaultfont', 'dejavusans');
         $customPaperSize = $this->getDocGeneratorOutputModel()->getStringOption('papersize', 'A4-P');
         $customPdfAEnabled = $this->getDocGeneratorOutputModel()->getBooleanOption('pdfa', false);
+        $customPdfXEnabled = $this->getDocGeneratorOutputModel()->getBooleanOption('pdfx', false);
 
         $config = [
             'tempDir' => sys_get_temp_dir() . '/mpdf',
@@ -84,6 +85,8 @@ class DocGeneratorOutputPdf extends DocGeneratorOutputHtml
             'format' => $customPaperSize,
             'PDFA' => $customPdfAEnabled,
             'PDFAauto' => $customPdfAEnabled,
+            'PDFX' => $customPdfXEnabled,
+            'PDFXauto' => $customPdfXEnabled,
         ];
 
         $mpdf = new Mpdf($config);

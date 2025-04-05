@@ -1428,12 +1428,12 @@
                     "value": "EN16931"
                 },
                 {
-                    "id": "paperorientation",
-                    "value": "landscape"
+                    "id": "papersize",
+                    "value": "A4-L"
                 },
                 {
-                    "id": "pdfaenbled",
-                    "value": false
+                    "id": "pdfa",
+                    "value": true
                 },
                 {
                     "id": "prepend",
@@ -1443,7 +1443,8 @@
                         "<head>",
                         "<title>A valid example for ZugferdDocumentBuilder in XRECHNUNG 3.x profile</title>",
                         "<style>",
-                        "body {font-size: 7pt;}",
+                        "body { padding-left: 1rem; padding-right: 1rem; }",
+                        "pre { padding: 1rem; border: 1px solid #a0a0a0; background-color: #ffffee; }",
                         "</style>",
                         "</head>",
                         "<body>"
@@ -1476,12 +1477,12 @@
                     "value": "XRECHNUNG"
                 },
                 {
-                    "id": "paperorientation",
-                    "value": "landscape"
+                    "id": "papersize",
+                    "value": "A4-L"
                 },
                 {
-                    "id": "pdfaenbled",
-                    "value": false
+                    "id": "pdfa",
+                    "value": true
                 },
                 {
                     "id": "prepend",
@@ -1491,7 +1492,8 @@
                         "<head>",
                         "<title>A valid example for ZugferdDocumentBuilder in XRECHNUNG 3.x profile</title>",
                         "<style>",
-                        "body {font-size: 7pt;}",
+                        "body { padding-left: 1rem; padding-right: 1rem; }",
+                        "pre { padding: 1rem; border: 1px solid #a0a0a0; background-color: #ffffee; }",
                         "</style>",
                         "</head>",
                         "<body>"
