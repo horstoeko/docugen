@@ -138,7 +138,7 @@ class DocGeneratorDocumentationBuilder
 
         $docGeneratorBlocks =
             array_map(
-                function ($docGeneratorBlockId) use ($docGeneratorExpressionLanguage) {
+                function ($docGeneratorBlockId) use ($docGeneratorExpressionLanguage): string {
                     return preg_match('/^=(.*)\|(.*)$/', $docGeneratorBlockId, $docGeneratorBlockIdMatches)
                         ? ($docGeneratorExpressionLanguage->evaluatesToBooleanTrue($docGeneratorBlockIdMatches[1]) ? $docGeneratorBlockIdMatches[2] : "")
                         : $docGeneratorBlockId;
@@ -149,14 +149,14 @@ class DocGeneratorDocumentationBuilder
         $docGeneratorBlocks =
             array_filter(
                 $docGeneratorBlocks,
-                function ($docGeneratorBlockId) {
+                function ($docGeneratorBlockId): bool {
                     return trim($docGeneratorBlockId) !== "";
                 }
             );
 
         $docGeneratorBlockModels =
             array_map(
-                function ($docGeneratorBlockId) {
+                function ($docGeneratorBlockId): \horstoeko\docugen\model\DocGeneratorBlockModel {
                     return $this->getDocGeneratorConfig()->getBlocks()->findByIdOrFail($docGeneratorBlockId);
                 },
                 $docGeneratorBlocks
@@ -165,7 +165,7 @@ class DocGeneratorDocumentationBuilder
         $docGeneratorBlockModels =
             array_filter(
                 $docGeneratorBlockModels,
-                function ($docGeneratorBlockModel) use ($docGeneratorExpressionLanguage) {
+                function ($docGeneratorBlockModel) use ($docGeneratorExpressionLanguage): bool {
                     if ($docGeneratorBlockModel->hasVisibleExpression() === false) {
                         return true;
                     }

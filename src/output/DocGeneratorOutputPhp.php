@@ -31,7 +31,7 @@ class DocGeneratorOutputPhp extends DocGeneratorOutputAbstract
     {
         $this->getDocGeneratorOutputBuffer()->addLinesToOutputBuffer(
             array_map(
-                function (string $line) {
+                function (string $line): string {
                     return sprintf("// %s", $line);
                 },
                 $docGeneratorBlockComment->getRenderedLines()

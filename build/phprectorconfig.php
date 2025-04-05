@@ -27,6 +27,7 @@ return RectorConfig::configure()
         phpunitCodeQuality: true,
         privatization: true,
         deadCode: true,
+        typeDeclarations: true,
         //
         carbon: false,
         doctrineCodeQuality: false,
@@ -34,5 +35,4 @@ return RectorConfig::configure()
         rectorPreset: false,
         symfonyCodeQuality: false,
         symfonyConfigs: false,
-        typeDeclarations: false,
     );

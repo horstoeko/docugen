@@ -182,7 +182,7 @@ class DocGeneratorLineParser
 
         $line = preg_replace_callback(
             '/@TXTPART:(\w+)(:\d+)?/',
-            function ($matches) {
+            function ($matches): string {
                 $indexWithinLines = isset($matches[2]) ? (int)ltrim($matches[2], ':') : 0;
                 $partTextModel = $this->docGeneratorConfig->getTexts()->findById($matches[1]);
 

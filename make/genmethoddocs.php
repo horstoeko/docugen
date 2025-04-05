@@ -78,7 +78,7 @@ class ExtractClass
      * @throws PcreException
      * @throws LogicException
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getJson();
     }
@@ -643,7 +643,7 @@ class BatchMarkDownGenerator
      * @throws PcreException
      * @throws LogicException
      */
-    public static function generate(array $classes, array $ignoreInheritance = [])
+    public static function generate(array $classes, array $ignoreInheritance = []): void
     {
         foreach ($classes as $className => $toFilename) {
             $extractor = new ExtractClass($className, $ignoreInheritance);
