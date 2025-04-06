@@ -29,6 +29,6 @@ class DocGeneratorInvalidJsonContentException extends DocGeneratorBaseException
      */
     public function __construct(?Throwable $throwable = null)
     {
-        parent::__construct('The JSON could not be parsed properly', DocGeneratorExceptionCodes::INVALIDJSONCONTENT, $throwable);
+        parent::__construct(sprintf('The JSON could not be parsed properly. %s', json_last_error_msg()), DocGeneratorExceptionCodes::INVALIDJSONCONTENT, $throwable);
     }
 }
