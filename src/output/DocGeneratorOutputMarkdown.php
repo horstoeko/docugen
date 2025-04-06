@@ -55,31 +55,13 @@ class DocGeneratorOutputMarkdown extends DocGeneratorOutputAbstract
      */
     protected function beforeAllBlocks(): DocGeneratorOutputAbstract
     {
-        $title = "";
-        $description = "";
-
-        if ($this->getDocGeneratorOutputModel()->getTitleMode() === 1) {
-            $title = $this->getDocGeneratorOutputModel()->getTitle();
-        } elseif ($this->getDocGeneratorOutputModel()->getTitleMode() === 2) {
-            $title = $this->getDocGeneratorDocumentationModel()->getTitle();
-        }
-
-        if ($this->getDocGeneratorOutputModel()->getDescriptionMode() === 1) {
-            $description = $this->getDocGeneratorOutputModel()->getDescription();
-        } elseif ($this->getDocGeneratorOutputModel()->getDescriptionMode() === 2) {
-            $description = $this->getDocGeneratorDocumentationModel()->getDescription();
-        }
-
-        $title = trim($title);
-        $description = trim($description);
-
-        if ($title !== '' && $title !== '0') {
-            $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer(sprintf('# %s', $title));
+        if ($this->getTitle() !== '' && $this->getTitle() !== '0') {
+            $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer(sprintf('# %s', $this->getTitle()));
             $this->getDocGeneratorOutputBuffer()->addEmptyLineToOutputBuffer();
         }
 
-        if ($description !== '' && $description !== '0') {
-            $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer($description);
+        if ($this->getDescription() !== '' && $this->getDescription() !== '0') {
+            $this->getDocGeneratorOutputBuffer()->addLineToOutputBuffer($this->getDescription());
             $this->getDocGeneratorOutputBuffer()->addEmptyLineToOutputBuffer();
         }
 

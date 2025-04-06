@@ -19,6 +19,7 @@ use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
 use horstoeko\docugen\model\DocGeneratorDocumentationModel;
 use horstoeko\docugen\model\DocGeneratorOutputModel;
 use horstoeko\stringmanagement\PathUtils;
+use RuntimeException;
 
 /**
  * Class representing the abstract outputter
@@ -135,6 +136,44 @@ abstract class DocGeneratorOutputAbstract
     public function getDocGeneratorBlockBuilders(): array
     {
         return $this->getDocGeneratorDocumentationBuilder()->getDocGeneratorBlockBuilders();
+    }
+
+    /**
+     * Get the title
+     *
+     * @return string
+     * @throws RuntimeException
+     */
+    protected function getTitle(): string
+    {
+        if ($this->getDocGeneratorOutputModel()->getTitleMode() === 1) {
+            return trim($this->getDocGeneratorOutputModel()->getTitle());
+        }
+
+        if ($this->getDocGeneratorOutputModel()->getTitleMode() === 2) {
+            return trim($this->getDocGeneratorDocumentationModel()->getTitle());
+        }
+
+        return "";
+    }
+
+    /**
+     * Get the description
+     *
+     * @return string
+     * @throws RuntimeException
+     */
+    protected function getDescription(): string
+    {
+        if ($this->getDocGeneratorOutputModel()->getDescriptionMode() === 1) {
+            return trim($this->getDocGeneratorOutputModel()->getDescription());
+        }
+
+        if ($this->getDocGeneratorOutputModel()->getDescriptionMode() === 2) {
+            return trim($this->getDocGeneratorDocumentationModel()->getDescription());
+        }
+
+        return "";
     }
 
     /**
