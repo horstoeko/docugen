@@ -165,7 +165,7 @@ class DocGeneratorOutputBuffer
      */
     public function appendLines(array $lines): DocGeneratorOutputBuffer
     {
-        $this->lines = array_merge($this->lines, $lines);
+        array_push($this->lines, ...$lines);
 
         return $this;
     }
