@@ -1,5 +1,8 @@
 <?php
 
+use horstoeko\docugen\console\DocGeneratorMakeConsoleCommand;
+use horstoeko\docugen\DocGenerator;
+use horstoeko\docugen\DocGeneratorConfig;
 use horstoeko\stringmanagement\StringUtils;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Printer;
@@ -655,7 +658,9 @@ class BatchMarkDownGenerator
 }
 
 BatchMarkDownGenerator::generate([
-    //MyClass::class => dirname(__FILE__) . '/Class-MyClass.md',
+    DocGeneratorConfig::class => dirname(__FILE__) . '/Class-DocGeneratorConfig.md',
+    DocGenerator::class => dirname(__FILE__) . '/Class-DocGenerator.md',
+    DocGeneratorMakeConsoleCommand::class => dirname(__FILE__) . '/Class-DocGeneratorMakeConsoleCommand.md',
 ], [
     //'horstoeko\\docugen\\MyClass::myMethodName',
 ]);
