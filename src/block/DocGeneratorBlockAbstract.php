@@ -9,12 +9,11 @@
 
 namespace horstoeko\docugen\block;
 
+use horstoeko\docugen\block\DocGeneratorBlockBuilder;
 use horstoeko\docugen\config\DocGeneratorConfig;
 use horstoeko\docugen\DocGeneratorLineParser;
-use horstoeko\docugen\output\DocGeneratorOutputBuffer;
 use horstoeko\docugen\model\DocGeneratorBlockModel;
-use horstoeko\docugen\model\DocGeneratorOutputModel;
-use horstoeko\docugen\block\DocGeneratorBlockBuilder;
+use horstoeko\docugen\output\DocGeneratorOutputBuffer;
 
 /**
  * Class representing an abstract documentation block

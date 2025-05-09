@@ -9,12 +9,11 @@
 
 namespace horstoeko\docugen\block;
 
-use horstoeko\docugen\config\DocGeneratorConfig;
-use horstoeko\docugen\model\DocGeneratorBlockModel;
-use horstoeko\docugen\model\DocGeneratorOutputModel;
 use horstoeko\docugen\block\DocGeneratorBlockAbstract;
 use horstoeko\docugen\builder\DocGeneratorDocumentationBuilder;
+use horstoeko\docugen\config\DocGeneratorConfig;
 use horstoeko\docugen\exception\DocGeneratorUnknownClassException;
+use horstoeko\docugen\model\DocGeneratorBlockModel;
 
 /**
  * Class representing a builder for a documentation block
