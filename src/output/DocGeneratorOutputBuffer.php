@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace horstoeko\docugen;
+namespace horstoeko\docugen\output;
 
 /**
  * Class representing a output buffer
