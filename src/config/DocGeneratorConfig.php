@@ -280,7 +280,7 @@ class DocGeneratorConfig
      */
     protected function validateJsonObject(stdClass $jsonObject): void
     {
-        $schemaJsonFilename = __DIR__ . "/assets/configschema.json";
+        $schemaJsonFilename = __DIR__ . "/../assets/configschema.json";
 
         if (!file_exists($schemaJsonFilename)) {
             throw new DocGeneratorFileNotFoundException($schemaJsonFilename);
