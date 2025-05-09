@@ -10,7 +10,7 @@
 namespace horstoeko\docugen\output;
 
 use horstoeko\docugen\DocGeneratorConfig;
-use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
+use horstoeko\docugen\builder\DocGeneratorDocumentationBuilder;
 use horstoeko\docugen\exception\DocGeneratorUnknownClassException;
 use horstoeko\docugen\model\DocGeneratorOutputModel;
 

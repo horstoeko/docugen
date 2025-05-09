@@ -13,7 +13,7 @@ use horstoeko\docugen\DocGeneratorConfig;
 use horstoeko\docugen\model\DocGeneratorBlockModel;
 use horstoeko\docugen\model\DocGeneratorOutputModel;
 use horstoeko\docugen\block\DocGeneratorBlockAbstract;
-use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
+use horstoeko\docugen\builder\DocGeneratorDocumentationBuilder;
 use horstoeko\docugen\exception\DocGeneratorUnknownClassException;
 
 /**

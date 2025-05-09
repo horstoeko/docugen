@@ -15,7 +15,7 @@ use horstoeko\docugen\block\DocGeneratorBlockCode;
 use horstoeko\docugen\block\DocGeneratorBlockComment;
 use horstoeko\docugen\DocGeneratorConfig;
 use horstoeko\docugen\DocGeneratorOutputBuffer;
-use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
+use horstoeko\docugen\builder\DocGeneratorDocumentationBuilder;
 use horstoeko\docugen\model\DocGeneratorDocumentationModel;
 use horstoeko\docugen\model\DocGeneratorOutputModel;
 use horstoeko\stringmanagement\PathUtils;

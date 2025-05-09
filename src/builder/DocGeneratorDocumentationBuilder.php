@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace horstoeko\docugen\documentation;
+namespace horstoeko\docugen\builder;
 
 use horstoeko\docugen\DocGeneratorConfig;
 use horstoeko\docugen\model\DocGeneratorOutputModel;

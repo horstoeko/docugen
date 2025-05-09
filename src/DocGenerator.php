@@ -10,7 +10,7 @@
 namespace horstoeko\docugen;
 
 use horstoeko\docugen\model\DocGeneratorOutputModel;
-use horstoeko\docugen\documentation\DocGeneratorDocumentationBuilder;
+use horstoeko\docugen\builder\DocGeneratorDocumentationBuilder;
 
 /**
  * Class representing the documentation generator
