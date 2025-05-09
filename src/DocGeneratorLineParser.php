@@ -10,6 +10,7 @@
 namespace horstoeko\docugen;
 
 use horstoeko\docugen\config\DocGeneratorConfig;
+use horstoeko\docugen\output\DocGeneratorOutputBuffer;
 
 /**
  * Class representing a line parser

@@ -9,12 +9,12 @@
 
 namespace horstoeko\docugen\builder;
 
-use horstoeko\docugen\config\DocGeneratorConfig;
-use horstoeko\docugen\model\DocGeneratorOutputModel;
 use horstoeko\docugen\block\DocGeneratorBlockBuilder;
-use horstoeko\docugen\output\DocGeneratorOutputBuilder;
-use horstoeko\docugen\model\DocGeneratorDocumentationModel;
+use horstoeko\docugen\config\DocGeneratorConfig;
 use horstoeko\docugen\expression\DocGeneratorExpressionLanguage;
+use horstoeko\docugen\model\DocGeneratorDocumentationModel;
+use horstoeko\docugen\model\DocGeneratorOutputModel;
+use horstoeko\docugen\output\DocGeneratorOutputBuilder;
 use RuntimeException;
 
 /**
