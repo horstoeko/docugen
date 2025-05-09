@@ -1,7 +1,7 @@
 <?php
 
 use horstoeko\docugen\DocGenerator;
-use horstoeko\docugen\DocGeneratorConfig;
+use horstoeko\docugen\config\DocGeneratorConfig;
 use horstoeko\docugen\block\DocGeneratorBlockCode;
 use horstoeko\docugen\block\DocGeneratorBlockBlank;
 use horstoeko\docugen\block\DocGeneratorBlockComment;

@@ -10,7 +10,7 @@
 namespace horstoeko\docugen\console;
 
 use horstoeko\docugen\DocGenerator;
-use horstoeko\docugen\DocGeneratorConfig;
+use horstoeko\docugen\config\DocGeneratorConfig;
 use Symfony\Component\Console\Input\InputOption;
 
 /**

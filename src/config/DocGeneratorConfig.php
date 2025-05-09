@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace horstoeko\docugen;
+namespace horstoeko\docugen\config;
 
 use Exception as GlobalException;
 use InvalidArgumentException;

@@ -2,7 +2,7 @@
 
 use horstoeko\docugen\console\DocGeneratorMakeConsoleCommand;
 use horstoeko\docugen\DocGenerator;
-use horstoeko\docugen\DocGeneratorConfig;
+use horstoeko\docugen\config\DocGeneratorConfig;
 use horstoeko\stringmanagement\StringUtils;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Printer;

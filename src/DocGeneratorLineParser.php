@@ -9,7 +9,7 @@
 
 namespace horstoeko\docugen;
 
-use horstoeko\docugen\DocGeneratorConfig;
+use horstoeko\docugen\config\DocGeneratorConfig;
 
 /**
  * Class representing a line parser

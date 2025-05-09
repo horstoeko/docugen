@@ -9,7 +9,7 @@
 
 namespace horstoeko\docugen\block;
 
-use horstoeko\docugen\DocGeneratorConfig;
+use horstoeko\docugen\config\DocGeneratorConfig;
 use horstoeko\docugen\DocGeneratorLineParser;
 use horstoeko\docugen\output\DocGeneratorOutputBuffer;
 use horstoeko\docugen\model\DocGeneratorBlockModel;
