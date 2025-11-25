@@ -28,7 +28,7 @@
         }
     },
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.4",
         "horstoeko/stringmanagement": "^1",
         "league/commonmark": "^0|^1|^2",
         "mpdf/mpdf": "^0|^1|^2|^3|^4|^5|^6|^7|^8",
